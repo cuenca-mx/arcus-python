@@ -6,7 +6,7 @@ with open('README.md', 'r') as f:
 
 
 setuptools.setup(
-    name='arcus-python',
+    name='arcus',
     version='0.0.2',
     author='Cuenca',
     author_email='dev@cuenca.com',
