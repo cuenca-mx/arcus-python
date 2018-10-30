@@ -7,10 +7,10 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
     name='arcus-python',
-    version='0.0.1',
+    version='0.0.2',
     author='Cuenca',
     author_email='dev@cuenca.com',
-    description='Regalii API Client',
+    description='Arcus API Client',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/cuenca-mx/arcus-python',
