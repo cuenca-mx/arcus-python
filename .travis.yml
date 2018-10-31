@@ -1,5 +1,5 @@
 notifications:
-  slack: cuencafinance:CVvxqYAkx4aLzagYK6I69M49
+  slack: cuencafinance:6N0IaVciA0KyNylSTq5ZzW4I
 
 language: python
 python:
