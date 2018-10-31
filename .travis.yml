@@ -3,3 +3,11 @@ python:
   - "3.6"
   - "3.7-dev"
 script: python setup.py test
+notifications:
+  slack:
+    secure: FdobP7E8v0pL+0UYcImvWWJIo47ts/X0dpCTE437YsOLdxbBY8goXhJRWE2lacswhbXamnSO9vme9LZF0lC6LqAn4fRoUmxVp3rBz2BzqL1TKprNjuLYhed7S2FSrGCQABn86wkk+zY8DlJJkyEQCvJOqVUhIV1exX4WQPzwVSx1neatmDkpPL3UV0rjiBLnRUIBc9KlZsBMKe6dkKgIvPYVyyFLtm5WDL3WYUsWJ4o5ZGLFHfGObsf2gT6iO3sQ8DiFvzVheLjnXCAXM9Rh0GRzVrWUGRN3/DVK0PcuIFBhPZwe58U9CvWgOZoZvsfw48+FTe4NMf3GYuJVI9MRA6A21ebpEdYNKbG2tsTntsTpdQTVeIdZi3geMlYFGW2lnaanOLMEgsFPwc1fzhkqPzQf2MeUF9KXMDAMvNYIz9uX2dkG+HKtaGomJNWuuFVWkryWtzg5g8xXfOcMrWvu82zre0/EkDd4d0bwzQY3N0tQP02nchnsR//B/n+aZ+LKMFvGiGmRCGdZ8LF1Qyeq+125vdV3Ow2dgap2ATay4r7nR799MxGMkxQheEmsuRPXYk3R7H/RFqpX7uzu2yWJL8lCFk32vnsvt+dAyYrOkcuD06kEcwptpqYOLv0z7qa/V0dsA/A07T33bwp+qPMwwD5RBgVaQQ8Wz2iCamzunec=
+    on_success: change
+    on_failure: always
+    template:
+      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} by %{author} %{result} in %{duration}"
+      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
