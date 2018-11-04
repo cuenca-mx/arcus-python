@@ -4,14 +4,19 @@ notifications:
 language: python
 python:
 - '3.6'
-- 3.7-dev
+- '3.7-dev'
 script: python setup.py test
 
-deploy:
-  provider: pypi
-  user: felipaoo
-  password:
-    secure: W+oCV4iVVMuggW7ssxWApDSb+Fs351P6sGRz4LElh+4immgaPuJDbW0p0qFf/bcQkZSaLJHjOhd9y98+aKfJP7NTeL2nMcLnUA+4qntGSeupi+2W513upk3A9xbdQrw77igUMJUmrMqzGCW5cHKJfptBWtGWexoI7g2lseG8iSJykyZ2jt95cFxKsOkkJSAfr991gEN3NhD+5KmVaju6R41dlsNpL8DyOAcEoj1wsf+FoFkcbZM0M5XeVSIBXfze3/6QsMXcCwPqhouDHhrRV28PwTM3RmVy5Epqj5xBpjtglx4aTRuvHqVc2JQVcZHqsdgO02ASFfZ+f0Q3wCnTBf2OFIibGWeSY0evQ3+X6ccToVfXgU/nIBHCv5G3ayZ/rwZtJQTbVLsNuObACNwy/gW6CUFFf1ktZHH7PQM4LTGoSBZUbVQk7VxsP0pPh572IR3vxGkz9RpdQQsfOtJ/56NNWcghm5lVUDTXdJgzZdJl28DOK44FedR3xzMX2MpvD50SGbTXiNdqNNF8FqZ6HEZCSYsE/AXLLTh3C9w00y+6Qj3q0PkhxRLQxRdID/2PPPO2fSsQPMemuuY+qtEP24yIaTuDIgAvlm4AhUXrjLKTCWmAVZ0zj0WrUEkV2B4Y4zMcSj8B/U3BMDRqRCtaIQkyvo9RrQxgDiyXboTlupg=
-  distributions: sdist bdist_wheel
-  on:
-    tags: true
+jobs:
+  include:
+    - stage: PyPI Upload
+      python: '3.7-dev'
+      script: echo "Uploading packages to PyPI"
+      deploy:
+        provider: pypi
+        user: felipaoo
+        password:
+          secure: "Otj/phQjDHxE6h9z3D30KuJNhJPXKZ+tOc80NcRja/cFS3En99j5QiBj4o1bcaxsW+vWauUOZ4FG3/5BoOHE6KeckrB4jI4dI/cmkFqMnIlxW+D64u8eAcg5TMvU2NmkveH1kIaHHZjcegR8tiiyHr2VNofqeZLOegv/PUcZznR3+rT7AWjo476Yfs4zgGALynGLcJ9rGtzQp0kBzkILY+y9nfKZbDlEBkNoRd/7ZZWmAr1Z5XLQX4pRFb5IOBbqQHTX5so7yc6tZ+hiaIXIin1gBUsqZAEU7EIjM95bv7cOjuCNgfluD2UE/1p6NgtHJ4c/LlSahmfO/rr3LySnsozsz+oFbjspfr9ULa9zQ3mO7EM4LoO/ziAjs19eI0UjY8jzbNar1CyeTVpE7tDdBak6D4NgN7vCHfCuTfFatNR4yyaST7R4UwfaFebxwT0j4xCfWcbaSGHGfFWOKljt2SXArnknHBdUp474xj9zvmbEtK1zrYMqn8YbF/A7MRpnIFFXDjVp2NGdpJEfcPMd3oMTM2+Qx+PFiqLcyhxzAl0GS6sGfPkhoVglcCZONaw4TKabi106Ryn3/7q4CJOTW2d9j8bGbWcgfADhP2snITODAU/nuHF9SDZNz89X9aO8pUbIzkY6Q7pTAgw7fs8bnJuMTGpruquQwPsfZu+k3Ag="
+        on:
+          tags: true
+        distributions: sdist bdist_wheel
