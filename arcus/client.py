@@ -35,7 +35,11 @@ class Client:
 
         return self.request('post', endpoint, data, **kwargs)
 
-    def request(self, method: str, endpoint: str, data: dict, **kwargs) -> dict:
+    def request(self,
+                method: str,
+                endpoint: str,
+                data: dict,
+                **kwargs) -> dict:
         if data is not None:
             data = json.dumps(data)
 

@@ -11,7 +11,8 @@ def get_checksum(data, secret_key):
     """
     Computes data checksum
 
-    The checksum is a Base64 SHA1 HMAC string encoded using your private secret key.
+    The checksum is a Base64 SHA1 HMAC string encoded
+    using your private secret key.
 
     :param data: Value to be computed
     :param secret_key: secret key api
