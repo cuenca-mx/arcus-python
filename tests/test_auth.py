@@ -12,11 +12,11 @@ SECRET_KEY = os.environ['ARCUS_SECRET_KEY']
 
 def test_valid_auth():
     client = Client(API_KEY, SECRET_KEY, sandbox=True)
-    resp = client.get('account')
-    assert resp.status_code == 200
-    assert resp.data['currency'] == 'MXN'
-    assert isinstance(resp.data['account_balance'], float)
-    assert resp.data['account_balance'] > resp.data['minimum_balance']
+    account = client.get('account')
+    assert type(account) is dict
+    assert account['currency'] == 'MXN'
+    assert type(account['account_balance']) is float
+    assert account['account_balance'] > account['minimum_balance']
 
 
 def test_invalid_auth():
