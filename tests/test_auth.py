@@ -20,7 +20,6 @@ def test_valid_auth():
 
 
 def test_invalid_auth():
-    # Attempt using sandbox creds on production API endpoint
     client = Client(API_KEY, SECRET_KEY)  # default is sandbox=False
     with pytest.raises(InvalidAuth) as excinfo:
         client.get('account')
