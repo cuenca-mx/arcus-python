@@ -1,12 +1,10 @@
 import os
 
 import pytest
-from dotenv import load_dotenv
 
 from arcus.exc import InvalidAuth
 from arcus.client import Client
 
-load_dotenv()
 
 API_KEY = os.environ['ARCUS_API_KEY']
 SECRET_KEY = os.environ['ARCUS_SECRET_KEY']

@@ -21,12 +21,11 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=install_requirements,
     setup_requires=['pytest-runner'],
-    tests_require=['pytest', 'python-dotenv'],
+    tests_require=['pytest'],
     extras_require={
         'dev': [
             'pytest>=3',
-            'pycodestyle',
-            'python-dotenv>=0.9.1'
+            'pycodestyle'
         ]
     },
     classifiers=[
