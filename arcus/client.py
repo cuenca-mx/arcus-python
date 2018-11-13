@@ -2,7 +2,7 @@ import requests
 import json
 
 from arcus import authtools
-from exc import InvalidAuth
+from arcus.exc import InvalidAuth
 
 CLIENT_VERSION = '4.0.1'
 API_VERSION = '3.1'

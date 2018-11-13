@@ -1,10 +1,12 @@
 import os
 
 import pytest
+from dotenv import load_dotenv
 
+from arcus.exc import InvalidAuth
+from arcus.client import Client
 
-from arcus import Client
-import exc
+load_dotenv()
 
 API_KEY = os.environ['ARCUS_API_KEY']
 SECRET_KEY = os.environ['ARCUS_SECRET_KEY']
@@ -22,6 +24,6 @@ def test_valid_auth():
 def test_invalid_auth():
     client = Client(API_KEY, SECRET_KEY)  # default is sandbox=False
 
-    with pytest.raises(exc.InvalidAuth) as excinfo:
+    with pytest.raises(InvalidAuth) as excinfo:
         client.get('account')
     assert excinfo.value.value == 'Invalid API authentication credentials'
