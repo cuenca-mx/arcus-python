@@ -25,7 +25,8 @@ setuptools.setup(
     extras_require={
         'dev': [
             'pytest>=3',
-            'pycodestyle'
+            'pycodestyle',
+            'python-dotenv>=0.9.1'
         ]
     },
     classifiers=[
