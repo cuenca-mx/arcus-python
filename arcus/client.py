@@ -1,14 +1,12 @@
-import json
 import requests
 
-from arcus import authtools
+from .auth import compute_auth_header, compute_date_header, compute_md5_header
 from arcus.exc import InvalidAuth
 
 
 API_VERSION = '3.1'
 PRODUCTION_API_URL = 'https://api.regalii.com'
 SANDBOX_API_URL = 'https://api.casiregalii.com'
-CONTENT_TYPE = 'application/json'
 
 
 class Client:
@@ -50,27 +48,9 @@ class Client:
     def _build_headers(self, endpoint: str, data: dict) -> dict:
         headers = [('Accept',
                     f'application/vnd.regalii.v{self.api_version}+json')]
-        headers.append(self._compute_md5_header(data))
-        headers.append(self._compute_date_header())
-        headers.append(self._compute_auth_header(headers, endpoint))
+        headers.append(compute_md5_header(data))
+        headers.append(compute_date_header())
+        headers.append(compute_auth_header(
+            headers, endpoint, self.api_key, self.secret_key))
         return dict(headers)
 
-    @staticmethod
-    def _compute_md5_header(data: dict) -> tuple:
-        data = json.dumps(data)
-        return 'Content-MD5', authtools.get_md5(data)
-
-    @staticmethod
-    def _compute_date_header() -> tuple:
-        return 'Date', authtools.get_timestamp()
-
-    def _compute_auth_header(self, headers: list, endpoint: str) -> tuple:
-        content_type = CONTENT_TYPE
-        headers = dict(headers)
-        content_md5 = headers['Content-MD5']
-        date = headers['Date']
-
-        data = f'{content_type},{content_md5},{endpoint},{date}'
-        checksum = authtools.get_checksum(data, self.secret_key)
-
-        return 'Authorization', f'APIAuth {self.api_key}:{checksum}'

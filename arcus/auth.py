@@ -1,41 +1,59 @@
 import hmac
-
-from hashlib import sha1, md5
+import json
 from base64 import b64encode
 from datetime import datetime
+from hashlib import sha1, md5
 
 import pytz
 
 
-def get_checksum(data, secret_key):
+CONTENT_TYPE = 'application/json'
+
+
+def compute_md5_header(data: dict) -> tuple:
+    data = json.dumps(data)
+    return 'Content-MD5', base64_md5(data)
+
+
+def compute_date_header() -> tuple:
+    return 'Date', compute_timestamp()
+
+
+def compute_auth_header(
+        headers: list,
+        endpoint: str,
+        api_key: str,
+        secret_key: str) -> tuple:
+    verify_secret = calculate_checksum(endpoint, headers, secret_key)
+    return 'Authorization', f'APIAuth {api_key}:{verify_secret}'
+
+
+def calculate_checksum(endpoint: str, headers: list,
+                       secret_key: str) -> str:
     """
-    Computes data checksum
-
-    The checksum is a Base64 SHA1 HMAC string encoded
-    using your private secret key.
-
-    :param data: Value to be computed
-    :param secret_key: secret key api
-    :return: Base64 SHA1 HMAC string encoded
+    Calculate checksum based on https://www.arcusfi.com/api/v3/#authentication
     """
-    secret_key = bytes(secret_key.encode('utf-8'))
-    data = bytes(data.encode('utf-8'))
+    headers = dict(headers)
+    content_md5 = headers['Content-MD5']
+    date = headers['Date']
+    verify_this = f'{CONTENT_TYPE},{content_md5},{endpoint},{date}'
+    verify_secret = hmac.new(
+        secret_key.encode('utf-8'), verify_this.encode('utf-8'), sha1)
+    return b64encode(verify_secret.digest()).decode('ascii')
 
-    hashed_value = hmac.new(secret_key, data, sha1)
 
-    return b64encode(hashed_value.digest()).decode('ascii')
-
-
-def get_md5(data: str) -> str:
-    """Computes md5 Base64 string"""
+def base64_md5(data: str) -> str:
+    """base64 encoded md5 hash"""
     digest = md5(data.encode('ascii')).digest()
     b64 = b64encode(digest).decode('ascii')
-
     return b64
 
 
-def get_timestamp():
-    """Gets current date and time"""
-    date = datetime.now(tz=pytz.utc)
-    date = date.astimezone(pytz.timezone('GMT'))
-    return date.strftime('%a, %d %b %Y %H:%M:%S ') + 'GMT'
+def compute_timestamp() -> str:
+    """
+    Gets current date and time
+    Based on https://github.com/regalii/regaliator_python/blob/master/regalii/
+        clients/__init__.py#L67
+    """
+    now = datetime.now(tz=pytz.utc).astimezone(pytz.timezone('GMT'))
+    return now.strftime('%a, %d %b %Y %H:%M:%S ') + 'GMT'
