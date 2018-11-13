@@ -4,7 +4,7 @@ import json
 from arcus import authtools
 from arcus.exc import InvalidAuth
 
-CLIENT_VERSION = '4.0.1'
+
 API_VERSION = '3.1'
 PRODUCTION_API_URL = 'https://api.regalii.com'
 SANDBOX_API_URL = 'https://api.casiregalii.com'
@@ -32,7 +32,6 @@ class Client:
         return self.request('get', endpoint, None, **kwargs)
 
     def post(self, endpoint: str, data: dict, **kwargs) -> dict:
-
         return self.request('post', endpoint, data, **kwargs)
 
     def request(self,
@@ -46,7 +45,8 @@ class Client:
         url = self._get_url(endpoint)
         headers = self._get_headers(endpoint=endpoint, data=data)
 
-        response = requests.request(method, url, headers=headers, data=data)
+        response = requests.request(
+            method, url, headers=headers, data=data, **kwargs)
 
         if response.status_code == 401:
             raise InvalidAuth('Invalid API authentication credentials')
@@ -55,7 +55,6 @@ class Client:
 
     def _get_headers(self, **kwargs):
         headers = {
-            'User-Agent': CLIENT_VERSION,
             'Accept': f'application/vnd.regalii.v{self.api_version}+json',
             'Content-type': CONTENT_TYPE
         }
