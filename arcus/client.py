@@ -80,7 +80,7 @@ class Client:
         content_md5 = headers['Content-MD5']
         date = headers['Date']
 
-        data = f'{content_type},{content_md5},/{endpoint},{date}'
+        data = f'{content_type},{content_md5},{endpoint},{date}'
         checksum = authtools.get_checksum(data, self.secret_key)
 
         headers['Authorization'] = f'APIAuth {self.api_key}:{checksum}'
