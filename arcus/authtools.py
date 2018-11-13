@@ -26,11 +26,8 @@ def get_checksum(data, secret_key):
     return b64encode(hashed_value.digest()).decode('ascii')
 
 
-def get_md5(data):
+def get_md5(data: str) -> str:
     """Computes md5 Base64 string"""
-    if not data:
-        return ''
-
     digest = md5(data.encode('ascii')).digest()
     b64 = b64encode(digest).decode('ascii')
 

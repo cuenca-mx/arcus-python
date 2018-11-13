@@ -29,7 +29,7 @@ class Client:
         self.api_version = api_version
 
     def get(self, endpoint: str, **kwargs) -> dict:
-        return self.request('get', endpoint, None, **kwargs)
+        return self.request('get', endpoint, {}, **kwargs)
 
     def post(self, endpoint: str, data: dict, **kwargs) -> dict:
         return self.request('post', endpoint, data, **kwargs)
@@ -39,47 +39,42 @@ class Client:
                 endpoint: str,
                 data: dict,
                 **kwargs) -> dict:
-        if data is not None:
-            data = json.dumps(data)
-
-        url = self._get_url(endpoint)
-        headers = self._get_headers(endpoint=endpoint, data=data)
+        url = self.base_url + endpoint
+        headers = self._build_headers(endpoint, data)
 
         response = requests.request(
-            method, url, headers=headers, data=data, **kwargs)
+            method, url, headers=headers, json=data, **kwargs)
 
         if response.status_code == 401:
             raise InvalidAuth('Invalid API authentication credentials')
 
         return response.json()
 
-    def _get_headers(self, **kwargs):
-        headers = {
-            'Accept': f'application/vnd.regalii.v{self.api_version}+json',
-            'Content-type': CONTENT_TYPE
-        }
+    def _build_headers(self, endpoint, data):
+        headers = [
+            ('Accept', f'application/vnd.regalii.v{self.api_version}+json')
+        ]
+        headers.append(self._compute_md5_header(data))
+        headers.append(self._compute_date_header())
+        headers.append(self._compute_auth_header(headers, endpoint))
+        return dict(headers)
 
-        self._set_md5_header(headers, kwargs['data'])
-        self._set_date_header(headers)
-        self._set_auth_header(headers, kwargs['endpoint'])
+    @staticmethod
+    def _compute_md5_header(data):
+        data = json.dumps(data)
+        return 'Content-MD5', authtools.get_md5(data)
 
-        return headers
+    @staticmethod
+    def _compute_date_header():
+        return 'Date', authtools.get_timestamp()
 
-    def _get_url(self, endpoint):
-        return f'{self.base_url}/{endpoint}'
-
-    def _set_md5_header(self, headers, data):
-        headers['Content-MD5'] = authtools.get_md5(data)
-
-    def _set_date_header(self, headers):
-        headers['Date'] = authtools.get_timestamp()
-
-    def _set_auth_header(self, headers, endpoint):
+    def _compute_auth_header(self, headers, endpoint):
         content_type = CONTENT_TYPE
+        headers = dict(headers)
         content_md5 = headers['Content-MD5']
         date = headers['Date']
 
         data = f'{content_type},{content_md5},{endpoint},{date}'
         checksum = authtools.get_checksum(data, self.secret_key)
 
-        headers['Authorization'] = f'APIAuth {self.api_key}:{checksum}'
+        return 'Authorization', f'APIAuth {self.api_key}:{checksum}'

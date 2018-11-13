@@ -23,7 +23,7 @@ def test_invalid_auth():
     client = Client(API_KEY, SECRET_KEY)  # default is sandbox=False
 
     with pytest.raises(InvalidAuth) as excinfo:
-        client.get('account')
+        client.get('/account')
     assert excinfo.value.value == 'Invalid API authentication credentials'
 
 
