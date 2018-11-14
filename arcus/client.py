@@ -1,7 +1,7 @@
 import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
-from arcus.exc import InvalidAuth
+from .exc import InvalidAuth
 
 
 API_VERSION = '3.1'
