@@ -44,7 +44,7 @@ def calculate_checksum(endpoint: str, headers: list,
 
 def base64_md5(data: str) -> str:
     """base64 encoded md5 hash"""
-    digest = md5(data.encode('ascii')).digest()
+    digest = md5(data.encode('utf-8')).digest()
     b64 = b64encode(digest).decode('ascii')
     return b64
 
