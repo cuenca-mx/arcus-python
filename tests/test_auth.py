@@ -5,26 +5,23 @@ from arcus.auth import base64_md5, \
     calculate_checksum, \
     compute_auth_header
 
-DICT = dict(account_id=40, account_number='501000000007')
-DICT_MD5 = 'lxllA6QjrbEADpYJYMxl2w=='
+ACCOUNT_INFO = dict(account_id=40, account_number='501000000007')
+ACCOUNT_INFO_MD5 = 'lxllA6QjrbEADpYJYMxl2w=='
 SECRET_KEY = 'verify-secret'
 API_KEY = 'abcdefghi123456'
 CHECKSUM = 'nLet/JEZG9CRXHScwaQ/na4vsKQ='
 
 
 def test_base64_md5():
-    input = json.dumps(DICT)
-    b64_str = base64_md5(input)
-    assert type(b64_str) is str
-    assert b64_str == DICT_MD5
+    json_dump = json.dumps(ACCOUNT_INFO)
+    b64_str = base64_md5(json_dump)
+    assert b64_str == ACCOUNT_INFO_MD5
 
 
 def test_compute_md5_header():
-    md5_header = compute_md5_header(DICT)
-    assert type(md5_header[0]) is str
-    assert md5_header[0] == 'Content-MD5'
-    assert type(md5_header[1]) is str
-    assert md5_header[1] == DICT_MD5
+    header_key, header_value = compute_md5_header(ACCOUNT_INFO)
+    assert header_key == 'Content-MD5'
+    assert header_value == ACCOUNT_INFO_MD5
 
 
 def test_calculate_checksum():
