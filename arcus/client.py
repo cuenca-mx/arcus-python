@@ -53,4 +53,3 @@ class Client:
         headers.append(compute_auth_header(
             headers, endpoint, self.api_key, self.secret_key))
         return dict(headers)
-

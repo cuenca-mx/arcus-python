@@ -1,37 +1,50 @@
-import os
+import json
 
-import pytest
+from arcus.auth import base64_md5, \
+    compute_md5_header, \
+    calculate_checksum, \
+    compute_auth_header
 
-from arcus.exc import InvalidAuth
-from arcus.client import Client
-
-
-API_KEY = os.environ['ARCUS_API_KEY']
-SECRET_KEY = os.environ['ARCUS_SECRET_KEY']
-
-
-def test_valid_auth():
-    client = Client(API_KEY, SECRET_KEY, sandbox=True)
-    account = client.get('/account')
-    assert type(account) is dict
-    assert account['currency'] == 'MXN'
-    assert type(account['balance']) is float
-    assert account['balance'] > account['minimum_balance']
+DICT = dict(account_id=40, account_number='501000000007')
+DICT_MD5 = 'lxllA6QjrbEADpYJYMxl2w=='
+SECRET_KEY = 'verify-secret'
+API_KEY = 'abcdefghi123456'
+CHECKSUM = 'nLet/JEZG9CRXHScwaQ/na4vsKQ='
 
 
-def test_invalid_auth():
-    client = Client(API_KEY, SECRET_KEY)  # default is sandbox=False
+def test_base64_md5():
+    input = json.dumps(DICT)
+    b64_str = base64_md5(input)
+    assert type(b64_str) is str
+    assert b64_str == DICT_MD5
 
-    with pytest.raises(InvalidAuth) as excinfo:
-        client.get('/account')
-    assert excinfo.value.value == 'Invalid API authentication credentials'
+
+def test_compute_md5_header():
+    md5_header = compute_md5_header(DICT)
+    assert type(md5_header[0]) is str
+    assert md5_header[0] == 'Content-MD5'
+    assert type(md5_header[1]) is str
+    assert md5_header[1] == DICT_MD5
 
 
-def test_valid_auth_post():
-    data = dict(biller_id=40, account_number='501000000007')
-    client = Client(API_KEY, SECRET_KEY, sandbox=True)
-    bill = client.post('/bills', data)
-    assert type(bill) is dict
-    assert bill['biller_id'] == 40
-    assert bill['account_number'] == '501000000007'
-    assert type(bill['balance']) is float
+def test_calculate_checksum():
+    endpoint = '/account'
+    headers = [
+        ('Content-MD5', ''),
+        ('Date', 'Wed, 02 Nov 2016 17:26:52 GMT')
+    ]
+    checksum = calculate_checksum(endpoint, headers, SECRET_KEY)
+    assert type(checksum) is str
+    assert checksum == CHECKSUM
+
+
+def test_compute_auth_header():
+    endpoint = '/account'
+    headers = [
+        ('Content-MD5', ''),
+        ('Date', 'Wed, 02 Nov 2016 17:26:52 GMT')
+    ]
+    auth_header = compute_auth_header(headers, endpoint, API_KEY, SECRET_KEY)
+    assert type(auth_header) is tuple
+    assert auth_header[0] == 'Authorization'
+    assert auth_header[1] == f'APIAuth {API_KEY}:{CHECKSUM}'
