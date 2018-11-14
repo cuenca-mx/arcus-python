@@ -37,3 +37,13 @@ account_info = dict(biller_id=40, account_number='501000000007')
 bill = client.post('/bills', account_info)
 
 ```
+
+
+## Release to PyPi
+
+1. Update version in `setup.py`
+2. `git tag -a <version> -m <release message>`
+3. `git push origin --tags`
+
+TravisCI will release the updated version to PyPi after verifying the tests
+pass.
