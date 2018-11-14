@@ -42,8 +42,9 @@ bill = client.post('/bills', account_info)
 ## Release to PyPi
 
 1. Update version in `setup.py`
-2. `git tag -a <version> -m <release message>`
-3. `git push origin --tags`
+1. Commit changes to `setup.py` and push to `origin/master`
+1. `git tag -a <version> -m <release message>`
+1. `git push origin --tags`
 
 TravisCI will release the updated version to PyPi after verifying the tests
 pass.
