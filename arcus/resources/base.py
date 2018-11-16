@@ -12,9 +12,10 @@ class Resource:
     def __repr__(self):
         indent = ' ' * 4
         rv = f'{self.__class__.__name__}(\n'
-        for name, value in self.__dict__.items():
-            rv += f'{indent}{name}={repr(value)},\n'
-        rv += ')'
+        rv += ',\n'.join([
+            f'{indent}{attr}={value}'
+            for attr, value in self.__dict__.items()])
+        rv += '\n)'
         return rv
 
     @classmethod
