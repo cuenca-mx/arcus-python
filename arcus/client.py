@@ -92,7 +92,7 @@ class Client:
             raise UnprocessableEntity('Unprocessable Entity',
                                       data['code'],
                                       data['message'],
-                                      data['id'])
+                                      data['id'] if 'id' in data else None)
         # elif response.status_code == 429:
         #     raise TooManyRequests()
         # elif response.status_code == 500:

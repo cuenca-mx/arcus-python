@@ -70,3 +70,32 @@ def test_cancel_bill():
     updated_transaction = client.transactions.get(transaction.id)
     assert updated_transaction.id == transaction.id
     assert updated_transaction.status == 'refunded'
+
+
+def test_consult_error():
+    client = ARCUS_CLIENT
+    with pytest.raises(UnprocessableEntity) as excinfo:
+        client.bills.create(2901, '1111322016')
+    exc = excinfo.value
+    assert exc.code == 'R16'
+    assert exc.message == 'Failed to make the consult, please try again later'
+
+
+def test_biller_maintenance():
+    client = ARCUS_CLIENT
+    with pytest.raises(UnprocessableEntity) as excinfo:
+        client.bills.create(1821, '1111992022')
+    exc = excinfo.value
+    assert exc.code == 'R22'
+    assert exc.message == (
+        'Biller maintenance in progress, please try again later')
+
+
+def test_timeout_on_payment():
+    client = ARCUS_CLIENT
+    bill = client.bills.create(37, '2424240024')
+    with pytest.raises(UnprocessableEntity) as excinfo:
+        bill.pay()
+    exc = excinfo.value
+    assert exc.code == 'R24'
+    assert exc.message == 'Timeout from biller'
