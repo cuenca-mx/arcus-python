@@ -1,10 +1,3 @@
-class ArcusException(Exception):
-    def __init__(self, data: dict):
-        self.code = data['code']
-        self.message = data['message']
-        self.id = ['id']
-
-
 class InvalidAuth(Exception):
     def __init__(self, value: str):
         self.value = value

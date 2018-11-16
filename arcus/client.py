@@ -16,6 +16,8 @@ class Client:
 
     bills = Bill
 
+    transactions = Transaction
+
     def __init__(
             self,
             api_key: str,
@@ -53,14 +55,6 @@ class Client:
     @property
     def account(self):
         return Account(**self.get('/account'))
-
-    @property
-    def bills(self):
-        return Bill()
-
-    @property
-    def transactions(self):
-        return Transaction()
 
     def _build_headers(self, endpoint: str, data: dict) -> dict:
         headers = [('Accept',

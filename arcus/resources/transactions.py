@@ -13,6 +13,6 @@ class Transaction(Resource):
 
     @classmethod
     def get(cls, transaction_id):
-        obj_dict = cls._client\
-            .get(f'{cls._endpoint}?q[id_eq]={transaction_id}')
-        return Transaction(**obj_dict['transactions'][0])
+        transaction_dict = (
+            cls._client.get(f'{cls._endpoint}?q[id_eq]={transaction_id}'))
+        return Transaction(**transaction_dict['transactions'][0])
