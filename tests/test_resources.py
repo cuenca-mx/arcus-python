@@ -40,15 +40,6 @@ def test_create_bill_wrong_account_number():
     assert ex.message == 'Invalid Account Number'
 
 
-def test_unexpected_error():
-    arcus = ARCUS_CLIENT
-    with pytest.raises(Exception) as excinfo:
-        arcus.bills.create(6900, '1111362009')
-    exc = excinfo.value
-    assert exc.code == 'R9'
-    assert exc.message.startswith('Unexpected error')
-
-
 def test_successful_payment():
     client = ARCUS_CLIENT
     bill = client.bills.create(40, '501000000007')
@@ -56,6 +47,15 @@ def test_successful_payment():
     transaction = bill.pay()
     assert transaction.id
     assert transaction.status == 'fulfilled'
+
+
+def test_unexpected_error():
+    arcus = ARCUS_CLIENT
+    with pytest.raises(Exception) as excinfo:
+        arcus.bills.create(6900, '1111362009')
+    exc = excinfo.value
+    assert exc.code == 'R9'
+    assert exc.message.startswith('Unexpected error')
 
 
 def test_cancel_bill():
