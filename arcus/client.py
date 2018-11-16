@@ -2,7 +2,6 @@ import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
 from .resources import Account, Bill, Resource, Transaction
-from .exc import ArcusException
 from .exc import (
     BadRequest, InvalidAuth, Forbidden, NotFound, TooManyRequests,
     InternalServerError, ServiceUnavailable, UnprocessableEntity)
@@ -84,8 +83,9 @@ class Client:
             raise BadRequest('Invalid request message')
         elif response.status_code == 401:
             raise InvalidAuth('Invalid API authentication credentials')
-        # elif response.status_code == 403:
-        #     raise Forbidden()
+        elif response.status_code == 403:
+            raise Forbidden('You are not authorized to access'
+                            ' the resource requested')
         elif response.status_code == 404:
             raise NotFound('Resource not found')
         elif response.status_code == 422:
@@ -93,9 +93,11 @@ class Client:
                                       data['code'],
                                       data['message'],
                                       data['id'] if 'id' in data else None)
-        # elif response.status_code == 429:
-        #     raise TooManyRequests()
-        # elif response.status_code == 500:
-        #     raise InternalServerError()
-        # elif response.status_code == 503:
-        #     raise ServiceUnavailable()
+        elif response.status_code == 429:
+            raise TooManyRequests('You’re sending too many requests!')
+        elif response.status_code == 500:
+            raise InternalServerError('We had a problem with our server. '
+                                      'Try again later.')
+        elif response.status_code == 503:
+            raise ServiceUnavailable('Service Unavailable – '
+                                     'Please try again later')

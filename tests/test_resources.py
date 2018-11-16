@@ -29,7 +29,6 @@ def test_create_bill():
     assert bill.biller_id == 40
     assert bill.account_number == '501000000007'
     assert type(bill.balance) is float
-    # import ipdb; ipdb.set_trace()
 
 
 def test_create_bill_wrong_account_number():
