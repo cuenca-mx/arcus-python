@@ -13,7 +13,7 @@ class Bill(Resource):
 
     def pay(self, amount=None):
         amount = amount or self.balance
-        data = dict(amount=amount, currency='MXN')
-        transaction_dict = self._client.post(f'{self._endpoint}/{self.id}/pay',
-                                             data)
+        data = dict(amount=amount, currency=self.balance_currency)
+        transaction_dict = self._client.post(
+            f'{self._endpoint}/{self.id}/pay', data)
         return Transaction(**transaction_dict)
