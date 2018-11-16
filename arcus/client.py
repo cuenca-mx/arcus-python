@@ -49,7 +49,7 @@ class Client:
         headers = self._build_headers(endpoint, data)
         response = requests.request(
             method, url, headers=headers, json=data, **kwargs)
-        self.check_response(response)
+        self._check_response(response)
         return response.json()
 
     @property
@@ -66,7 +66,7 @@ class Client:
         return dict(headers)
 
     @staticmethod
-    def check_response(response):
+    def _check_response(response):
         if response.status_code in (200, 201):
             return
         try:
