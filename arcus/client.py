@@ -1,7 +1,11 @@
 import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
-from .exc import InvalidAuth
+from .resources import Account, Bill, Resource, Transaction
+from .exc import ArcusException
+from .exc import (
+    BadRequest, InvalidAuth, Forbidden, NotFound, TooManyRequests,
+    InternalServerError, ServiceUnavailable, UnprocessableEntity)
 
 
 API_VERSION = '3.1'
@@ -10,6 +14,8 @@ SANDBOX_API_URL = 'https://api.casiregalii.com'
 
 
 class Client:
+
+    bills = Bill
 
     def __init__(
             self,
@@ -25,6 +31,7 @@ class Client:
         else:
             self.base_url = PRODUCTION_API_URL
         self.api_version = api_version
+        Resource._client = self
 
     def get(self, endpoint: str, **kwargs) -> dict:
         return self.request('get', endpoint, {}, **kwargs)
@@ -41,9 +48,20 @@ class Client:
         headers = self._build_headers(endpoint, data)
         response = requests.request(
             method, url, headers=headers, json=data, **kwargs)
-        if response.status_code == 401:
-            raise InvalidAuth('Invalid API authentication credentials')
+        self.check_response(response)
         return response.json()
+
+    @property
+    def account(self):
+        return Account(**self.get('/account'))
+
+    @property
+    def bills(self):
+        return Bill()
+
+    @property
+    def transactions(self):
+        return Transaction()
 
     def _build_headers(self, endpoint: str, data: dict) -> dict:
         headers = [('Accept',
@@ -53,3 +71,31 @@ class Client:
         headers.append(compute_auth_header(
             headers, endpoint, self.api_key, self.secret_key))
         return dict(headers)
+
+    @staticmethod
+    def check_response(response):
+        if response.status_code in (200, 201):
+            return
+        try:
+            data = response.json()
+        except Exception:
+            data = dict()
+        if response.status_code == 400:
+            raise BadRequest('Invalid request message')
+        elif response.status_code == 401:
+            raise InvalidAuth('Invalid API authentication credentials')
+        # elif response.status_code == 403:
+        #     raise Forbidden()
+        elif response.status_code == 404:
+            raise NotFound('Resource not found')
+        elif response.status_code == 422:
+            raise UnprocessableEntity('Unprocessable Entity',
+                                      data['code'],
+                                      data['message'],
+                                      data['id'])
+        # elif response.status_code == 429:
+        #     raise TooManyRequests()
+        # elif response.status_code == 500:
+        #     raise InternalServerError()
+        # elif response.status_code == 503:
+        #     raise ServiceUnavailable()

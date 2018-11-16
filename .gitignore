@@ -111,3 +111,6 @@ venv.bak/
 
 # environment variables
 .env
+
+# envrc
+.envrc
