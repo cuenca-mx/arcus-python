@@ -39,6 +39,24 @@ bill = client.post('/bills', account_info)
 ```
 
 
+## Create bill, pay and show transaction
+
+```python
+from arcus import Client
+
+client = Client('your-api-key', 'your-secret-key', sandbox=True)
+
+
+# create bill
+bill = client.bills.create(40, '501000000007')
+
+# pay bill
+transaction = bill.pay()
+
+# show transaction
+transaction = client.transactions.get(transaction.id)
+```
+
 ## Release to PyPi
 
 1. Update version in `setup.py`
