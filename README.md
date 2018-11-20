@@ -55,6 +55,16 @@ transaction = bill.pay()
 
 # show transaction
 transaction = client.transactions.get(transaction.id)
+
+# cancel transaction
+cancellation = client.transactions.cancel(transaction.id)
+assert cancellation.code == 'R0'
+assert cancellation.message == 'Transaction successful'
+
+# verify cancellation
+updated_transaction = client.transactions.get(transaction.id)
+assert updated_transaction.id == transaction.id
+assert updated_transaction.status == 'refunded'
 ```
 
 ## Release to PyPi
