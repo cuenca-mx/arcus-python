@@ -19,7 +19,7 @@ $ pip install arcus
 $ make test
 ```
 
-## Simple demo
+## Authentication and account info
 
 Current version support direct endpoint calls.
 
@@ -27,7 +27,7 @@ Current version support direct endpoint calls.
 from arcus.client import Client
 
 # Create an Arcus client instance
-client = Client('your-api-key', 'your-secret-key', sandbox=True)
+client = Client('your-api-key', 'your-secret-key')
 
 # Get account info 
 account_info = client.get('/account')
@@ -39,12 +39,12 @@ bill = client.post('/bills', account_info)
 ```
 
 
-## Create bill, pay and show transaction
+## Usage
 
 ```python
 from arcus import Client
 
-client = Client('your-api-key', 'your-secret-key', sandbox=True)
+client = Client('your-api-key', 'your-secret-key')
 
 
 # create bill
