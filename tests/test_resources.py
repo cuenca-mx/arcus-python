@@ -1,6 +1,7 @@
 import os
 
 import pytest
+import vcr
 
 from arcus import Client
 from arcus.exc import UnprocessableEntity
@@ -13,6 +14,7 @@ ARCUS_SECRET_KEY = os.environ['ARCUS_SECRET_KEY']
 ARCUS_CLIENT = Client(ARCUS_API_KEY, ARCUS_SECRET_KEY, sandbox=True)
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_get_account_info():
     client = ARCUS_CLIENT
     account = client.account
@@ -22,6 +24,7 @@ def test_get_account_info():
     assert account.balance > account.minimum_balance
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_create_bill():
     client = ARCUS_CLIENT
     bill = client.bills.create(40, '501000000007')
@@ -31,6 +34,7 @@ def test_create_bill():
     assert type(bill.balance) is float
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_create_bill_wrong_account_number():
     client = ARCUS_CLIENT
     with pytest.raises(UnprocessableEntity) as excinfo:
@@ -40,6 +44,7 @@ def test_create_bill_wrong_account_number():
     assert ex.message == 'Invalid Account Number'
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_successful_payment():
     client = ARCUS_CLIENT
     bill = client.bills.create(40, '501000000007')
@@ -49,6 +54,7 @@ def test_successful_payment():
     assert transaction.status == 'fulfilled'
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_unexpected_error():
     arcus = ARCUS_CLIENT
     with pytest.raises(Exception) as excinfo:
@@ -58,6 +64,7 @@ def test_unexpected_error():
     assert exc.message.startswith('Unexpected error')
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_cancel_bill():
     client = ARCUS_CLIENT
     bill = client.bills.create(35, '123456851236')
@@ -71,6 +78,7 @@ def test_cancel_bill():
     assert updated_transaction.status == 'refunded'
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_consult_error():
     client = ARCUS_CLIENT
     with pytest.raises(UnprocessableEntity) as excinfo:
@@ -80,6 +88,7 @@ def test_consult_error():
     assert exc.message == 'Failed to make the consult, please try again later'
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_biller_maintenance():
     client = ARCUS_CLIENT
     with pytest.raises(UnprocessableEntity) as excinfo:
@@ -90,6 +99,7 @@ def test_biller_maintenance():
         'Biller maintenance in progress, please try again later')
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_timeout_on_payment():
     client = ARCUS_CLIENT
     bill = client.bills.create(37, '2424240024')
