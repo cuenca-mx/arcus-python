@@ -11,16 +11,16 @@ matrix:
 
 script: python setup.py test
 
-jobs:
-  include:
-    - stage: PyPI Upload
-      python: 3.7
-      script: echo "Uploading packages to PyPI"
-      deploy:
-        provider: pypi
-        user: felipaoo
-        password:
-          secure: "Otj/phQjDHxE6h9z3D30KuJNhJPXKZ+tOc80NcRja/cFS3En99j5QiBj4o1bcaxsW+vWauUOZ4FG3/5BoOHE6KeckrB4jI4dI/cmkFqMnIlxW+D64u8eAcg5TMvU2NmkveH1kIaHHZjcegR8tiiyHr2VNofqeZLOegv/PUcZznR3+rT7AWjo476Yfs4zgGALynGLcJ9rGtzQp0kBzkILY+y9nfKZbDlEBkNoRd/7ZZWmAr1Z5XLQX4pRFb5IOBbqQHTX5so7yc6tZ+hiaIXIin1gBUsqZAEU7EIjM95bv7cOjuCNgfluD2UE/1p6NgtHJ4c/LlSahmfO/rr3LySnsozsz+oFbjspfr9ULa9zQ3mO7EM4LoO/ziAjs19eI0UjY8jzbNar1CyeTVpE7tDdBak6D4NgN7vCHfCuTfFatNR4yyaST7R4UwfaFebxwT0j4xCfWcbaSGHGfFWOKljt2SXArnknHBdUp474xj9zvmbEtK1zrYMqn8YbF/A7MRpnIFFXDjVp2NGdpJEfcPMd3oMTM2+Qx+PFiqLcyhxzAl0GS6sGfPkhoVglcCZONaw4TKabi106Ryn3/7q4CJOTW2d9j8bGbWcgfADhP2snITODAU/nuHF9SDZNz89X9aO8pUbIzkY6Q7pTAgw7fs8bnJuMTGpruquQwPsfZu+k3Ag="
-        on:
-          tags: true
-        distributions: sdist bdist_wheel
+#jobs:
+#  include:
+#    - stage: PyPI Upload
+#      python: 3.7
+#      script: echo "Uploading packages to PyPI"
+#      deploy:
+#        provider: pypi
+#        user: felipaoo
+#        password:
+#          secure: "Otj/phQjDHxE6h9z3D30KuJNhJPXKZ+tOc80NcRja/cFS3En99j5QiBj4o1bcaxsW+vWauUOZ4FG3/5BoOHE6KeckrB4jI4dI/cmkFqMnIlxW+D64u8eAcg5TMvU2NmkveH1kIaHHZjcegR8tiiyHr2VNofqeZLOegv/PUcZznR3+rT7AWjo476Yfs4zgGALynGLcJ9rGtzQp0kBzkILY+y9nfKZbDlEBkNoRd/7ZZWmAr1Z5XLQX4pRFb5IOBbqQHTX5so7yc6tZ+hiaIXIin1gBUsqZAEU7EIjM95bv7cOjuCNgfluD2UE/1p6NgtHJ4c/LlSahmfO/rr3LySnsozsz+oFbjspfr9ULa9zQ3mO7EM4LoO/ziAjs19eI0UjY8jzbNar1CyeTVpE7tDdBak6D4NgN7vCHfCuTfFatNR4yyaST7R4UwfaFebxwT0j4xCfWcbaSGHGfFWOKljt2SXArnknHBdUp474xj9zvmbEtK1zrYMqn8YbF/A7MRpnIFFXDjVp2NGdpJEfcPMd3oMTM2+Qx+PFiqLcyhxzAl0GS6sGfPkhoVglcCZONaw4TKabi106Ryn3/7q4CJOTW2d9j8bGbWcgfADhP2snITODAU/nuHF9SDZNz89X9aO8pUbIzkY6Q7pTAgw7fs8bnJuMTGpruquQwPsfZu+k3Ag="
+#        on:
+#          tags: true
+#        distributions: sdist bdist_wheel
