@@ -1,12 +1,8 @@
 notifications:
   slack: cuencafinance:6N0IaVciA0KyNylSTq5ZzW4I
 
-language: python
 matrix:
   include:
-    - python: 2.7
-    - python: 3.4
-    - python: 3.5
     - python: 3.6
     - python: 3.7
       dist: xenial
@@ -17,7 +13,7 @@ script: python setup.py test
 jobs:
   include:
     - stage: PyPI Upload
-      python: '3.7-dev'
+      python: 3.7
       script: echo "Uploading packages to PyPI"
       deploy:
         provider: pypi
