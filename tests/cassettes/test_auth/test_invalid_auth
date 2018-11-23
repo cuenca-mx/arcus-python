@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: '{}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:VUDNscy0Sd/keL2Qw+W55oJDO9M=']
+      Connection: [keep-alive]
+      Content-Length: ['2']
+      Content-MD5: [mZFLkyvTelC5g8XnyQrpOw==]
+      Content-Type: [application/json]
+      Date: ['Wed, 21 Nov 2018 23:41:51 GMT']
+      User-Agent: [python-requests/2.20.1]
+    method: GET
+    uri: https://api.regalii.com/account
+  response:
+    body: {string: '{"message":"Unauthorized"}'}
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 21 Nov 2018 23:41:51 GMT']
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [38c2acb6-8239-4d12-9e22-a6a63f5154da]
+      X-Runtime: ['0.007086']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 401, message: Unauthorized}
+version: 1
