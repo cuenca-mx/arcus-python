@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: '{"biller_id": 13599, "account_number": "559999", "amount": 100.0, "currency":
+      "MXN"}'
+    headers:
+      Accept: [application/vnd.regalii.v1.6+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:fpiRt7Ket0xlkIgx6rxu2j8kEns=']
+      Connection: [keep-alive]
+      Content-Length: ['84']
+      Content-MD5: [3MHe+SV+NQcI/Q1Wo0EyqQ==]
+      Content-Type: [application/json]
+      Date: ['Mon, 26 Nov 2018 23:32:08 GMT']
+      User-Agent: [python-requests/2.20.1]
+    method: POST
+    uri: https://api.casiregalii.com/bill/pay
+  response:
+    body: {string: '{"code":"R5","message":"Invalid Phone Number","mode":"STAGING"}'}
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Mon, 26 Nov 2018 23:32:08 GMT']
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [4efe510a-ec86-4641-9247-5bb0915c7d67]
+      X-Runtime: ['0.030543']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 422, message: Unprocessable Entity}
+version: 1
