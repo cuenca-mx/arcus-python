@@ -110,6 +110,7 @@ def test_timeout_on_payment():
     assert exc.message == 'Timeout from biller'
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_topup():
     client = Client(ARCUS_API_KEY,
                     ARCUS_SECRET_KEY,
@@ -126,6 +127,7 @@ def test_topup():
     assert transaction.chain_earned + transaction.chain_paid == amount
 
 
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_topup_invalid_phone_number():
     client = Client(ARCUS_API_KEY,
                     ARCUS_SECRET_KEY,
