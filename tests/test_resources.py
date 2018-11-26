@@ -98,3 +98,34 @@ def test_timeout_on_payment():
     exc = excinfo.value
     assert exc.code == 'R24'
     assert exc.message == 'Timeout from biller'
+
+
+def test_topup():
+    client = Client(ARCUS_API_KEY,
+                    ARCUS_SECRET_KEY,
+                    sandbox=True,
+                    api_version='1.6')
+    biller_id = 13599
+    account_number = '5599999999'
+    amount = 100.0
+    transaction = client.bills.topup(biller_id, account_number, amount)
+    assert transaction.biller_id == biller_id
+    assert transaction.account_number == account_number
+    assert transaction.bill_amount == amount
+    assert transaction.ending_balance < transaction.starting_balance
+    assert transaction.chain_earned + transaction.chain_paid == amount
+
+
+def test_topup_invalid_phone_number():
+    client = Client(ARCUS_API_KEY,
+                    ARCUS_SECRET_KEY,
+                    sandbox=True,
+                    api_version='1.6')
+    biller_id = 13599
+    account_number = '559999'
+    amount = 100.0
+    with pytest.raises(UnprocessableEntity) as excinfo:
+        client.bills.topup(biller_id, account_number, amount)
+    exc = excinfo.value
+    assert exc.code == 'R5'
+    assert exc.message == 'Invalid Phone Number'
