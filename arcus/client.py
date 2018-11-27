@@ -8,7 +8,6 @@ from .exc import (
 
 
 API_VERSION = '3.1'
-API_VERSION_KEY = 'api_version'
 PRODUCTION_API_URL = 'https://api.regalii.com'
 SANDBOX_API_URL = 'https://api.casiregalii.com'
 
@@ -45,13 +44,9 @@ class Client:
                 method: str,
                 endpoint: str,
                 data: dict,
+                api_version: str = API_VERSION,
                 **kwargs) -> dict:
         url = self.base_url + endpoint
-        if API_VERSION_KEY not in kwargs:
-            api_version = API_VERSION
-        else:
-            api_version = kwargs[API_VERSION_KEY]
-            del kwargs[API_VERSION_KEY]
         headers = self._build_headers(endpoint, api_version, data)
         response = requests.request(
             method, url, headers=headers, json=data, **kwargs)
