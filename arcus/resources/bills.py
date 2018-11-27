@@ -1,6 +1,8 @@
 from .base import Resource
 from .transactions import Transaction
 
+ARCUS_API_VERSION_1_6 = '1.6'
+
 
 class Bill(Resource):
     _endpoint = '/bills'
@@ -24,6 +26,5 @@ class Bill(Resource):
                     account_number=account_number,
                     amount=amount,
                     currency='MXN')
-        cls._client.api_version = '1.6'
-        topup_dict = cls._client.post('/bill/pay', data)
+        topup_dict = cls._client.post('/bill/pay', ARCUS_API_VERSION_1_6, data)
         return Transaction(**topup_dict)

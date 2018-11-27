@@ -112,10 +112,7 @@ def test_timeout_on_payment():
 
 @vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_topup():
-    client = Client(ARCUS_API_KEY,
-                    ARCUS_SECRET_KEY,
-                    sandbox=True,
-                    api_version='1.6')
+    client = ARCUS_CLIENT
     biller_id = 13599
     account_number = '5599999999'
     amount = 100.0
@@ -129,10 +126,7 @@ def test_topup():
 
 @vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_topup_invalid_phone_number():
-    client = Client(ARCUS_API_KEY,
-                    ARCUS_SECRET_KEY,
-                    sandbox=True,
-                    api_version='1.6')
+    client = ARCUS_CLIENT
     biller_id = 13599
     account_number = '559999'
     amount = 100.0
