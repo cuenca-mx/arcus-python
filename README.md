@@ -40,7 +40,7 @@ bill = client.post('/bills', account_info)
 ```
 
 
-## Usage
+## Pay bills
 
 ```python
 from arcus import Client
@@ -66,6 +66,23 @@ assert cancellation.message == 'Transaction successful'
 updated_transaction = client.transactions.get(transaction.id)
 assert updated_transaction.id == transaction.id
 assert updated_transaction.status == 'refunded'
+```
+
+## Top-up
+```python
+from arcus import Client
+
+client = Client('your-api-key', 'your-secret-key')
+
+biller_id = 808080
+phone_number = '5599992222'
+amount = 100.0
+
+# by default, currency is MXN
+topup = client.topups.create(biller_id, phone_number, amount)
+
+assert topup.bill_amount == 100.0
+
 ```
 
 ## Release to PyPi
