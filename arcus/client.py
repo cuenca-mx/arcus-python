@@ -1,13 +1,14 @@
 import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
-from .resources import Account, Bill, Resource, Transaction
+from .resources import Account, Bill, Resource, Topup, Transaction
 from .exc import (
     BadRequest, InvalidAuth, Forbidden, NotFound, TooManyRequests,
     InternalServerError, ServiceUnavailable, UnprocessableEntity)
 
 
 API_VERSION = '3.1'
+API_VERSION_KEY = 'api_version'
 PRODUCTION_API_URL = 'https://api.regalii.com'
 SANDBOX_API_URL = 'https://api.casiregalii.com'
 
@@ -18,12 +19,13 @@ class Client:
 
     transactions = Transaction
 
+    topups = Topup
+
     def __init__(
             self,
             api_key: str,
             secret_key: str,
-            sandbox: bool = False,
-            api_version: str = API_VERSION
+            sandbox: bool = False
     ):
         self.api_key = api_key
         self.secret_key = secret_key
@@ -31,7 +33,6 @@ class Client:
             self.base_url = SANDBOX_API_URL
         else:
             self.base_url = PRODUCTION_API_URL
-        self.api_version = api_version
         Resource._client = self
 
     def get(self, endpoint: str, **kwargs) -> dict:
@@ -46,7 +47,12 @@ class Client:
                 data: dict,
                 **kwargs) -> dict:
         url = self.base_url + endpoint
-        headers = self._build_headers(endpoint, data)
+        if API_VERSION_KEY not in kwargs:
+            api_version = API_VERSION
+        else:
+            api_version = kwargs[API_VERSION_KEY]
+            del kwargs[API_VERSION_KEY]
+        headers = self._build_headers(endpoint, api_version, data)
         response = requests.request(
             method, url, headers=headers, json=data, **kwargs)
         self._check_response(response)
@@ -56,9 +62,12 @@ class Client:
     def account(self):
         return Account(**self.get('/account'))
 
-    def _build_headers(self, endpoint: str, data: dict) -> dict:
+    def _build_headers(self,
+                       endpoint: str,
+                       api_version: str,
+                       data: dict) -> dict:
         headers = [('Accept',
-                    f'application/vnd.regalii.v{self.api_version}+json')]
+                    f'application/vnd.regalii.v{api_version}+json')]
         headers.append(compute_md5_header(data))
         headers.append(compute_date_header())
         headers.append(compute_auth_header(
