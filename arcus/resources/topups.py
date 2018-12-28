@@ -23,7 +23,6 @@ class Topup(Resource):
                     account_number=account_number,
                     amount=amount,
                     currency=currency)
-        topup_dict = cls._client.post('/bill/pay',
-                                      data,
-                                      api_version=TOPUP_API_VERSION)
+        topup_dict = cls._client.post(
+            '/bill/pay', data, api_version=TOPUP_API_VERSION)
         return Topup(**topup_dict)
