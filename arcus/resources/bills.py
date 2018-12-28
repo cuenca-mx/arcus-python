@@ -13,7 +13,7 @@ class Bill(Resource):
         bill_dict = cls._client.post(cls._endpoint, data)
         return cls(**bill_dict)
 
-    def pay(self, amount: Optional[int] = None) -> Transaction:
+    def pay(self, amount: Optional[float] = None) -> Transaction:
         amount = amount or self.balance
         data = dict(amount=amount, currency=self.balance_currency)
         transaction_dict = self._client.post(
