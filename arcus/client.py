@@ -100,4 +100,4 @@ class Client:
             raise ServiceUnavailable('Service Unavailable – '
                                      'Please try again later')
         else:
-            raise UnknownStatusCode('Unknown status code', response.status_code)
+            raise UnknownStatusCode('Unknown status', response.status_code)
