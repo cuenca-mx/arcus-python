@@ -99,3 +99,5 @@ class Client:
         elif response.status_code == 503:
             raise ServiceUnavailable('Service Unavailable – '
                                      'Please try again later')
+        else:
+            raise UnknownStatusCode('Unknown status code', response.status_code)
