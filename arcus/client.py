@@ -78,7 +78,7 @@ class Client:
         except Exception:
             data = dict()
         if response.status_code == 400:
-            raise BadRequest(response.status_code,'Invalid request message')
+            raise BadRequest(response.status_code, 'Invalid request message')
         elif response.status_code == 401:
             raise InvalidAuth('Invalid API authentication credentials')
         elif response.status_code == 403:
