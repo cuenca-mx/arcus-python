@@ -4,7 +4,8 @@ from .auth import compute_auth_header, compute_date_header, compute_md5_header
 from .resources import Account, Bill, Resource, Topup, Transaction
 from .exc import (
     BadRequest, InvalidAuth, Forbidden, NotFound, TooManyRequests,
-    InternalServerError, ServiceUnavailable, UnprocessableEntity)
+    InternalServerError, ServiceUnavailable, UnprocessableEntity,
+    UnknownStatusCode)
 
 
 API_VERSION = '3.1'
