@@ -24,7 +24,8 @@ errors = {
     "404": exc.NotFound,
     "429": exc.TooManyRequests,
     "500": exc.InternalServerError,
-    "503": exc.ServiceUnavailable
+    "503": exc.ServiceUnavailable,
+    "9000": exc.UnknownStatusCode
 }
 
 
