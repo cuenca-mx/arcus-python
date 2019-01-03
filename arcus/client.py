@@ -5,10 +5,7 @@ import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
 from .resources import Account, Bill, Resource, Topup, Transaction
-from .exc import (
-    BadRequest, InvalidAuth, Forbidden, NotFound, TooManyRequests,
-    InternalServerError, ServiceUnavailable, UnprocessableEntity,
-    UnknownStatusCode)
+from .exc import InvalidAuth, NotFound, UnprocessableEntity
 
 
 API_VERSION = '3.1'
@@ -73,29 +70,19 @@ class Client:
 
     @staticmethod
     def _check_response(response):
-        if response.status_code in (200, 201):
+        if response.ok:
             return
         data = response.json()
         if response.status_code == 400:
-            raise BadRequest(response.status_code, 'Invalid request message')
+            response.raise_for_status()
         elif response.status_code == 401:
-            raise InvalidAuth('Invalid API authentication credentials')
-        elif response.status_code == 403:
-            raise Forbidden('You are not authorized to access'
-                            ' the resource requested')
+            raise InvalidAuth
         elif response.status_code == 404:
-            raise NotFound('Resource not found')
+            try:
+                raise NotFound(data['message'])
+            except KeyError:
+                response.raise_for_status()
         elif response.status_code == 422:
-            raise UnprocessableEntity(
-                'Unprocessable Entity', data['code'], data['message'],
-                data['id'] if 'id' in data else None)
-        elif response.status_code == 429:
-            raise TooManyRequests('You’re sending too many requests!')
-        elif response.status_code == 500:
-            raise InternalServerError('We had a problem with our server. '
-                                      'Try again later.')
-        elif response.status_code == 503:
-            raise ServiceUnavailable('Service Unavailable – '
-                                     'Please try again later')
+            raise UnprocessableEntity(**data)
         else:
-            raise UnknownStatusCode('Unknown status', response.status_code)
+            response.raise_for_status()

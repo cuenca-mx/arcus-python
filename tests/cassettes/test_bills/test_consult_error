@@ -1,32 +1,32 @@
 interactions:
 - request:
-    body: '{"biller_id": 6900, "account_number": "1111362009"}'
+    body: '{"biller_id": 2901, "account_number": "1111322016"}'
     headers:
       Accept: [application/vnd.regalii.v3.1+json]
       Accept-Encoding: ['gzip, deflate']
-      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:6WNKCybPls6l2pyelDA8hlJ4+Vo=']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:ZWIAykOqUbdLQsUnFG5AXM8jlmQ=']
       Connection: [keep-alive]
       Content-Length: ['51']
-      Content-MD5: [bQK9pnQdJW/eFR0gpmVoHA==]
+      Content-MD5: [ZkNGR5IItPT5UO5fquuDpg==]
       Content-Type: [application/json]
-      Date: ['Thu, 03 Jan 2019 19:50:35 GMT']
+      Date: ['Thu, 03 Jan 2019 22:21:47 GMT']
       User-Agent: [python-requests/2.21.0]
     method: POST
     uri: https://api.casiregalii.com/bills
   response:
-    body: {string: '{"code":"R9","message":"Unexpected error (everything entered was
-        correct)","id":8391}'}
+    body: {string: '{"code":"R16","message":"Failed to make the consult, please try
+        again later","id":8393}'}
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Thu, 03 Jan 2019 19:50:37 GMT']
+      Date: ['Thu, 03 Jan 2019 22:21:48 GMT']
       Strict-Transport-Security: [max-age=31536000]
       Transfer-Encoding: [chunked]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [b6d05231-adfb-41ff-8243-0620b31c5a16]
-      X-Runtime: ['1.062360']
+      X-Request-Id: [ead90a6c-b850-4190-9ee7-0f573e7d5bb7]
+      X-Runtime: ['1.061307']
       X-XSS-Protection: [1; mode=block]
     status: {code: 422, message: Unprocessable Entity}
 version: 1

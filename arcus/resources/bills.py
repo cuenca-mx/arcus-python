@@ -1,8 +1,8 @@
 from typing import Optional, Union
 
 from arcus.exc import (
-    ArcusException,
-    InvalidAccountNumber, InvalidBiller, NotFound, UnprocessableEntity)
+    ArcusException, InvalidAccountNumber, InvalidBiller, NotFound,
+    UnprocessableEntity)
 
 from .base import Resource
 from .transactions import Transaction

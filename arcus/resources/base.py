@@ -11,11 +11,29 @@ class Resource:
 
     def __repr__(self):
         indent = ' ' * 4
+        attrs = {}
+        for attr, value in self.__dict__.items():
+            if isinstance(value, str):
+                value = f"'{value}'"
+            attrs[attr] = value
         rv = f'{self.__class__.__name__}(\n'
         rv += ',\n'.join([
             f'{indent}{attr}={value}'
-            for attr, value in self.__dict__.items()])
+            for attr, value in attrs.items()])
         rv += '\n)'
+        return rv
+
+    def __str__(self):
+        attrs = {}
+        for attr, value in self.__dict__.items():
+            if isinstance(value, str):
+                value = f"'{value}'"
+            attrs[attr] = value
+        rv = f'{self.__class__.__name__}('
+        rv += ', '.join([
+            f'{attr}={value}'
+            for attr, value in attrs.items()])
+        rv += ')'
         return rv
 
     @classmethod
