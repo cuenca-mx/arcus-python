@@ -51,9 +51,9 @@ def test_unexpected_error(client):
 def test_cancel_bill(client):
     bill = client.bills.create(35, '123456851236')
     transaction = bill.pay(bill.balance)
-    cancellation = client.transactions.cancel(transaction.id)
-    assert cancellation.code == 'R0'
-    assert cancellation.message == 'Transaction successful'
+    cancellation = transaction.cancel()
+    assert cancellation['code'] == 'R0'
+    assert cancellation['message'] == 'Transaction successful'
 
     updated_transaction = client.transactions.get(transaction.id)
     assert updated_transaction.id == transaction.id
