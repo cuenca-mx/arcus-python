@@ -37,6 +37,8 @@ class Bill(Resource):
 
     def pay(self, amount: Optional[float] = None) -> Transaction:
         amount = amount or self.balance
+        if not amount:
+            raise ValueError('amount is not specified')
         data = dict(amount=amount, currency=self.balance_currency)
         transaction_dict = self._client.post(
             f'{self._endpoint}/{self.id}/pay', data)

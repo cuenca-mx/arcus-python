@@ -87,3 +87,12 @@ def test_timeout_on_payment(client):
     e = excinfo.value
     assert e.code == 'R24'
     assert e.message == 'Timeout from biller'
+
+
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_bills')
+def test_invalid_transaction_amount(client):
+    bill = client.bills.create(40, '501000000007')
+    assert bill == client.bills.get(bill.id)
+    bill.balance = None
+    with pytest.raises(ValueError):
+        bill.pay(None)
