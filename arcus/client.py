@@ -74,10 +74,7 @@ class Client:
     def _check_response(response):
         if response.status_code in (200, 201):
             return
-        try:
-            data = response.json()
-        except Exception:
-            data = dict()
+        data = response.json()
         if response.status_code == 400:
             raise BadRequest(response.status_code, 'Invalid request message')
         elif response.status_code == 401:
