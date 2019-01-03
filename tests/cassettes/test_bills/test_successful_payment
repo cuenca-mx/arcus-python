@@ -4,29 +4,29 @@ interactions:
     headers:
       Accept: [application/vnd.regalii.v3.1+json]
       Accept-Encoding: ['gzip, deflate']
-      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:RZhRJTpUgL7xu+kyJo1JmB8l9V4=']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:jv0gsuilkNe6nZzfMxKsG5YJF/g=']
       Connection: [keep-alive]
       Content-Length: ['51']
       Content-MD5: [PtZUYQ9bmh3ULNV0W7ZNdw==]
       Content-Type: [application/json]
-      Date: ['Wed, 21 Nov 2018 23:41:56 GMT']
-      User-Agent: [python-requests/2.20.1]
+      Date: ['Thu, 03 Jan 2019 22:21:40 GMT']
+      User-Agent: [python-requests/2.21.0]
     method: POST
     uri: https://api.casiregalii.com/bills
   response:
-    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2018-11-21T23:41:56Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
+    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2019-01-03T22:21:40Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Connection: [keep-alive]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 21 Nov 2018 23:41:57 GMT']
-      ETag: [W/"700d084df3f6b381ba077c5f9d9977a9"]
+      Date: ['Thu, 03 Jan 2019 22:21:41 GMT']
+      ETag: [W/"71aedcf3fa17a5f4cfa5d0f261efce4d"]
       Strict-Transport-Security: [max-age=31536000]
       Transfer-Encoding: [chunked]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [aa9a1a3d-d018-4ba0-8338-2c58addef766]
-      X-Runtime: ['1.083624']
+      X-Request-Id: [faa34098-93c8-487d-a2b0-94cc62f5edd2]
+      X-Runtime: ['1.056587']
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 - request:
@@ -34,29 +34,29 @@ interactions:
     headers:
       Accept: [application/vnd.regalii.v3.1+json]
       Accept-Encoding: ['gzip, deflate']
-      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:zbL9VKOrqgsFEuKeye/jHPps6Yg=']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:bZfdbNVnxBeVC7/PT3FqkEaH57g=']
       Connection: [keep-alive]
       Content-Length: ['2']
       Content-MD5: [mZFLkyvTelC5g8XnyQrpOw==]
       Content-Type: [application/json]
-      Date: ['Wed, 21 Nov 2018 23:41:58 GMT']
-      User-Agent: [python-requests/2.20.1]
+      Date: ['Thu, 03 Jan 2019 22:21:41 GMT']
+      User-Agent: [python-requests/2.21.0]
     method: GET
     uri: https://api.casiregalii.com/bills/8390
   response:
-    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2018-11-21T23:41:56Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
+    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2019-01-03T22:21:40Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Connection: [keep-alive]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 21 Nov 2018 23:41:58 GMT']
-      ETag: [W/"700d084df3f6b381ba077c5f9d9977a9"]
+      Date: ['Thu, 03 Jan 2019 22:21:41 GMT']
+      ETag: [W/"71aedcf3fa17a5f4cfa5d0f261efce4d"]
       Strict-Transport-Security: [max-age=31536000]
       Transfer-Encoding: [chunked]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [7d5d42f4-559f-46fb-8e07-baef4e13a2a8]
-      X-Runtime: ['0.013146']
+      X-Request-Id: [d1c5f349-1fc9-474e-b278-b5ab9d3133e2]
+      X-Runtime: ['0.019050']
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 - request:
@@ -64,29 +64,29 @@ interactions:
     headers:
       Accept: [application/vnd.regalii.v3.1+json]
       Accept-Encoding: ['gzip, deflate']
-      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:r00OWBAuEIWKsSFT8xy8CTB9uuA=']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:bMQgLZea/2RiMkgL8IDoJSUVr54=']
       Connection: [keep-alive]
       Content-Length: ['36']
       Content-MD5: [ze1WRUVApUnpFxTpAr7ygw==]
       Content-Type: [application/json]
-      Date: ['Wed, 21 Nov 2018 23:41:58 GMT']
-      User-Agent: [python-requests/2.20.1]
+      Date: ['Thu, 03 Jan 2019 22:21:41 GMT']
+      User-Agent: [python-requests/2.21.0]
     method: POST
     uri: https://api.casiregalii.com/bills/8390/pay
   response:
-    body: {string: '{"type":"transaction","id":44730,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-21T23:41:58Z","status":"fulfilled"}'}
+    body: {string: '{"type":"transaction","id":46631,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.94,"transaction_fee":3.0,"total_usd":28.1,"hours_to_fulfill":0,"created_at":"2019-01-03T22:21:42Z","status":"fulfilled"}'}
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Connection: [keep-alive]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 21 Nov 2018 23:41:58 GMT']
-      ETag: [W/"01ae68e390b5c926e636e59b337840b9"]
+      Date: ['Thu, 03 Jan 2019 22:21:42 GMT']
+      ETag: [W/"500f7b0aa7d5cf678d7f3599981d9d26"]
       Strict-Transport-Security: [max-age=31536000]
       Transfer-Encoding: [chunked]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [d86ec057-4e9c-42fa-a419-c294e1096b3c]
-      X-Runtime: ['0.091673']
+      X-Request-Id: [4e9d7db0-e2ec-4bc8-906f-d445af933d5f]
+      X-Runtime: ['0.082121']
       X-XSS-Protection: [1; mode=block]
     status: {code: 201, message: Created}
 version: 1

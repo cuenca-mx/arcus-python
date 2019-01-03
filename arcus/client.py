@@ -1,10 +1,11 @@
+import os
+from typing import Optional
+
 import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
 from .resources import Account, Bill, Resource, Topup, Transaction
-from .exc import (
-    BadRequest, InvalidAuth, Forbidden, NotFound, TooManyRequests,
-    InternalServerError, ServiceUnavailable, UnprocessableEntity)
+from .exc import InvalidAuth, NotFound, UnprocessableEntity
 
 
 API_VERSION = '3.1'
@@ -15,19 +16,17 @@ SANDBOX_API_URL = 'https://api.casiregalii.com'
 class Client:
 
     bills = Bill
-
     transactions = Transaction
-
     topups = Topup
 
     def __init__(
             self,
-            api_key: str,
-            secret_key: str,
+            api_key: Optional[str] = None,
+            secret_key: Optional[str] = None,
             sandbox: bool = False
     ):
-        self.api_key = api_key
-        self.secret_key = secret_key
+        self.api_key = api_key or os.environ['ARCUS_API_KEY']
+        self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
         if sandbox:
             self.base_url = SANDBOX_API_URL
         else:
@@ -71,31 +70,19 @@ class Client:
 
     @staticmethod
     def _check_response(response):
-        if response.status_code in (200, 201):
+        if response.ok:
             return
-        try:
-            data = response.json()
-        except Exception:
-            data = dict()
+        data = response.json()
         if response.status_code == 400:
-            raise BadRequest('Invalid request message')
+            response.raise_for_status()
         elif response.status_code == 401:
-            raise InvalidAuth('Invalid API authentication credentials')
-        elif response.status_code == 403:
-            raise Forbidden('You are not authorized to access'
-                            ' the resource requested')
+            raise InvalidAuth
         elif response.status_code == 404:
-            raise NotFound('Resource not found')
+            try:
+                raise NotFound(data['message'])
+            except KeyError:
+                response.raise_for_status()
         elif response.status_code == 422:
-            raise UnprocessableEntity('Unprocessable Entity',
-                                      data['code'],
-                                      data['message'],
-                                      data['id'] if 'id' in data else None)
-        elif response.status_code == 429:
-            raise TooManyRequests('You’re sending too many requests!')
-        elif response.status_code == 500:
-            raise InternalServerError('We had a problem with our server. '
-                                      'Try again later.')
-        elif response.status_code == 503:
-            raise ServiceUnavailable('Service Unavailable – '
-                                     'Please try again later')
+            raise UnprocessableEntity(**data)
+        else:
+            response.raise_for_status()

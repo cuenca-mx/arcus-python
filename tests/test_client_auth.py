@@ -25,9 +25,8 @@ def test_valid_auth():
 def test_invalid_auth():
     # default is sandbox=False
     client = Client(ARCUS_API_KEY, ARCUS_SECRET_KEY)
-    with pytest.raises(InvalidAuth) as excinfo:
+    with pytest.raises(InvalidAuth):
         client.get('/account')
-    assert excinfo.value.value == 'Invalid API authentication credentials'
 
 
 @vcr.use_cassette(cassette_library_dir='tests/cassettes/test_auth')

@@ -1,48 +1,40 @@
-class InvalidAuth(Exception):
-    def __init__(self, value: str):
-        self.value = value
+from typing import Union
+
+from requests import HTTPError
 
 
-class BadRequest(Exception):
-    def __init__(self, code: str, message: str):
-        self.code = code
-        self.message = message
+class ArcusException(Exception):
+    message = """Generic Arcus API exception"""
 
 
-class Forbidden(Exception):
-    def __init__(self, message: str):
-        self.message = message
+class InvalidAuth(ArcusException):
+    message = """Invalid API authentication credentials"""
 
 
-class NotFound(Exception):
-    def __init__(self, message: str):
-        self.message = message
+class InvalidAccountNumber(ArcusException):
+    def __init__(self, account_number: str):
+        self.message = f'{account_number} is an invalid account_number'
 
 
-class UnprocessableEntity(Exception):
-    def __init__(self, value: str, code: str, message: str, id: int):
-        self.value = value
-        self.code = code
-        self.message = message
-        self.id = id
+class InvalidBiller(ArcusException):
+    def __init__(self, biller_id: Union[int, str]):
+        self.message = f'{biller_id} is an invalid biller_id'
 
 
-class TooManyRequests(Exception):
-    def __init__(self, message: str):
-        self.message = message
+class NotFound(ArcusException, HTTPError):
+    pass
 
 
-class InternalServerError(Exception):
-    def __init__(self, message: str):
-        self.message = message
+class UnprocessableEntity(ArcusException):
+    def __init__(self, **kwargs):
+        for attr, value in kwargs.items():
+            setattr(self, attr, value)
 
-
-class ServiceUnavailable(Exception):
-    def __init__(self, message: str):
-        self.message = message
-
-
-class UnknownStatusCode(Exception):
-    def __init__(self, message: str, status_code: int):
-        self.message = message
-        self.status_code = status_code
+    def __repr__(self):
+        attrs = {}
+        for attr, value in self.__dict__.items():
+            if isinstance(value, str):
+                value = f"'{value}'"
+            attrs[attr] = value
+        return self.__class__.__name__ + ', '.join(
+            [f'{attr}={value}' for attr, value in attrs.items()]) + ')'
