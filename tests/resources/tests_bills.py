@@ -25,7 +25,7 @@ def test_invalid_biller_id(client):
 
 @vcr.use_cassette(cassette_library_dir='tests/cassettes/resources/test_bills')
 def test_invalid_account_number(client):
-    invalid_account_number  = '501000000004'
+    invalid_account_number = '501000000004'
     with pytest.raises(exc.InvalidAccountNumber):
         client.bills.create(40, invalid_account_number)
 
