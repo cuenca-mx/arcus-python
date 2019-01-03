@@ -43,6 +43,7 @@ def test_successful_payment(client):
 def test_unexpected_error(client):
     with pytest.raises(Exception) as e:
         client.bills.create(6900, '1111362009')
+        import ipdb; ipdb.set_trace()
     e = e.value
     assert e.code == 'R9'
     assert e.message.startswith('Unexpected error')
