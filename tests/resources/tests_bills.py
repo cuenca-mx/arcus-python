@@ -26,7 +26,7 @@ def test_invalid_biller_id(client):
 @vcr.use_cassette(cassette_library_dir='tests/cassettes/resources/test_bills')
 def test_invalid_account_number(client):
     invalid_account_number  = '501000000004'
-    with pytest.raises(exc.InvalidAccountNumber) as excinfo:
+    with pytest.raises(exc.InvalidAccountNumber):
         client.bills.create(40, invalid_account_number)
 
 
@@ -37,3 +37,54 @@ def test_successful_payment(client):
     transaction = bill.pay()
     assert transaction.id
     assert transaction.status == 'fulfilled'
+
+
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/resources/test_bills')
+def test_unexpected_error(client):
+    with pytest.raises(Exception) as e:
+        client.bills.create(6900, '1111362009')
+    e = e.value
+    assert e.code == 'R9'
+    assert e.message.startswith('Unexpected error')
+
+
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/resources/test_bills')
+def test_cancel_bill(client):
+    bill = client.bills.create(35, '123456851236')
+    transaction = bill.pay(bill.balance)
+    cancellation = client.transactions.cancel(transaction.id)
+    assert cancellation.code == 'R0'
+    assert cancellation.message == 'Transaction successful'
+
+    updated_transaction = client.transactions.get(transaction.id)
+    assert updated_transaction.id == transaction.id
+    assert updated_transaction.status == 'refunded'
+
+
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/resources/test_bills')
+def test_consult_error(client):
+    with pytest.raises(exc.UnprocessableEntity) as e:
+        client.bills.create(2901, '1111322016')
+    e = e.value
+    assert e.code == 'R16'
+    assert e.message == 'Failed to make the consult, please try again later'
+
+
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/resources/test_bills')
+def test_biller_maintenance(client):
+    with pytest.raises(exc.UnprocessableEntity) as e:
+        client.bills.create(1821, '1111992022')
+    e = e.value
+    assert e.code == 'R22'
+    assert e.message == (
+        'Biller maintenance in progress, please try again later')
+
+
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/resources/test_bills')
+def test_timeout_on_payment(client):
+    bill = client.bills.create(37, '2424240024')
+    with pytest.raises(exc.UnprocessableEntity) as e:
+        bill.pay()
+    e = e.value
+    assert e.code == 'R24'
+    assert e.message == 'Timeout from biller'
