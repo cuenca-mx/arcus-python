@@ -14,6 +14,8 @@ def test_create_bill(client):
     assert bill.biller_id == 40
     assert bill.account_number == '501000000007'
     assert type(bill.balance) is float
+    assert str(bill)
+    assert repr(bill)
 
 
 @vcr.use_cassette(cassette_library_dir='tests/cassettes/test_bills')
@@ -65,6 +67,7 @@ def test_consult_error(client):
     with pytest.raises(exc.UnprocessableEntity) as excinfo:
         client.bills.create(2901, '1111322016')
     e = excinfo.value
+    assert repr(e)
     assert e.code == 'R16'
     assert e.message == 'Failed to make the consult, please try again later'
 

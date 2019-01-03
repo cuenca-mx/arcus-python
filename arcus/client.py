@@ -73,9 +73,7 @@ class Client:
         if response.ok:
             return
         data = response.json()
-        if response.status_code == 400:
-            response.raise_for_status()
-        elif response.status_code == 401:
+        if response.status_code == 401:
             raise InvalidAuth
         elif response.status_code == 404:
             try:
