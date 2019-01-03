@@ -1,3 +1,15 @@
+from typing import Union
+
+
+class ArcusException(Exception):
+    """Generic Arcus API exception"""
+
+
+class InvalidBiller(ArcusException):
+    def __init__(self, biller_id: Union[int, str]):
+        self.message = f'{biller_id} is an invalid biller_id'
+
+
 class InvalidAuth(Exception):
     def __init__(self, value: str):
         self.value = value

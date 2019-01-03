@@ -1,3 +1,6 @@
+import os
+from typing import Optional
+
 import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
@@ -16,19 +19,17 @@ SANDBOX_API_URL = 'https://api.casiregalii.com'
 class Client:
 
     bills = Bill
-
     transactions = Transaction
-
     topups = Topup
 
     def __init__(
             self,
-            api_key: str,
-            secret_key: str,
+            api_key: Optional[str] = None,
+            secret_key: Optional[str] = None,
             sandbox: bool = False
     ):
-        self.api_key = api_key
-        self.secret_key = secret_key
+        self.api_key = api_key or os.environ['ARCUS_API_KEY']
+        self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
         if sandbox:
             self.base_url = SANDBOX_API_URL
         else:
