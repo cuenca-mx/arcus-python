@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: '{"biller_id": 99999999, "account_number": "1234"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:hR3IR1EPuPN6dwKL3z6H8zaBwc8=']
+      Connection: [keep-alive]
+      Content-Length: ['49']
+      Content-MD5: [CQOFDTwfW/T51+QfBizIMw==]
+      Content-Type: [application/json]
+      Date: ['Thu, 03 Jan 2019 19:32:34 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills
+  response:
+    body: {string: '{"message":"Couldn''t find company"}'}
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Thu, 03 Jan 2019 19:32:35 GMT']
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [fbd22687-d89a-402a-b923-6115f6cb42d3]
+      X-Runtime: ['0.015824']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 404, message: Not Found}
+version: 1

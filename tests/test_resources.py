@@ -25,36 +25,6 @@ def test_get_account_info():
 
 
 @vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
-def test_create_bill():
-    client = ARCUS_CLIENT
-    bill = client.bills.create(40, '501000000007')
-    assert type(bill) is Bill
-    assert bill.biller_id == 40
-    assert bill.account_number == '501000000007'
-    assert type(bill.balance) is float
-
-
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
-def test_create_bill_wrong_account_number():
-    client = ARCUS_CLIENT
-    with pytest.raises(UnprocessableEntity) as excinfo:
-        client.bills.create(40, '501000000004')
-    ex = excinfo.value
-    assert ex.code == 'R2'
-    assert ex.message == 'Invalid Account Number'
-
-
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
-def test_successful_payment():
-    client = ARCUS_CLIENT
-    bill = client.bills.create(40, '501000000007')
-    assert bill == client.bills.get(bill.id)
-    transaction = bill.pay()
-    assert transaction.id
-    assert transaction.status == 'fulfilled'
-
-
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_resources')
 def test_unexpected_error():
     arcus = ARCUS_CLIENT
     with pytest.raises(Exception) as excinfo:

@@ -86,10 +86,9 @@ class Client:
         elif response.status_code == 404:
             raise NotFound('Resource not found')
         elif response.status_code == 422:
-            raise UnprocessableEntity('Unprocessable Entity',
-                                      data['code'],
-                                      data['message'],
-                                      data['id'] if 'id' in data else None)
+            raise UnprocessableEntity(
+                'Unprocessable Entity', data['code'], data['message'],
+                data['id'] if 'id' in data else None)
         elif response.status_code == 429:
             raise TooManyRequests('You’re sending too many requests!')
         elif response.status_code == 500:
