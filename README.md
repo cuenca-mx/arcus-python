@@ -58,9 +58,9 @@ transaction = bill.pay()
 transaction = client.transactions.get(transaction.id)
 
 # cancel transaction
-cancellation = client.transactions.cancel(transaction.id)
-assert cancellation.code == 'R0'
-assert cancellation.message == 'Transaction successful'
+cancellation = transaction.cancel()
+assert cancellation['code'] == 'R0'
+assert cancellation['message'] == 'Transaction successful'
 
 # verify cancellation
 updated_transaction = client.transactions.get(transaction.id)
