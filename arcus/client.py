@@ -76,10 +76,7 @@ class Client:
         if response.status_code == 401:
             raise InvalidAuth
         elif response.status_code == 404:
-            try:
-                raise NotFound(data['message'])
-            except KeyError:
-                response.raise_for_status()
+            raise NotFound(data['message'])
         elif response.status_code == 422:
             raise UnprocessableEntity(**data)
         else:
