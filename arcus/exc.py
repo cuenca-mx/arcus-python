@@ -4,11 +4,11 @@ from requests import HTTPError
 
 
 class ArcusException(Exception):
-    message = """Generic Arcus API exception"""
+    """Generic Arcus API exception"""
 
 
 class InvalidAuth(ArcusException):
-    message = """Invalid API authentication credentials"""
+    """Invalid API authentication credentials"""
 
 
 class InvalidAccountNumber(ArcusException):
@@ -26,7 +26,8 @@ class NotFound(ArcusException, HTTPError):
 
 
 class UnprocessableEntity(ArcusException):
-    def __init__(self, **kwargs):
+    def __init__(self, code: str, **kwargs):
+        self.code = code
         for attr, value in kwargs.items():
             setattr(self, attr, value)
 
