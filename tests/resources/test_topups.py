@@ -29,3 +29,8 @@ def test_topup_invalid_phone_number(client):
     exc = excinfo.value
     assert exc.code == 'R5'
     assert exc.message == 'Invalid Phone Number'
+
+
+def test_topup_list(client):
+    with pytest.raises(NotImplementedError):
+        client.topups.list()

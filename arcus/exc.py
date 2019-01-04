@@ -32,10 +32,6 @@ class UnprocessableEntity(ArcusException):
             setattr(self, attr, value)
 
     def __repr__(self):
-        attrs = {}
-        for attr, value in self.__dict__.items():
-            if isinstance(value, str):
-                value = f"'{value}'"
-            attrs[attr] = value
         return self.__class__.__name__ + ', '.join(
-            [f'{attr}={value}' for attr, value in attrs.items()]) + ')'
+            [f'{attr}={repr(value)}'
+             for attr, value in self.__dict__.items()]) + ')'

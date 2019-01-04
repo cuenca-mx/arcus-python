@@ -26,3 +26,8 @@ class Topup(Resource):
         topup_dict = cls._client.post(
             '/bill/pay', data, api_version=TOPUP_API_VERSION)
         return Topup(**topup_dict)
+
+    @classmethod
+    def list(cls):
+        raise NotImplementedError(
+            f"{cls.__class__}.list() hasn't been implemented")

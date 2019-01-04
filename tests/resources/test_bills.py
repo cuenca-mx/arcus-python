@@ -99,3 +99,11 @@ def test_invalid_transaction_amount(client):
     bill.balance = None
     with pytest.raises(ValueError):
         bill.pay(None)
+
+
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_bills')
+def test_bills_list(client):
+    bills = client.bills.list()
+    assert bills
+    assert type(bills) is list
+    assert all(isinstance(bill, Bill) for bill in bills)

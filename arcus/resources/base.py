@@ -1,38 +1,37 @@
+import datetime as dt
+
+
 class Resource:
     _client = None
     _endpoint = None
 
     def __init__(self, **attrs):
         for attr, value in attrs.items():
+            if attr.endswith('_at') and value:
+                value = dt.datetime.fromisoformat(value[:-1])
+            elif attr.endswith('_date') and value:
+                value = dt.date.fromisoformat(value[:10])
+            elif attr == 'type':
+                continue
             setattr(self, attr, value)
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        return type(self) is type(other) and self.__dict__ == other.__dict__
 
     def __repr__(self):
         indent = ' ' * 4
-        attrs = {}
-        for attr, value in self.__dict__.items():
-            if isinstance(value, str):
-                value = f"'{value}'"
-            attrs[attr] = value
         rv = f'{self.__class__.__name__}(\n'
         rv += ',\n'.join([
-            f'{indent}{attr}={value}'
-            for attr, value in attrs.items()])
+            f'{indent}{attr}={repr(value)}'
+            for attr, value in self.__dict__.items()])
         rv += '\n)'
         return rv
 
     def __str__(self):
-        attrs = {}
-        for attr, value in self.__dict__.items():
-            if isinstance(value, str):
-                value = f"'{value}'"
-            attrs[attr] = value
         rv = f'{self.__class__.__name__}('
         rv += ', '.join([
-            f'{attr}={value}'
-            for attr, value in attrs.items()])
+            f'{attr}={repr(value)}'
+            for attr, value in self.__dict__.items()])
         rv += ')'
         return rv
 
@@ -40,3 +39,10 @@ class Resource:
     def get(cls, obj_id):
         obj_dict = cls._client.get(f'{cls._endpoint}/{obj_id}')
         return cls(**obj_dict)
+
+    @classmethod
+    def list(cls) -> list:
+        type_ = cls._endpoint[1:]
+        obj_dicts = cls._client.get(cls._endpoint)[type_]
+        objs = [cls(**obj_dict) for obj_dict in obj_dicts]
+        return objs
