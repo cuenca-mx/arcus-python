@@ -2,7 +2,8 @@ import setuptools
 
 install_requirements = [
     'requests',
-    'pytz'
+    'pytz',
+    'iso8601'
 ]
 
 with open('README.md', 'r') as f:
@@ -11,7 +12,7 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
     name='arcus',
-    version='0.2.3',
+    version='0.2.4',
     author='Cuenca',
     author_email='dev@cuenca.com',
     description='Arcus API Client',

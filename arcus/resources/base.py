@@ -1,4 +1,4 @@
-import datetime as dt
+import iso8601
 
 
 class Resource:
@@ -8,9 +8,9 @@ class Resource:
     def __init__(self, **attrs):
         for attr, value in attrs.items():
             if attr.endswith('_at') and value:
-                value = dt.datetime.fromisoformat(value[:-1])
+                value = iso8601.parse_date(value)
             elif attr.endswith('_date') and value:
-                value = dt.date.fromisoformat(value[:10])
+                value = iso8601.parse_date(value).date()
             elif attr == 'type':
                 continue
             setattr(self, attr, value)
