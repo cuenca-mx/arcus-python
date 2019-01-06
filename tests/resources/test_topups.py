@@ -34,3 +34,17 @@ def test_topup_invalid_phone_number(client):
 def test_topup_list(client):
     with pytest.raises(NotImplementedError):
         client.topups.list()
+
+
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_topups')
+def test_pay_invoice_with_name_on_account(client):
+    biller_id = 1781
+    account_number = '5599999999'
+    amount = 578.0
+    invoice_owner = 'Edward S. Burton'
+    topup = client.topups.create(biller_id, account_number, amount,
+                                 name_on_account=invoice_owner)
+    assert topup.biller_id == biller_id
+    assert topup.account_number == account_number
+    assert topup.bill_amount == amount
+    assert topup.ending_balance < topup.starting_balance

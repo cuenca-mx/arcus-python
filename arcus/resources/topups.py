@@ -17,12 +17,14 @@ class Topup(Resource):
             biller_id: int,
             account_number: str,
             amount: float,
-            currency: str = 'MXN'
+            currency: str = 'MXN',
+            name_on_account: str = None
     ):
         data = dict(biller_id=biller_id,
                     account_number=account_number,
                     amount=amount,
-                    currency=currency)
+                    currency=currency,
+                    name_on_account=name_on_account)
         topup_dict = cls._client.post(
             '/bill/pay', data, api_version=TOPUP_API_VERSION)
         return Topup(**topup_dict)
