@@ -1,3 +1,5 @@
+from typing import Optional
+
 from .base import Resource
 
 
@@ -18,7 +20,7 @@ class Topup(Resource):
             account_number: str,
             amount: float,
             currency: str = 'MXN',
-            name_on_account: str = None
+            name_on_account: Optional[str] = None
     ):
         data = dict(biller_id=biller_id,
                     account_number=account_number,
