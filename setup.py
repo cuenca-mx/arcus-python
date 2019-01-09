@@ -1,9 +1,10 @@
 import setuptools
 
 install_requirements = [
-    'requests',
-    'pytz',
-    'iso8601'
+    'requests==2.21.0',
+    'pytz==2018.9',
+    'iso8601==0.1.12',
+    'pydash==4.7.4'
 ]
 
 with open('README.md', 'r') as f:
