@@ -16,7 +16,7 @@ SANDBOX_API_URL = 'https://api.casiregalii.com'
 class Client:
 
     bills = Bill
-    biller = Biller
+    billers = Biller
     topups = Topup
     transactions = Transaction
 

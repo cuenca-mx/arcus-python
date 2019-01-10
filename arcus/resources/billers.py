@@ -7,6 +7,14 @@ ENDPOINTS = ['credentials', 'topups', 'utilities']
 
 
 class Biller(Resource):
+    _endpoint = '/billers'
+
+    @classmethod
+    def get(cls, _):
+        raise NotImplementedError(
+            f"{cls.__name__}.get() hasn't been implemented or isn't "
+            f"supported by the API."
+        )
 
     @classmethod
     def list(cls, **filters):
@@ -22,7 +30,7 @@ class Biller(Resource):
         page = 1
         billers = []
         while True:
-            resp = cls._client.get(f'/billers/{endpoint}?page={page}')
+            resp = cls._client.get(f'{cls._endpoint}/{endpoint}?page={page}')
             billers.extend(resp['billers'])
             if len(resp['billers']) == 0:
                 break

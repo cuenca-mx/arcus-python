@@ -34,4 +34,5 @@ class Topup(Resource):
     @classmethod
     def list(cls):
         raise NotImplementedError(
-            f"{cls.__class__}.list() hasn't been implemented")
+            f"{cls.__name__}.list() hasn't been implemented or isn't "
+            f"supported by the API.")
