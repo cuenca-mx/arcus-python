@@ -8,10 +8,7 @@ ENDPOINTS = ['utilities', 'topups', 'credentials']
 class Biller(Resource):
 
     @classmethod
-    def list(
-            cls,
-            **kwargs
-    ):
+    def list(cls, **kwargs):
         billers_list = []
         for endpoint in ENDPOINTS:
             billers_list = union(billers_list, cls.list_billers(endpoint))
