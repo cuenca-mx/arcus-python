@@ -8,18 +8,10 @@ Arcus python3.6 + 3.7 client library for API version 3.1 of [Arcus](https://www.
 
 
 
-## Installation and configuration
+## Install
 
-Create a virtual enviroment an activate it
 ```bash
-$ virtualenv -p python3 venv
-$ source venv/bin/activate
-
-```
-
-Install arcus
-```bash
-(venv)$ pip install arcus
+$ pip install arcus
 ```
 
 
@@ -45,12 +37,6 @@ account_info = client.get('/account')
 account_info = dict(biller_id=40, account_number='501000000007')
 bill = client.post('/bills', account_info)
 
-```
-
-For test purpose you need to add an extra parameter when a client is created
-
-```bash
-client = Client('your-api-key', 'your-secret-key', True)
 ```
 
 
@@ -98,6 +84,7 @@ topup = client.topups.create(biller_id, phone_number, amount)
 assert topup.bill_amount == 100.0
 
 ```
+
 
 ## Billers list
 
