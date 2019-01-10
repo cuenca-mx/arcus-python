@@ -85,6 +85,25 @@ assert topup.bill_amount == 100.0
 
 ```
 
+
+## Billers list
+
+You can list all active billers or filter in a specific field
+```python
+from arcus.client import Client
+
+# Create an Arcus client instance
+client = Client('your-api-key', 'your-secret-key')
+
+# Get all billers in Mexico which use MXN as currency
+mx_biller_list = client.biller.list(country='MX', currency='MXN')
+
+# Get all billers with an specific biller_type
+electricity_biller_list = client.biller.list(biller_type='Electricity')
+
+
+```
+
 ## Release to PyPi
 
 1. Update version in `setup.py`
