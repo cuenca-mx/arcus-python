@@ -4,8 +4,8 @@ from typing import Optional
 import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
-from .resources import Account, Bill, Biller, Resource, Topup, Transaction
 from .exc import InvalidAuth, NotFound, UnprocessableEntity
+from .resources import Account, Bill, Biller, Resource, Topup, Transaction
 
 
 API_VERSION = '3.1'
@@ -17,8 +17,8 @@ class Client:
 
     bills = Bill
     biller = Biller
-    transactions = Transaction
     topups = Topup
+    transactions = Transaction
 
     def __init__(
             self,

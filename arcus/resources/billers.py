@@ -2,22 +2,23 @@ from pydash import filter_
 
 from .base import Resource
 
-ENDPOINTS = ['utilities', 'topups', 'credentials']
+
+ENDPOINTS = ['credentials', 'topups', 'utilities']
 
 
 class Biller(Resource):
 
     @classmethod
-    def list(cls, **kwargs):
-        billers_list = []
+    def list(cls, **filters):
+        billers = []
         for endpoint in ENDPOINTS:
-            billers_list.extend(cls.list_billers(endpoint))
-        billers = [Biller(**biller_dict)
-                   for biller_dict in filter_(billers_list, kwargs)]
-        return billers
+            billers.extend(cls._list_for_endpoint(endpoint))
+        filtered_billers = [Biller(**biller_dict)
+                            for biller_dict in filter_(billers, filters)]
+        return filtered_billers
 
     @classmethod
-    def list_billers(cls, endpoint: str) -> list:
+    def _list_for_endpoint(cls, endpoint: str) -> list:
         page = 1
         billers = []
         while True:
