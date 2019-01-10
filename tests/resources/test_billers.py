@@ -4,10 +4,15 @@ from ..fixtures import client
 
 
 @vcr.use_cassette(cassette_library_dir='tests/cassettes/test_billers')
-def test_biller_list(client):
-    biller_list = client.biller.list('MX', 'MXN')
+def test_mexican_biller_list(client):
+    biller_list = client.biller.list(country='MX', currency='MXN')
 
-    N = len(biller_list)
-    for x in range(0, N):
-        assert biller_list[x]['country'] == 'MX' and \
-               biller_list[x]['currency'] == 'MXN'
+    assert all(biller.country == 'MX' and
+               biller.currency == 'MXN' for biller in biller_list)
+
+
+@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_billers')
+def test_electricity_biller_list(client):
+    biller_list = client.biller.list(biller_type='Electricity')
+
+    assert all(biller.biller_type == 'Electricity' for biller in biller_list)

@@ -10,22 +10,15 @@ class Biller(Resource):
     @classmethod
     def list(
             cls,
-            country: str = 'MX',
-            currency: str = 'MXN',
             **kwargs
     ):
         billers_list = []
         for endpoint in ENDPOINTS:
-            billers = cls.list_billers(endpoint)
-            billers_list = union(billers_list, billers)
+            billers_list = union(billers_list, cls.list_billers(endpoint))
 
-        filtered_billers_list = filter_(
-            billers_list,
-            {'country': country,
-             'currency': currency}
-        )
-
-        return filtered_billers_list
+        billers = [Biller(**biller_dict)
+                   for biller_dict in filter_(billers_list, kwargs)]
+        return billers
 
     @classmethod
     def list_billers(cls, endpoint):
