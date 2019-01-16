@@ -114,3 +114,7 @@ venv.bak/
 
 # envrc
 .envrc
+
+# others
+.DS_Store
+
