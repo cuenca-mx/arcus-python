@@ -1,10 +1,13 @@
+import os
+
 import pytest
 
-from arcus.client import Client
 from arcus.exc import InvalidAuth
+from arcus.client import Client
 
-ARCUS_API_KEY = 'xxx'
-ARCUS_SECRET_KEY = 'xxx'
+
+ARCUS_API_KEY = os.environ['ARCUS_API_KEY']
+ARCUS_SECRET_KEY = os.environ['ARCUS_SECRET_KEY']
 
 
 @pytest.mark.vcr
