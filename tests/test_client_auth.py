@@ -1,17 +1,13 @@
-import os
-
 import pytest
-import vcr
 
-from arcus.exc import InvalidAuth
 from arcus.client import Client
+from arcus.exc import InvalidAuth
+
+ARCUS_API_KEY = 'xxx'
+ARCUS_SECRET_KEY = 'xxx'
 
 
-ARCUS_API_KEY = os.environ['ARCUS_API_KEY']
-ARCUS_SECRET_KEY = os.environ['ARCUS_SECRET_KEY']
-
-
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_auth')
+@pytest.mark.vcr
 def test_valid_auth():
     client = Client(ARCUS_API_KEY, ARCUS_SECRET_KEY, sandbox=True)
     account = client.get('/account')
@@ -21,7 +17,7 @@ def test_valid_auth():
     assert account['balance'] > account['minimum_balance']
 
 
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_auth')
+@pytest.mark.vcr
 def test_invalid_auth():
     # default is sandbox=False
     client = Client(ARCUS_API_KEY, ARCUS_SECRET_KEY)
@@ -29,7 +25,7 @@ def test_invalid_auth():
         client.get('/account')
 
 
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_auth')
+@pytest.mark.vcr
 def test_valid_auth_post():
     data = dict(biller_id=40, account_number='501000000007')
     client = Client(ARCUS_API_KEY, ARCUS_SECRET_KEY, sandbox=True)
