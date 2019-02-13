@@ -13,6 +13,6 @@ def vcr_config():
 
 @pytest.fixture
 def client():
-    # Using BOTMAKER_ACCESS_TOKEN from env
+    #
     yield Client()
 
