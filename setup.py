@@ -23,7 +23,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=install_requirements,
     setup_requires=['pytest-runner'],
-    tests_require=['pytest', 'vcr'],
+    tests_require=['pytest', 'vcrpy'],
     extras_require={
         'dev': [
             'pytest>=3',
