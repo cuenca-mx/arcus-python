@@ -1,11 +1,9 @@
-import vcr
+import pytest
 
 from arcus.resources import Account
 
-from ..fixtures import client
 
-
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_accounts')
+@pytest.mark.vcr
 def test_get_account_info(client):
     account = client.account
     assert type(account) is Account

@@ -1,6 +1,6 @@
 SHELL := bash
 PATH := ./venv/bin:${PATH}
-PYTHON=python3.7
+PYTHON=python3.6
 
 
 all: test
