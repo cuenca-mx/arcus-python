@@ -1,12 +1,9 @@
 import pytest
-import vcr
 
 from arcus.exc import UnprocessableEntity
 
-from ..fixtures import client
 
-
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_topups')
+@pytest.mark.vcr
 def test_topup(client):
     biller_id = 13599
     account_number = '5599999999'
@@ -19,7 +16,7 @@ def test_topup(client):
     assert topup.chain_earned + topup.chain_paid == amount
 
 
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_topups')
+@pytest.mark.vcr
 def test_topup_invalid_phone_number(client):
     biller_id = 13599
     account_number = '559999'
@@ -36,7 +33,7 @@ def test_topup_list(client):
         client.topups.list()
 
 
-@vcr.use_cassette(cassette_library_dir='tests/cassettes/test_topups')
+@pytest.mark.vcr
 def test_pay_invoice_with_name_on_account(client):
     biller_id = 1781
     account_number = '5599999999'

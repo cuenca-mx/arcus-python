@@ -23,12 +23,16 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=install_requirements,
     setup_requires=['pytest-runner'],
-    tests_require=['pytest', 'vcrpy'],
+    tests_require=[
+        'pytest>=4.2.1,<4.3.0',
+        'vcrpy==2.0.1'
+    ],
     extras_require={
         'dev': [
             'pytest>=3',
             'pycodestyle',
-            'coverage'
+            'coverage',
+            'pytest-vcr>=1.0.1'
         ]
     },
     classifiers=[

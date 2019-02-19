@@ -4,12 +4,12 @@ interactions:
     headers:
       Accept: [application/vnd.regalii.v3.1+json]
       Accept-Encoding: ['gzip, deflate']
-      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:uCxm5VYFD2yP4nACnAL0X7QEndQ=']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:ICN1nK7C/BhTDx963lapEnDIGeU=']
       Connection: [keep-alive]
       Content-Length: ['2']
       Content-MD5: [mZFLkyvTelC5g8XnyQrpOw==]
       Content-Type: [application/json]
-      Date: ['Fri, 04 Jan 2019 23:49:51 GMT']
+      Date: ['Fri, 15 Feb 2019 00:14:24 GMT']
       User-Agent: [python-requests/2.21.0]
     method: GET
     uri: https://api.casiregalii.com/transactions
@@ -19,15 +19,15 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Connection: [keep-alive]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 04 Jan 2019 23:49:51 GMT']
+      Date: ['Fri, 15 Feb 2019 00:14:24 GMT']
       ETag: [W/"c4843fdf638efb2fd109e61394bcceb6"]
       Strict-Transport-Security: [max-age=31536000]
       Transfer-Encoding: [chunked]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Pagination: ['{"total_entries":401,"total_pages":5,"previous_page":null,"current_page":1,"next_page":2}']
-      X-Request-Id: [e9d19568-0cc1-4dee-88fe-ad70c1f832dd]
-      X-Runtime: ['0.060388']
+      X-Pagination: ['{"total_entries":653,"total_pages":7,"previous_page":null,"current_page":1,"next_page":2}']
+      X-Request-Id: [aa987556-aaa5-4604-82f7-a0ebe4df98ac]
+      X-Runtime: ['0.109766']
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 version: 1
