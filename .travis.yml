@@ -3,6 +3,7 @@ notifications:
 
 language: python
 
+cache: pip
 
 script: make test
 
