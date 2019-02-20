@@ -66,9 +66,8 @@ def test_cancel_bill_fail(client):
     transactions = list(filter(lambda t: t.status == 'fulfilled',
                                transactions))
     if transactions:
-        transaction = transactions[0]
         with pytest.raises(UnprocessableEntity) as excinfo:
-            transaction.cancel()
+            transactions[0].cancel()
         assert excinfo.value.code == 'R26'
         assert excinfo.value.message == ('Reversal '
                                          'not supported for this biller')
