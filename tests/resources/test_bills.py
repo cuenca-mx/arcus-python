@@ -2,6 +2,7 @@ import pytest
 
 from arcus import exc
 from arcus.resources import Bill
+from arcus.exc import UnprocessableEntity
 
 
 @pytest.mark.vcr
@@ -47,7 +48,7 @@ def test_unexpected_error(client):
 
 
 @pytest.mark.vcr
-def test_cancel_bill(client):
+def test_cancel_bill_success(client):
     bill = client.bills.create(35, '123456851236')
     transaction = bill.pay(bill.balance)
     cancellation = transaction.cancel()
@@ -57,6 +58,22 @@ def test_cancel_bill(client):
     updated_transaction = client.transactions.get(transaction.id)
     assert updated_transaction.id == transaction.id
     assert updated_transaction.status == 'refunded'
+
+
+@pytest.mark.vcr
+def test_cancel_bill_fail(client):
+    transactions = client.transactions.list()
+    transactions = list(filter(lambda t: t.status == 'fulfilled',
+                               transactions))
+    if transactions:
+        transaction = transactions[0]
+        with pytest.raises(UnprocessableEntity) as excinfo:
+            transaction.cancel()
+        assert excinfo.value.code == 'R26'
+        assert excinfo.value.message == ('Reversal '
+                                         'not supported for this biller')
+    else:
+        assert True
 
 
 @pytest.mark.vcr
