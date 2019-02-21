@@ -64,16 +64,17 @@ def test_cancel_bill_fail(client):
     first_bill = client.bills.create(35, '123456851236')
     first_transaction = first_bill.pay(first_bill.balance)
     first_transaction.cancel()
-    with pytest.raises(exc.UnprocessableEntity):
+    with pytest.raises(exc.UnprocessableEntity) as excinfo:
         first_transaction.cancel()
+    assert excinfo.value.code == 'R103'
+    assert excinfo.value.message == 'Transaction already reversed'
 
     second_bill = client.bills.create(37, '7259047384')
     second_transaction = second_bill.pay(second_bill.balance)
-    with pytest.raises(exc.UnprocessableEntity):
+    with pytest.raises(exc.UnprocessableEntity) as excinfo:
         second_transaction.cancel()
-
-    third_bill = client.bills.create(40, '501000000007')
-    third_transaction = third_bill.pay(third_bill.balance)
+    assert excinfo.value.code == 'R26'
+    assert excinfo.value.message == 'Reversal not supported for this biller'
 
 
 @pytest.mark.vcr
