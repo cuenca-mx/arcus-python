@@ -35,3 +35,8 @@ class UnprocessableEntity(ArcusException):
         return self.__class__.__name__ + ', '.join(
             [f'{attr}={repr(value)}'
              for attr, value in self.__dict__.items()]) + ')'
+
+
+class InvalidOperation(UnprocessableEntity):
+    def __init__(self, txn_id: Union[int, str]):
+        self.message = f'Unable to cancel the transaction {txn_id}'
