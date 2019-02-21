@@ -1,46 +1,194 @@
 interactions:
 - request:
-    body: '{}'
+    body: '{"biller_id": 35, "account_number": "123456851236"}'
     headers:
       Accept: [application/vnd.regalii.v3.1+json]
       Accept-Encoding: ['gzip, deflate']
-      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:0nf+dCjYHEWAkC7DWjVrzoDifCI=']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:sLdaVWzV0PBP94WM/dvN++iEqvU=']
       Connection: [keep-alive]
-      Content-Length: ['2']
-      Content-MD5: [mZFLkyvTelC5g8XnyQrpOw==]
+      Content-Length: ['51']
+      Content-MD5: [PwKwTwz6VF3g47PSroLXIQ==]
       Content-Type: [application/json]
-      Date: ['Wed, 20 Feb 2019 18:04:03 GMT']
+      Date: ['Wed, 20 Feb 2019 23:45:25 GMT']
       User-Agent: [python-requests/2.21.0]
-    method: GET
-    uri: https://api.casiregalii.com/transactions
+    method: POST
+    uri: https://api.casiregalii.com/bills
   response:
-    body: {string: '{"transactions":[{"type":"transaction","id":34869,"amount":48.84,"amount_currency":"USD","fx_rate":1.0,"amount_usd":2.39,"transaction_fee":3.0,"total_usd":2.54,"hours_to_fulfill":72,"created_at":"2018-06-07T17:43:07Z","status":"fulfilled"},{"type":"transaction","id":34870,"amount":73.35,"amount_currency":"USD","fx_rate":1.0,"amount_usd":3.59,"transaction_fee":3.0,"total_usd":3.73,"hours_to_fulfill":72,"created_at":"2018-06-07T17:45:22Z","status":"fulfilled"},{"type":"transaction","id":34871,"amount":21.75,"amount_currency":"USD","fx_rate":1.0,"amount_usd":1.06,"transaction_fee":3.0,"total_usd":1.21,"hours_to_fulfill":72,"created_at":"2018-06-07T17:47:55Z","status":"fulfilled"},{"type":"transaction","id":34925,"amount":36.25,"amount_currency":"USD","fx_rate":1.0,"amount_usd":1.76,"transaction_fee":3.0,"total_usd":1.9,"hours_to_fulfill":72,"created_at":"2018-06-08T15:48:13Z","status":"fulfilled"},{"type":"transaction","id":34926,"amount":84.51,"amount_currency":"USD","fx_rate":1.0,"amount_usd":4.1,"transaction_fee":3.0,"total_usd":4.24,"hours_to_fulfill":72,"created_at":"2018-06-08T15:52:08Z","status":"fulfilled"},{"type":"transaction","id":34927,"amount":549.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":26.63,"transaction_fee":3.0,"total_usd":26.77,"hours_to_fulfill":0,"created_at":"2018-06-08T16:01:08Z","status":"fulfilled"},{"type":"transaction","id":34928,"amount":549.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":26.63,"transaction_fee":3.0,"total_usd":26.77,"hours_to_fulfill":0,"created_at":"2018-06-08T16:01:32Z","status":"fulfilled"},{"type":"transaction","id":34929,"amount":549.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":26.63,"transaction_fee":3.0,"total_usd":26.77,"hours_to_fulfill":0,"created_at":"2018-06-08T16:07:59Z","status":"fulfilled"},{"type":"transaction","id":34931,"amount":537.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":26.04,"transaction_fee":3.0,"total_usd":26.19,"hours_to_fulfill":24,"created_at":"2018-06-08T16:42:46Z","status":"refunded"},{"type":"transaction","id":34932,"amount":669.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":32.45,"transaction_fee":3.0,"total_usd":32.59,"hours_to_fulfill":24,"created_at":"2018-06-08T16:49:50Z","status":"fulfilled"},{"type":"transaction","id":34933,"amount":539.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":26.14,"transaction_fee":3.0,"total_usd":26.29,"hours_to_fulfill":24,"created_at":"2018-06-08T16:50:20Z","status":"refunded"},{"type":"transaction","id":34934,"amount":537.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":26.04,"transaction_fee":3.0,"total_usd":26.19,"hours_to_fulfill":24,"created_at":"2018-06-08T16:54:20Z","status":"fulfilled"},{"type":"transaction","id":34939,"amount":782.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":37.93,"transaction_fee":3.0,"total_usd":38.07,"hours_to_fulfill":24,"created_at":"2018-06-08T17:06:03Z","status":"refunded"},{"type":"transaction","id":34941,"amount":586.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":28.42,"transaction_fee":3.0,"total_usd":28.57,"hours_to_fulfill":24,"created_at":"2018-06-08T17:10:40Z","status":"refunded"},{"type":"transaction","id":34942,"amount":862.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":41.81,"transaction_fee":3.0,"total_usd":41.95,"hours_to_fulfill":24,"created_at":"2018-06-08T17:11:06Z","status":"refunded"},{"type":"transaction","id":34943,"amount":472.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":22.89,"transaction_fee":3.0,"total_usd":23.04,"hours_to_fulfill":24,"created_at":"2018-06-08T17:12:02Z","status":"refunded"},{"type":"transaction","id":34945,"amount":549.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":26.63,"transaction_fee":3.0,"total_usd":26.77,"hours_to_fulfill":0,"created_at":"2018-06-08T17:17:55Z","status":"fulfilled"},{"type":"transaction","id":34946,"amount":698.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":33.85,"transaction_fee":3.0,"total_usd":34.0,"hours_to_fulfill":24,"created_at":"2018-06-08T17:17:58Z","status":"refunded"},{"type":"transaction","id":34947,"amount":549.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":26.63,"transaction_fee":3.0,"total_usd":26.77,"hours_to_fulfill":0,"created_at":"2018-06-08T17:37:03Z","status":"fulfilled"},{"type":"transaction","id":34948,"amount":255.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":12.37,"transaction_fee":3.0,"total_usd":12.51,"hours_to_fulfill":24,"created_at":"2018-06-08T17:37:06Z","status":"refunded"},{"type":"transaction","id":43613,"amount":549.0,"amount_currency":"MXN","fx_rate":0.98,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-06T19:42:29Z","status":"fulfilled"},{"type":"transaction","id":43614,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-06T19:50:22Z","status":"fulfilled"},{"type":"transaction","id":43615,"amount":361.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":17.87,"transaction_fee":3.0,"total_usd":18.02,"hours_to_fulfill":24,"created_at":"2018-11-06T19:50:27Z","status":"refunded"},{"type":"transaction","id":44276,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-15T23:00:01Z","status":"fulfilled"},{"type":"transaction","id":44277,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-15T23:00:41Z","status":"fulfilled"},{"type":"transaction","id":44280,"amount":631.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":31.23,"transaction_fee":3.0,"total_usd":31.38,"hours_to_fulfill":24,"created_at":"2018-11-15T23:25:25Z","status":"fulfilled"},{"type":"transaction","id":44281,"amount":218.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":10.79,"transaction_fee":3.0,"total_usd":10.94,"hours_to_fulfill":24,"created_at":"2018-11-15T23:26:08Z","status":"refunded"},{"type":"transaction","id":44283,"amount":782.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":38.71,"transaction_fee":3.0,"total_usd":38.86,"hours_to_fulfill":24,"created_at":"2018-11-15T23:27:32Z","status":"refunded"},{"type":"transaction","id":44284,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-15T23:32:23Z","status":"fulfilled"},{"type":"transaction","id":44285,"amount":214.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":10.59,"transaction_fee":3.0,"total_usd":10.74,"hours_to_fulfill":24,"created_at":"2018-11-15T23:32:25Z","status":"refunded"},{"type":"transaction","id":44286,"amount":829.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":41.04,"transaction_fee":3.0,"total_usd":41.18,"hours_to_fulfill":24,"created_at":"2018-11-15T23:33:57Z","status":"refunded"},{"type":"transaction","id":44288,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-15T23:45:03Z","status":"fulfilled"},{"type":"transaction","id":44289,"amount":888.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":43.96,"transaction_fee":3.0,"total_usd":44.1,"hours_to_fulfill":24,"created_at":"2018-11-15T23:45:05Z","status":"refunded"},{"type":"transaction","id":44290,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-15T23:52:37Z","status":"fulfilled"},{"type":"transaction","id":44291,"amount":352.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":17.42,"transaction_fee":3.0,"total_usd":17.57,"hours_to_fulfill":24,"created_at":"2018-11-15T23:52:39Z","status":"refunded"},{"type":"transaction","id":44293,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-15T23:56:30Z","status":"fulfilled"},{"type":"transaction","id":44294,"amount":870.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":43.07,"transaction_fee":3.0,"total_usd":43.21,"hours_to_fulfill":24,"created_at":"2018-11-15T23:56:32Z","status":"refunded"},{"type":"transaction","id":44296,"amount":425.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":21.04,"transaction_fee":3.0,"total_usd":21.19,"hours_to_fulfill":24,"created_at":"2018-11-16T00:07:53Z","status":"refunded"},{"type":"transaction","id":44297,"amount":479.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":23.71,"transaction_fee":3.0,"total_usd":23.86,"hours_to_fulfill":24,"created_at":"2018-11-16T00:08:26Z","status":"refunded"},{"type":"transaction","id":44298,"amount":208.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":10.3,"transaction_fee":3.0,"total_usd":10.44,"hours_to_fulfill":24,"created_at":"2018-11-16T00:10:31Z","status":"refunded"},{"type":"transaction","id":44299,"amount":656.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":32.47,"transaction_fee":3.0,"total_usd":32.62,"hours_to_fulfill":24,"created_at":"2018-11-16T00:11:14Z","status":"refunded"},{"type":"transaction","id":44300,"amount":202.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":10.0,"transaction_fee":3.0,"total_usd":10.15,"hours_to_fulfill":24,"created_at":"2018-11-16T00:11:38Z","status":"refunded"},{"type":"transaction","id":44301,"amount":582.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":28.81,"transaction_fee":3.0,"total_usd":28.96,"hours_to_fulfill":24,"created_at":"2018-11-16T00:11:59Z","status":"refunded"},{"type":"transaction","id":44302,"amount":476.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":23.56,"transaction_fee":3.0,"total_usd":23.71,"hours_to_fulfill":24,"created_at":"2018-11-16T00:13:07Z","status":"refunded"},{"type":"transaction","id":44303,"amount":502.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":24.85,"transaction_fee":3.0,"total_usd":25.0,"hours_to_fulfill":24,"created_at":"2018-11-16T00:14:03Z","status":"refunded"},{"type":"transaction","id":44308,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T02:19:13Z","status":"fulfilled"},{"type":"transaction","id":44309,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T02:19:49Z","status":"fulfilled"},{"type":"transaction","id":44310,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T02:27:17Z","status":"fulfilled"},{"type":"transaction","id":44311,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T02:27:35Z","status":"fulfilled"},{"type":"transaction","id":44312,"amount":645.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":31.93,"transaction_fee":3.0,"total_usd":32.08,"hours_to_fulfill":24,"created_at":"2018-11-16T02:43:43Z","status":"fulfilled"},{"type":"transaction","id":44313,"amount":547.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.08,"transaction_fee":3.0,"total_usd":27.23,"hours_to_fulfill":24,"created_at":"2018-11-16T02:47:10Z","status":"fulfilled"},{"type":"transaction","id":44314,"amount":796.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":39.4,"transaction_fee":3.0,"total_usd":39.55,"hours_to_fulfill":24,"created_at":"2018-11-16T02:47:48Z","status":"fulfilled"},{"type":"transaction","id":44315,"amount":538.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":26.63,"transaction_fee":3.0,"total_usd":26.78,"hours_to_fulfill":24,"created_at":"2018-11-16T02:48:20Z","status":"fulfilled"},{"type":"transaction","id":44316,"amount":225.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":11.14,"transaction_fee":3.0,"total_usd":11.29,"hours_to_fulfill":24,"created_at":"2018-11-16T02:50:40Z","status":"fulfilled"},{"type":"transaction","id":44317,"amount":116.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":5.74,"transaction_fee":3.0,"total_usd":5.89,"hours_to_fulfill":24,"created_at":"2018-11-16T02:53:04Z","status":"fulfilled"},{"type":"transaction","id":44318,"amount":785.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":38.86,"transaction_fee":3.0,"total_usd":39.01,"hours_to_fulfill":24,"created_at":"2018-11-16T02:55:24Z","status":"refunded"},{"type":"transaction","id":44319,"amount":950.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":47.03,"transaction_fee":3.0,"total_usd":47.17,"hours_to_fulfill":24,"created_at":"2018-11-16T03:01:00Z","status":"refunded"},{"type":"transaction","id":44320,"amount":949.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":46.98,"transaction_fee":3.0,"total_usd":47.12,"hours_to_fulfill":24,"created_at":"2018-11-16T03:03:58Z","status":"refunded"},{"type":"transaction","id":44321,"amount":811.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":40.14,"transaction_fee":3.0,"total_usd":40.29,"hours_to_fulfill":24,"created_at":"2018-11-16T03:08:57Z","status":"refunded"},{"type":"transaction","id":44322,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T03:10:02Z","status":"fulfilled"},{"type":"transaction","id":44323,"amount":725.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":35.89,"transaction_fee":3.0,"total_usd":36.04,"hours_to_fulfill":24,"created_at":"2018-11-16T03:10:04Z","status":"refunded"},{"type":"transaction","id":44324,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T03:14:30Z","status":"fulfilled"},{"type":"transaction","id":44325,"amount":904.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":44.75,"transaction_fee":3.0,"total_usd":44.9,"hours_to_fulfill":24,"created_at":"2018-11-16T03:14:32Z","status":"refunded"},{"type":"transaction","id":44326,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T03:17:49Z","status":"fulfilled"},{"type":"transaction","id":44327,"amount":238.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":11.78,"transaction_fee":3.0,"total_usd":11.93,"hours_to_fulfill":24,"created_at":"2018-11-16T03:17:50Z","status":"refunded"},{"type":"transaction","id":44328,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T03:18:18Z","status":"fulfilled"},{"type":"transaction","id":44329,"amount":925.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":45.79,"transaction_fee":3.0,"total_usd":45.94,"hours_to_fulfill":24,"created_at":"2018-11-16T03:18:20Z","status":"refunded"},{"type":"transaction","id":44330,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T03:21:45Z","status":"fulfilled"},{"type":"transaction","id":44331,"amount":610.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":30.2,"transaction_fee":3.0,"total_usd":30.34,"hours_to_fulfill":24,"created_at":"2018-11-16T03:21:47Z","status":"refunded"},{"type":"transaction","id":44333,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T03:33:57Z","status":"fulfilled"},{"type":"transaction","id":44334,"amount":918.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":45.44,"transaction_fee":3.0,"total_usd":45.59,"hours_to_fulfill":24,"created_at":"2018-11-16T03:33:58Z","status":"refunded"},{"type":"transaction","id":44338,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T03:34:44Z","status":"fulfilled"},{"type":"transaction","id":44339,"amount":997.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":49.35,"transaction_fee":3.0,"total_usd":49.5,"hours_to_fulfill":24,"created_at":"2018-11-16T03:34:46Z","status":"refunded"},{"type":"transaction","id":44340,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T03:37:36Z","status":"fulfilled"},{"type":"transaction","id":44341,"amount":443.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":21.93,"transaction_fee":3.0,"total_usd":22.08,"hours_to_fulfill":24,"created_at":"2018-11-16T03:37:37Z","status":"refunded"},{"type":"transaction","id":44342,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T03:37:49Z","status":"fulfilled"},{"type":"transaction","id":44343,"amount":896.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":44.35,"transaction_fee":3.0,"total_usd":44.5,"hours_to_fulfill":24,"created_at":"2018-11-16T03:37:51Z","status":"refunded"},{"type":"transaction","id":44344,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T16:39:53Z","status":"fulfilled"},{"type":"transaction","id":44345,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T16:39:54Z","status":"fulfilled"},{"type":"transaction","id":44346,"amount":29.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":1.44,"transaction_fee":3.0,"total_usd":1.58,"hours_to_fulfill":24,"created_at":"2018-11-16T16:39:55Z","status":"refunded"},{"type":"transaction","id":44347,"amount":715.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":35.39,"transaction_fee":3.0,"total_usd":35.54,"hours_to_fulfill":24,"created_at":"2018-11-16T16:39:56Z","status":"refunded"},{"type":"transaction","id":44348,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T16:40:06Z","status":"fulfilled"},{"type":"transaction","id":44349,"amount":825.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":40.84,"transaction_fee":3.0,"total_usd":40.99,"hours_to_fulfill":24,"created_at":"2018-11-16T16:40:08Z","status":"refunded"},{"type":"transaction","id":44350,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T16:40:08Z","status":"fulfilled"},{"type":"transaction","id":44351,"amount":372.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":18.41,"transaction_fee":3.0,"total_usd":18.56,"hours_to_fulfill":24,"created_at":"2018-11-16T16:40:10Z","status":"refunded"},{"type":"transaction","id":44364,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T19:12:46Z","status":"fulfilled"},{"type":"transaction","id":44365,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T19:14:11Z","status":"fulfilled"},{"type":"transaction","id":44366,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T19:16:04Z","status":"fulfilled"},{"type":"transaction","id":44367,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T19:18:58Z","status":"fulfilled"},{"type":"transaction","id":44368,"amount":437.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":21.63,"transaction_fee":3.0,"total_usd":21.78,"hours_to_fulfill":24,"created_at":"2018-11-16T19:19:00Z","status":"refunded"},{"type":"transaction","id":44370,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T19:24:22Z","status":"fulfilled"},{"type":"transaction","id":44371,"amount":311.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":15.39,"transaction_fee":3.0,"total_usd":15.54,"hours_to_fulfill":24,"created_at":"2018-11-16T19:24:24Z","status":"refunded"},{"type":"transaction","id":44372,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T19:33:44Z","status":"fulfilled"},{"type":"transaction","id":44373,"amount":107.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":5.3,"transaction_fee":3.0,"total_usd":5.45,"hours_to_fulfill":24,"created_at":"2018-11-16T19:33:46Z","status":"refunded"},{"type":"transaction","id":44374,"amount":669.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":33.12,"transaction_fee":3.0,"total_usd":33.26,"hours_to_fulfill":24,"created_at":"2018-11-16T19:33:48Z","status":"refunded"},{"type":"transaction","id":44375,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T19:33:52Z","status":"fulfilled"},{"type":"transaction","id":44376,"amount":706.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":34.95,"transaction_fee":3.0,"total_usd":35.1,"hours_to_fulfill":24,"created_at":"2018-11-16T19:33:53Z","status":"refunded"},{"type":"transaction","id":44377,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T19:34:29Z","status":"fulfilled"},{"type":"transaction","id":44378,"amount":135.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":6.68,"transaction_fee":3.0,"total_usd":6.83,"hours_to_fulfill":24,"created_at":"2018-11-16T19:34:30Z","status":"refunded"},{"type":"transaction","id":44379,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":27.18,"transaction_fee":3.0,"total_usd":27.32,"hours_to_fulfill":0,"created_at":"2018-11-16T19:35:31Z","status":"fulfilled"}]}'}
+    body: {string: '{"type":"bill","id":8392,"biller_id":35,"account_number":"123456851236","name_on_account":null,"due_date":null,"balance":949.0,"balance_currency":"MXN","balance_updated_at":"2019-02-20T23:45:25Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Connection: [keep-alive]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 20 Feb 2019 18:04:03 GMT']
-      ETag: [W/"c4843fdf638efb2fd109e61394bcceb6"]
+      Date: ['Wed, 20 Feb 2019 23:45:26 GMT']
+      ETag: [W/"38009d244c4c03b11bba40a7a0ddbea5"]
       Strict-Transport-Security: [max-age=31536000]
       Transfer-Encoding: [chunked]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Pagination: ['{"total_entries":680,"total_pages":7,"previous_page":null,"current_page":1,"next_page":2}']
-      X-Request-Id: [02eacc9b-a2fa-4ebd-9c05-d58b941ff5d9]
-      X-Runtime: ['0.077160']
+      X-Request-Id: [5bf1a233-8682-49b6-8b48-69691c7646fa]
+      X-Runtime: ['1.055717']
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 - request:
-    body: '{"id": 34869}'
+    body: '{"amount": 949.0, "currency": "MXN"}'
     headers:
       Accept: [application/vnd.regalii.v3.1+json]
       Accept-Encoding: ['gzip, deflate']
-      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:osg1MsbpgiT2yhI/4ktYjAl0uyc=']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:FbyIiKc5yBZ5AEA/KO2FjC4n0d8=']
+      Connection: [keep-alive]
+      Content-Length: ['36']
+      Content-MD5: [K3GJioYyHM5w9dGAkUY7pg==]
+      Content-Type: [application/json]
+      Date: ['Wed, 20 Feb 2019 23:45:26 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills/8392/pay
+  response:
+    body: {string: '{"type":"transaction","id":48670,"amount":949.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":49.44,"transaction_fee":3.0,"total_usd":49.6,"hours_to_fulfill":24,"created_at":"2019-02-20T23:45:26Z","status":"sent"}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 20 Feb 2019 23:45:26 GMT']
+      ETag: [W/"ba1d1813dc8373084a73f8a5a36de495"]
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [a4d581bf-b6ec-4506-8381-a4035927aef7]
+      X-Runtime: ['0.072516']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 201, message: Created}
+- request:
+    body: '{"id": 48670}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:cWZH10G0AFDYZbJNT38sU6yV8WU=']
       Connection: [keep-alive]
       Content-Length: ['13']
-      Content-MD5: [ocsyZ5MRM5Y2KyGQTni3Zg==]
+      Content-MD5: [lJbxO6AO1wNDjboYE9YoPA==]
       Content-Type: [application/json]
-      Date: ['Wed, 20 Feb 2019 18:04:03 GMT']
+      Date: ['Wed, 20 Feb 2019 23:45:26 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/transaction/cancel
+  response:
+    body: {string: '{"code":"R0","message":"Transaction successful","mode":"STAGING"}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 20 Feb 2019 23:45:27 GMT']
+      ETag: [W/"db0d73e6dab3e6ac7e916f3c7659ec9f"]
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [d5ef74be-171c-439e-b4a3-f31160340f34]
+      X-Runtime: ['0.066304']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"id": 48670}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:fRnApEhZUbnX6hFAruSNsGEzEBM=']
+      Connection: [keep-alive]
+      Content-Length: ['13']
+      Content-MD5: [lJbxO6AO1wNDjboYE9YoPA==]
+      Content-Type: [application/json]
+      Date: ['Wed, 20 Feb 2019 23:45:27 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/transaction/cancel
+  response:
+    body: {string: '{"code":"R103","message":"Transaction already reversed","mode":"STAGING"}'}
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 20 Feb 2019 23:45:27 GMT']
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [44d3b67a-5c1a-47e7-8b29-26a3f0dfef06]
+      X-Runtime: ['0.021098']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 422, message: Unprocessable Entity}
+- request:
+    body: '{"biller_id": 37, "account_number": "7259047384"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:FGw85D6GFrqwj+ELb/xTy3yUXvM=']
+      Connection: [keep-alive]
+      Content-Length: ['49']
+      Content-MD5: [62F3V1wBjtV3NfAN13xtMg==]
+      Content-Type: [application/json]
+      Date: ['Wed, 20 Feb 2019 23:45:27 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills
+  response:
+    body: {string: '{"type":"bill","id":12617,"biller_id":37,"account_number":"7259047384","name_on_account":null,"due_date":null,"balance":280.0,"balance_currency":"MXN","balance_updated_at":"2019-02-20T23:45:27Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 20 Feb 2019 23:45:28 GMT']
+      ETag: [W/"5ecde4db2c6abc5eb9b125f111996801"]
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [385ef4cc-2620-4a83-8084-8316ec451d7a]
+      X-Runtime: ['1.058211']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"amount": 280.0, "currency": "MXN"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:Ghe00esQlGEYMfYvA89ScGUtb1Y=']
+      Connection: [keep-alive]
+      Content-Length: ['36']
+      Content-MD5: [OQr5+HO08nKPiaW20Uw7og==]
+      Content-Type: [application/json]
+      Date: ['Wed, 20 Feb 2019 23:45:28 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills/12617/pay
+  response:
+    body: {string: '{"type":"transaction","id":48671,"amount":280.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":14.59,"transaction_fee":3.0,"total_usd":14.74,"hours_to_fulfill":48,"created_at":"2019-02-20T23:45:29Z","status":"sent"}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 20 Feb 2019 23:45:29 GMT']
+      ETag: [W/"5f4b4a1ab41cbd576aa869d405274d5f"]
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [49f7ca90-9799-4cdc-beb2-2a86ecb01d33]
+      X-Runtime: ['0.070588']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 201, message: Created}
+- request:
+    body: '{"id": 48671}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:ijt2Ng0MghKgoJ893XXUgFOeXss=']
+      Connection: [keep-alive]
+      Content-Length: ['13']
+      Content-MD5: [yob7L6GSD26Lc2ljo9n0Rw==]
+      Content-Type: [application/json]
+      Date: ['Wed, 20 Feb 2019 23:45:29 GMT']
       User-Agent: [python-requests/2.21.0]
     method: POST
     uri: https://api.casiregalii.com/transaction/cancel
@@ -50,13 +198,73 @@ interactions:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 20 Feb 2019 18:04:03 GMT']
+      Date: ['Wed, 20 Feb 2019 23:45:29 GMT']
       Strict-Transport-Security: [max-age=31536000]
       Transfer-Encoding: [chunked]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [17d5cd8e-9fbf-40e4-b5a3-aac233a3bcff]
-      X-Runtime: ['0.024113']
+      X-Request-Id: [292b505f-3bf2-486c-9e8a-ea2dcbbf0c2a]
+      X-Runtime: ['0.019501']
       X-XSS-Protection: [1; mode=block]
     status: {code: 422, message: Unprocessable Entity}
+- request:
+    body: '{"biller_id": 40, "account_number": "501000000007"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:WMMCO5E0mBGiUyOaB/xvOLQeMvw=']
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      Content-MD5: [PtZUYQ9bmh3ULNV0W7ZNdw==]
+      Content-Type: [application/json]
+      Date: ['Wed, 20 Feb 2019 23:45:29 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills
+  response:
+    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2019-02-20T23:45:29Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 20 Feb 2019 23:45:30 GMT']
+      ETag: [W/"b3a13899b0eb123434d5d34c005f85fc"]
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [d8809e44-3b08-476a-9af6-ab29fc8cde0e]
+      X-Runtime: ['1.084236']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"amount": 549.0, "currency": "MXN"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:9CdYHcJo3/cBKK01hRnjSr77mUU=']
+      Connection: [keep-alive]
+      Content-Length: ['36']
+      Content-MD5: [ze1WRUVApUnpFxTpAr7ygw==]
+      Content-Type: [application/json]
+      Date: ['Wed, 20 Feb 2019 23:45:31 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills/8390/pay
+  response:
+    body: {string: '{"type":"transaction","id":48672,"amount":549.0,"amount_currency":"MXN","fx_rate":1.0,"amount_usd":28.6,"transaction_fee":3.0,"total_usd":28.76,"hours_to_fulfill":0,"created_at":"2019-02-20T23:45:31Z","status":"fulfilled"}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 20 Feb 2019 23:45:31 GMT']
+      ETag: [W/"93133d8312792cd249168377fc6a99d9"]
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [f15ba223-c444-4b85-91f5-56c3ae06f54c]
+      X-Runtime: ['0.071494']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 201, message: Created}
 version: 1
