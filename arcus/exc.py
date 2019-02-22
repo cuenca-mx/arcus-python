@@ -38,6 +38,9 @@ class UnprocessableEntity(ArcusException):
             [f'{attr}={repr(value)}'
              for attr, value in self.__dict__.items()]) + ')'
 
+    def __str__(self):
+        return getattr(self, 'message', self.__class__.__doc__)
+
 
 class InvalidOperation(UnprocessableEntity):
     def __init__(self, code: str, transaction_id: Union[int, str]):
