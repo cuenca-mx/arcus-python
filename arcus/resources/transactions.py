@@ -1,5 +1,7 @@
 from typing import Union
 
+from arcus.exc import InvalidOperation, UnprocessableEntity
+
 from .base import Resource
 
 
@@ -27,4 +29,10 @@ class Transaction(Resource):
         return Transaction(**transaction_dict['transactions'][0])
 
     def cancel(self) -> dict:
-        return self._client.post('/transaction/cancel', dict(id=self.id))
+        try:
+            return self._client.post('/transaction/cancel', dict(id=self.id))
+        except UnprocessableEntity as ex:
+            if ex.code in ['R26', 'R103']:
+                raise InvalidOperation(ex.code, self.id)
+            else:
+                raise

@@ -47,7 +47,7 @@ def test_unexpected_error(client):
 
 
 @pytest.mark.vcr
-def test_cancel_bill(client):
+def test_cancel_bill_success(client):
     bill = client.bills.create(35, '123456851236')
     transaction = bill.pay(bill.balance)
     cancellation = transaction.cancel()
@@ -57,6 +57,26 @@ def test_cancel_bill(client):
     updated_transaction = client.transactions.get(transaction.id)
     assert updated_transaction.id == transaction.id
     assert updated_transaction.status == 'refunded'
+
+
+@pytest.mark.vcr
+def test_cancel_bill_fail(client):
+    first_bill = client.bills.create(35, '123456851236')
+    first_transaction = first_bill.pay(first_bill.balance)
+    first_transaction.cancel()
+    with pytest.raises(exc.InvalidOperation) as excinfo:
+        first_transaction.cancel()
+    assert excinfo.value.code == 'R103'
+    assert excinfo.value.message == (
+        f'Unable to cancel the transaction {first_transaction.id}')
+
+    second_bill = client.bills.create(37, '7259047384')
+    second_transaction = second_bill.pay(second_bill.balance)
+    with pytest.raises(exc.InvalidOperation) as excinfo:
+        second_transaction.cancel()
+    assert excinfo.value.code == 'R26'
+    assert excinfo.value.message == (
+        f'Unable to cancel the transaction {second_transaction.id}')
 
 
 @pytest.mark.vcr
