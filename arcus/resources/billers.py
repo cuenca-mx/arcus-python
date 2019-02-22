@@ -1,4 +1,8 @@
+from typing import Union
+
 from pydash import filter_
+
+from arcus.exc import NotFound
 
 from .base import Resource
 
@@ -10,11 +14,11 @@ class Biller(Resource):
     _endpoint = '/billers'
 
     @classmethod
-    def get(cls, _):
-        raise NotImplementedError(
-            f"{cls.__name__}.get() hasn't been implemented or isn't "
-            f"supported by the API."
-        )
+    def get(cls, biller_id: Union[int, str]):
+        billers = cls.list(id=int(biller_id))
+        if not billers:
+            raise NotFound(f'There is no biller with id {biller_id}')
+        return billers[0]
 
     @classmethod
     def list(cls, **filters):

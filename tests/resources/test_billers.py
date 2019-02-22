@@ -1,5 +1,7 @@
 import pytest
 
+from arcus.exc import NotFound
+
 
 @pytest.mark.vcr
 def test_mexican_biller_list(client):
@@ -14,6 +16,10 @@ def test_electricity_biller_list(client):
     assert all(biller.biller_type == 'Electricity' for biller in biller_list)
 
 
+@pytest.mark.vcr
 def test_billers_get(client):
-    with pytest.raises(NotImplementedError):
-        client.billers.get(1)
+    biller = client.billers.get(1)
+    assert biller.id == 1
+
+    with pytest.raises(NotFound):
+        client.billers.get(77777777)
