@@ -33,6 +33,6 @@ class Transaction(Resource):
             return self._client.post('/transaction/cancel', dict(id=self.id))
         except UnprocessableEntity as ex:
             if ex.code in ['R26', 'R103']:
-                raise InvalidOperation(self.id)
+                raise InvalidOperation(ex.code, self.id)
             else:
                 raise
