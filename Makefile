@@ -10,7 +10,7 @@ venv:
 		$(PYTHON) -m venv --prompt $(PROJECT) venv
 		pip install -qU pip
 
-install-test: venv
+install-test:
 		pip install -q .[test]
 
 test: clean install-test lint
