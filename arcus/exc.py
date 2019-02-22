@@ -38,5 +38,5 @@ class UnprocessableEntity(ArcusException):
 
 
 class InvalidOperation(UnprocessableEntity):
-    def __init__(self, txn_id: Union[int, str]):
-        self.message = f'Unable to cancel the transaction {txn_id}'
+    def __init__(self, transaction_id: Union[int, str]):
+        self.message = f'Unable to cancel the transaction {transaction_id}'
