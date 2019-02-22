@@ -3,9 +3,13 @@ notifications:
 
 language: python
 
+install: make install-test
+
 cache: pip
 
-script: make test
+script:
+  - make lint
+  - python setup.py test
 
 jobs:
   include:
@@ -19,10 +23,12 @@ jobs:
       python: 3.7
       dist: xenial
       sudo: true
-      install: pip install coveralls
+      install:
+        - make install-test
+        - pip install coveralls
       script:
-      - coverage run --source=arcus setup.py test
-      - coveralls
+        - python setup.py test
+        - coveralls
     - stage: PyPI Upload
       python: 3.7
       dist: xenial
