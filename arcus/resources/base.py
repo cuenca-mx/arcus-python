@@ -3,7 +3,7 @@ import iso8601
 
 class Resource:
     _client = None
-    _endpoint = None
+    _endpoint: str
 
     def __init__(self, **attrs):
         for attr, value in attrs.items():
