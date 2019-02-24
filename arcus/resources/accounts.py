@@ -2,4 +2,8 @@ from .base import Resource
 
 
 class Account(Resource):
-    pass
+
+    name: str
+    balance: float
+    minimum_balance: float
+    currency: str

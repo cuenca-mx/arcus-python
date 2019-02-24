@@ -1,3 +1,4 @@
+import datetime
 from typing import Union
 
 from arcus.exc import InvalidOperation, UnprocessableEntity
@@ -8,19 +9,13 @@ from .base import Resource
 class Transaction(Resource):
     _endpoint = '/transactions'
 
-    def __init__(
-            self,
-            id: int,
-            amount: float,
-            amount_currency: str,
-            status: str,
-            **kwargs
-    ):
-        self.id = id
-        self.amount = amount
-        self.amount_currency = amount_currency
-        self.status = status
-        super().__init__(**kwargs)
+    id: int
+    amount: float
+    amount_currency: str
+    transaction_fee: float
+    hours_to_fulfill: int
+    created_at: datetime.datetime
+    status: str
 
     @classmethod
     def get(cls, transaction_id: Union[int, str]):

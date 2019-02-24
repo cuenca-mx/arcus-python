@@ -13,6 +13,19 @@ ENDPOINTS = ['credentials', 'topups', 'utilities']
 class Biller(Resource):
     _endpoint = '/billers'
 
+    id: int
+    name: str
+    country: str
+    currency: str
+    biller_type: str
+    bill_type: str
+    can_check_balance: bool
+    mask: str
+    requires_name_on_account: bool
+    supports_partial_payments: bool
+    hours_to_fulfill: int
+    account_number_digits: int
+
     @classmethod
     def get(cls, biller_id: Union[int, str]):
         billers = cls.list(id=int(biller_id))

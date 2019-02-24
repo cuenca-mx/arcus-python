@@ -1,3 +1,4 @@
+import datetime
 from typing import Optional, Union
 
 from arcus.exc import (
@@ -10,21 +11,18 @@ from .transactions import Transaction
 class Bill(Resource):
     _endpoint = '/bills'
 
-    def __init__(
-            self,
-            id: int,
-            biller_id: int,
-            account_number: str,
-            balance: float,
-            balance_currency: str,
-            **kwargs
-    ):
-        self.id = id
-        self.biller_id = biller_id
-        self.account_number = account_number
-        self.balance = balance
-        self.balance_currency = balance_currency
-        super().__init__(**kwargs)
+    id: int
+    biller_id: int
+    account_number: str
+    balance: Optional[float]
+    balance_currency: str
+    name_on_account: Optional[str]
+    due_date: Optional[datetime.date]
+    balance_updated_at: Optional[datetime.datetime]
+    error_code: Optional[str]
+    error_message: Optional[str]
+    status: str
+    migrated_at: Optional[datetime.datetime]
 
     @classmethod
     def create(cls, biller_id: Union[int, str], account_number: str):

@@ -1,3 +1,4 @@
+import datetime
 from typing import Optional
 
 from .base import Resource
@@ -12,6 +13,14 @@ TOPUP_API_VERSION = '1.6'
 
 
 class Topup(Resource):
+
+    id: int
+    biller_id: int
+    account_number: str
+    bill_amount: float
+    bill_amount_currency: str
+    hours_to_fulfill: int
+    created_at: datetime.datetime
 
     @classmethod
     def create(
