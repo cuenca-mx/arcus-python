@@ -26,6 +26,7 @@ class Client:
             secret_key: Optional[str] = None,
             sandbox: bool = False
     ):
+        self.session = requests.Session()
         self.api_key = api_key or os.environ['ARCUS_API_KEY']
         self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
         if sandbox:
@@ -48,7 +49,7 @@ class Client:
                 **kwargs) -> dict:
         url = self.base_url + endpoint
         headers = self._build_headers(endpoint, api_version, data)
-        response = requests.request(
+        response = self.session.request(
             method, url, headers=headers, json=data, **kwargs)
         self._check_response(response)
         return response.json()
