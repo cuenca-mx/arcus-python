@@ -6,7 +6,6 @@ from arcus.exc import NotFound
 
 from .base import Resource
 
-
 ENDPOINTS = ['credentials', 'topups', 'utilities']
 
 

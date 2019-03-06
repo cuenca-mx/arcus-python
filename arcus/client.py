@@ -7,7 +7,6 @@ from .auth import compute_auth_header, compute_date_header, compute_md5_header
 from .exc import InvalidAuth, NotFound, UnprocessableEntity
 from .resources import Account, Bill, Biller, Resource, Topup, Transaction
 
-
 API_VERSION = '3.1'
 PRODUCTION_API_URL = 'https://api.regalii.com'
 SANDBOX_API_URL = 'https://api.casiregalii.com'

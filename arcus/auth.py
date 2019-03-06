@@ -2,10 +2,9 @@ import hmac
 import json
 from base64 import b64encode
 from datetime import datetime
-from hashlib import sha1, md5
+from hashlib import md5, sha1
 
 import pytz
-
 
 CONTENT_TYPE = 'application/json'
 

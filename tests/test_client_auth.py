@@ -2,9 +2,8 @@ import os
 
 import pytest
 
-from arcus.exc import InvalidAuth
 from arcus.client import Client
-
+from arcus.exc import InvalidAuth
 
 ARCUS_API_KEY = os.environ['ARCUS_API_KEY']
 ARCUS_SECRET_KEY = os.environ['ARCUS_SECRET_KEY']

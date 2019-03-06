@@ -7,7 +7,8 @@ install_requirements = [
     'pydash>=4.7.4,<4.8.0'
 ]
 
-test_requires = ['pytest', 'pytest-vcr', 'pycodestyle', 'pytest-cov']
+test_requires = ['pytest', 'pytest-vcr', 'pycodestyle', 'pytest-cov',
+                 'isort[pipfile]']
 
 with open('README.md', 'r') as f:
     long_description = f.read()

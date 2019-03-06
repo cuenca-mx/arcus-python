@@ -3,7 +3,6 @@ from typing import Optional
 
 from .base import Resource
 
-
 """
 Arcus API version 1.6 should be used in order to make top-up operations.
 It's because newer API versions don't support this kind of operations.

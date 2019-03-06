@@ -1,8 +1,8 @@
 import datetime
 from typing import Optional, Union
 
-from arcus.exc import (
-    InvalidAccountNumber, InvalidBiller, NotFound, UnprocessableEntity)
+from arcus.exc import (InvalidAccountNumber, InvalidBiller, NotFound,
+                       UnprocessableEntity)
 
 from .base import Resource
 from .transactions import Transaction
