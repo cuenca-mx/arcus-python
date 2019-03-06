@@ -20,10 +20,10 @@ class Client:
     transactions = Transaction
 
     def __init__(
-            self,
-            api_key: Optional[str] = None,
-            secret_key: Optional[str] = None,
-            sandbox: bool = False
+        self,
+        api_key: Optional[str] = None,
+        secret_key: Optional[str] = None,
+        sandbox: bool = False,
     ):
         self.session = requests.Session()
         self.api_key = api_key or os.environ['ARCUS_API_KEY']
@@ -40,16 +40,19 @@ class Client:
     def post(self, endpoint: str, data: dict, **kwargs) -> dict:
         return self.request('post', endpoint, data, **kwargs)
 
-    def request(self,
-                method: str,
-                endpoint: str,
-                data: dict,
-                api_version: str = API_VERSION,
-                **kwargs) -> dict:
+    def request(
+        self,
+        method: str,
+        endpoint: str,
+        data: dict,
+        api_version: str = API_VERSION,
+        **kwargs,
+    ) -> dict:
         url = self.base_url + endpoint
         headers = self._build_headers(endpoint, api_version, data)
         response = self.session.request(
-            method, url, headers=headers, json=data, **kwargs)
+            method, url, headers=headers, json=data, **kwargs
+        )
         self._check_response(response)
         return response.json()
 
@@ -57,16 +60,17 @@ class Client:
     def account(self):
         return Account(**self.get('/account'))
 
-    def _build_headers(self,
-                       endpoint: str,
-                       api_version: str,
-                       data: dict) -> dict:
-        headers = [('Accept',
-                    f'application/vnd.regalii.v{api_version}+json')]
+    def _build_headers(
+        self, endpoint: str, api_version: str, data: dict
+    ) -> dict:
+        headers = [('Accept', f'application/vnd.regalii.v{api_version}+json')]
         headers.append(compute_md5_header(data))
         headers.append(compute_date_header())
-        headers.append(compute_auth_header(
-            headers, endpoint, self.api_key, self.secret_key))
+        headers.append(
+            compute_auth_header(
+                headers, endpoint, self.api_key, self.secret_key
+            )
+        )
         return dict(headers)
 
     @staticmethod

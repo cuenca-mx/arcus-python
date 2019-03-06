@@ -19,16 +19,13 @@ def compute_date_header() -> tuple:
 
 
 def compute_auth_header(
-        headers: list,
-        endpoint: str,
-        api_key: str,
-        secret_key: str) -> tuple:
+    headers: list, endpoint: str, api_key: str, secret_key: str
+) -> tuple:
     verify_secret = calculate_checksum(endpoint, headers, secret_key)
     return 'Authorization', f'APIAuth {api_key}:{verify_secret}'
 
 
-def calculate_checksum(endpoint: str, headers: list,
-                       secret_key: str) -> str:
+def calculate_checksum(endpoint: str, headers: list, secret_key: str) -> str:
     """
     Calculate checksum based on https://www.arcusfi.com/api/v3/#authentication
     """
@@ -37,7 +34,8 @@ def calculate_checksum(endpoint: str, headers: list,
     date = headers['Date']
     verify_this = f'{CONTENT_TYPE},{content_md5},{endpoint},{date}'
     verify_secret = hmac.new(
-        secret_key.encode('utf-8'), verify_this.encode('utf-8'), sha1)
+        secret_key.encode('utf-8'), verify_this.encode('utf-8'), sha1
+    )
     return b64encode(verify_secret.digest()).decode('utf-8')
 
 

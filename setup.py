@@ -8,7 +8,7 @@ install_requirements = [
 ]
 
 test_requires = ['pytest', 'pytest-vcr', 'pycodestyle', 'pytest-cov',
-                 'isort[pipfile]']
+                 'black', 'isort[pipfile]']
 
 with open('README.md', 'r') as f:
     long_description = f.read()

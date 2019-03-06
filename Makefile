@@ -17,7 +17,8 @@ test: clean install-test lint
 		python setup.py test
 
 polish:
-		isort -rc --atomic .
+		black -S -l 79 **/*.py
+		isort -rc --atomic **/*.py
 
 lint:
 		pycodestyle setup.py $(PROJECT)/ tests/

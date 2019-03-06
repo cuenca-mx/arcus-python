@@ -24,10 +24,7 @@ def test_compute_md5_header():
 
 def test_calculate_checksum():
     endpoint = '/account'
-    headers = [
-        ('Content-MD5', ''),
-        ('Date', 'Wed, 02 Nov 2016 17:26:52 GMT')
-    ]
+    headers = [('Content-MD5', ''), ('Date', 'Wed, 02 Nov 2016 17:26:52 GMT')]
     checksum = calculate_checksum(endpoint, headers, SECRET_KEY)
     assert type(checksum) is str
     assert checksum == CHECKSUM
@@ -35,11 +32,9 @@ def test_calculate_checksum():
 
 def test_compute_auth_header():
     endpoint = '/account'
-    headers = [
-        ('Content-MD5', ''),
-        ('Date', 'Wed, 02 Nov 2016 17:26:52 GMT')
-    ]
+    headers = [('Content-MD5', ''), ('Date', 'Wed, 02 Nov 2016 17:26:52 GMT')]
     header_key, header_value = compute_auth_header(
-        headers, endpoint, API_KEY, SECRET_KEY)
+        headers, endpoint, API_KEY, SECRET_KEY
+    )
     assert header_key == 'Authorization'
     assert header_value == f'APIAuth {API_KEY}:{CHECKSUM}'
