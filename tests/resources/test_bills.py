@@ -11,8 +11,6 @@ def test_create_bill(client):
     assert bill.biller_id == 40
     assert bill.account_number == '501000000007'
     assert type(bill.balance) is float
-    assert str(bill)
-    assert repr(bill)
 
 
 @pytest.mark.vcr
