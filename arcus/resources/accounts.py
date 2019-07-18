@@ -1,6 +1,9 @@
+from dataclasses import dataclass
+
 from .base import Resource
 
 
+@dataclass
 class Account(Resource):
 
     name: str
