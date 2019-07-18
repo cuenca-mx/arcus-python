@@ -24,14 +24,14 @@ class Bill(Resource):
     error_code: Optional[str]
     error_message: Optional[str]
     status: str
-    migrated_at: Optional[datetime.datetime]
-    type: str
-    mfa_challenges: list
-    address: dict = field(default_factory=dict)
-    payment_method: dict = field(default_factory=dict)
-    statements: list = field(default_factory=list)
-    subordinates: list = field(default_factory=list)
-    payments: list = field(default_factory=list)
+    migrated_at: Optional[datetime.datetime] = field(repr=False)
+    type: str = field(repr=False)
+    mfa_challenges: list = field(repr=False)
+    address: dict = field(default_factory=dict, repr=False)
+    payment_method: dict = field(default_factory=dict, repr=False)
+    statements: list = field(default_factory=list, repr=False)
+    subordinates: list = field(default_factory=list, repr=False)
+    payments: list = field(default_factory=list, repr=False)
 
     @classmethod
     def create(cls, biller_id: Union[int, str], account_number: str):

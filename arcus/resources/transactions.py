@@ -1,5 +1,5 @@
 import datetime
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Union
 
 from arcus.exc import InvalidOperation, UnprocessableEntity
@@ -18,11 +18,10 @@ class Transaction(Resource):
     hours_to_fulfill: int
     created_at: datetime.datetime
     status: str
-    type: str
-    fx_rate: float
-    amount_usd: float
-    total_usd: float
-    hours_to_fulfill: int
+    type: str = field(repr=False)
+    fx_rate: float = field(repr=False)
+    amount_usd: float = field(repr=False)
+    total_usd: float = field(repr=False)
 
     @classmethod
     def get(cls, transaction_id: Union[int, str]):

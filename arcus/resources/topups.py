@@ -1,5 +1,5 @@
 import datetime
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 
 from .base import Resource
@@ -21,22 +21,22 @@ class Topup(Resource):
     bill_amount: float
     bill_amount_currency: str
     created_at: datetime.datetime
-    fx_rate: float
-    bill_amount_usd: float
-    bill_amount_chain_currency: float
-    payment_transaction_fee: float
-    payment_total_usd: float
-    payment_total_chain_currency: float
-    chain_earned: float
-    chain_paid: float
     starting_balance: float
     ending_balance: float
-    local_currency: str
-    bill_amount_local_currency: str
-    ticket_text: Optional[str]
     hours_to_fulfill: Optional[int]
-    external_id: Optional[int]
-    sms_text: Optional[str]
+    local_currency: str = field(repr=False)
+    fx_rate: float = field(repr=False)
+    bill_amount_usd: float = field(repr=False)
+    bill_amount_chain_currency: float = field(repr=False)
+    payment_transaction_fee: float = field(repr=False)
+    payment_total_usd: float = field(repr=False)
+    payment_total_chain_currency: float = field(repr=False)
+    chain_earned: float = field(repr=False)
+    chain_paid: float = field(repr=False)
+    bill_amount_local_currency: str = field(repr=False)
+    ticket_text: Optional[str] = field(repr=False)
+    external_id: Optional[int] = field(repr=False)
+    sms_text: Optional[str] = field(repr=False)
 
     @classmethod
     def create(

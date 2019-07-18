@@ -28,8 +28,8 @@ class Biller(Resource):
     can_check_balance: bool = False
     required_parameters: List[str] = field(default_factory=list)
     returned_parameters: List[str] = field(default_factory=list)
-    can_migrate: bool = False
-    has_xdata: bool = False
+    can_migrate: bool = field(default=False, repr=False)
+    has_xdata: bool = field(default=False, repr=False)
     available_topup_amounts: Optional[list] = None
     topup_fxrate: Optional[float] = None
     topup_commission: Optional[float] = None
