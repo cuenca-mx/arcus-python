@@ -1,4 +1,5 @@
 import datetime
+from dataclasses import dataclass, field
 from typing import Optional, Union
 
 from arcus.exc import (InvalidAccountNumber, InvalidBiller, NotFound,
@@ -8,6 +9,7 @@ from .base import Resource
 from .transactions import Transaction
 
 
+@dataclass
 class Bill(Resource):
     _endpoint = '/bills'
 
@@ -22,7 +24,14 @@ class Bill(Resource):
     error_code: Optional[str]
     error_message: Optional[str]
     status: str
-    migrated_at: Optional[datetime.datetime]
+    migrated_at: Optional[datetime.datetime] = field(repr=False)
+    type: str = field(repr=False)
+    mfa_challenges: list = field(repr=False)
+    address: dict = field(default_factory=dict, repr=False)
+    payment_method: dict = field(default_factory=dict, repr=False)
+    statements: list = field(default_factory=list, repr=False)
+    subordinates: list = field(default_factory=list, repr=False)
+    payments: list = field(default_factory=list, repr=False)
 
     @classmethod
     def create(cls, biller_id: Union[int, str], account_number: str):
@@ -36,8 +45,7 @@ class Bill(Resource):
                 raise InvalidAccountNumber(account_number)
             else:
                 raise
-        else:
-            return cls(**bill_dict)
+        return cls(**bill_dict)
 
     def pay(self, amount: Optional[float] = None) -> Transaction:
         amount = amount or self.balance

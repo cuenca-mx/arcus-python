@@ -1,4 +1,5 @@
-from typing import Union
+from dataclasses import dataclass, field
+from typing import List, Optional, Union
 
 from pydash import filter_
 
@@ -9,6 +10,7 @@ from .base import Resource
 ENDPOINTS = ['credentials', 'topups', 'utilities']
 
 
+@dataclass
 class Biller(Resource):
     _endpoint = '/billers'
 
@@ -18,12 +20,19 @@ class Biller(Resource):
     currency: str
     biller_type: str
     bill_type: str
-    can_check_balance: bool
-    mask: str
-    requires_name_on_account: bool
-    supports_partial_payments: bool
-    hours_to_fulfill: int
-    account_number_digits: int
+    hours_to_fulfill: Optional[int] = None
+    mask: Optional[str] = None
+    account_number_digits: Optional[int] = None
+    supports_partial_payments: bool = False
+    requires_name_on_account: bool = False
+    can_check_balance: bool = False
+    required_parameters: List[str] = field(default_factory=list)
+    returned_parameters: List[str] = field(default_factory=list)
+    can_migrate: bool = field(default=False, repr=False)
+    has_xdata: bool = field(default=False, repr=False)
+    available_topup_amounts: Optional[list] = None
+    topup_fxrate: Optional[float] = None
+    topup_commission: Optional[float] = None
 
     @classmethod
     def get(cls, biller_id: Union[int, str]):
