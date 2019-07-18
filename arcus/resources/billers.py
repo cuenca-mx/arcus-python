@@ -20,9 +20,9 @@ class Biller(Resource):
     currency: str
     biller_type: str
     bill_type: str
+    hours_to_fulfill: Optional[int] = None
     mask: Optional[str] = None
     account_number_digits: Optional[int] = None
-    hours_to_fulfill: Optional[int] = None
     supports_partial_payments: bool = False
     requires_name_on_account: bool = False
     can_check_balance: bool = False
