@@ -1,4 +1,5 @@
 import datetime
+from dataclasses import dataclass
 from typing import Optional
 
 from .base import Resource
@@ -11,6 +12,7 @@ https://www.arcusfi.com/api/v1_6/#pay
 TOPUP_API_VERSION = '1.6'
 
 
+@dataclass
 class Topup(Resource):
 
     id: int
@@ -18,8 +20,23 @@ class Topup(Resource):
     account_number: str
     bill_amount: float
     bill_amount_currency: str
-    hours_to_fulfill: int
     created_at: datetime.datetime
+    fx_rate: float
+    bill_amount_usd: float
+    bill_amount_chain_currency: float
+    payment_transaction_fee: float
+    payment_total_usd: float
+    payment_total_chain_currency: float
+    chain_earned: float
+    chain_paid: float
+    starting_balance: float
+    ending_balance: float
+    local_currency: str
+    bill_amount_local_currency: str
+    ticket_text: Optional[str]
+    hours_to_fulfill: Optional[int]
+    external_id: Optional[int]
+    sms_text: Optional[str]
 
     @classmethod
     def create(
