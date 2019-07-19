@@ -17,6 +17,15 @@ def test_topup(client):
 
 
 @pytest.mark.vcr
+def test_topup_with_int(client):
+    biller_id = 13599
+    account_number = '5599999999'
+    amount = 100
+    with pytest.raises(TypeError):
+        client.topups.create(biller_id, account_number, amount)
+
+
+@pytest.mark.vcr
 def test_topup_invalid_phone_number(client):
     biller_id = 13599
     account_number = '559999'

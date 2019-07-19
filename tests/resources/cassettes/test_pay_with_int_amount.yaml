@@ -1,0 +1,56 @@
+interactions:
+- request:
+    body: '{"biller_id": 40, "account_number": "501000000007"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:r2sSQ2DED7RGXgH18/FnSjxmp+I=']
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      Content-MD5: [PtZUYQ9bmh3ULNV0W7ZNdw==]
+      Content-Type: [application/json]
+      Date: ['Fri, 19 Jul 2019 00:43:43 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills
+  response:
+    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2019-07-19T00:43:43Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Fri, 19 Jul 2019 00:43:45 GMT']
+      ETag: [W/"d5887eda3a0381986e4683ee85b125e3"]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains]
+      Transfer-Encoding: [chunked]
+      X-Request-Id: [553e398b-867e-4a56-8922-0455ee8d026a]
+      X-Runtime: ['1.057190']
+    status: {code: 200, message: OK}
+- request:
+    body: '{}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:rJ0Vh6UleSWToAb8UYQPA+CPQ/8=']
+      Connection: [keep-alive]
+      Content-Length: ['2']
+      Content-MD5: [mZFLkyvTelC5g8XnyQrpOw==]
+      Content-Type: [application/json]
+      Date: ['Fri, 19 Jul 2019 00:43:45 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://api.casiregalii.com/bills/8390
+  response:
+    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2019-07-19T00:43:43Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Fri, 19 Jul 2019 00:43:45 GMT']
+      ETag: [W/"d5887eda3a0381986e4683ee85b125e3"]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains]
+      Transfer-Encoding: [chunked]
+      X-Request-Id: [e6ca2bdd-2c7f-4cf8-84f7-97a5da000a0d]
+      X-Runtime: ['0.018602']
+    status: {code: 200, message: OK}
+version: 1

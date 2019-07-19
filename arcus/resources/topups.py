@@ -47,6 +47,8 @@ class Topup(Resource):
             currency: str = 'MXN',
             name_on_account: Optional[str] = None
     ):
+        if not isinstance(amount, float):
+            raise TypeError('amount must be a float')
         data = dict(biller_id=biller_id,
                     account_number=account_number,
                     amount=amount,
