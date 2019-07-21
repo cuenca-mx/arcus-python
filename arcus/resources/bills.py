@@ -42,7 +42,7 @@ class Bill(Resource):
             raise InvalidBiller(biller_id)
         except UnprocessableEntity as ex:
             if ex.code == 'R2':
-                raise InvalidAccountNumber(account_number)
+                raise InvalidAccountNumber(account_number, biller_id)
             else:
                 raise
         return cls(**bill_dict)

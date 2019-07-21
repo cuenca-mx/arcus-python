@@ -2,6 +2,8 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Optional
 
+from arcus.exc import InvalidAccountNumber, UnprocessableEntity
+
 from .base import Resource
 
 """
@@ -54,8 +56,14 @@ class Topup(Resource):
                     amount=amount,
                     currency=currency,
                     name_on_account=name_on_account)
-        topup_dict = cls._client.post(
-            '/bill/pay', data, api_version=TOPUP_API_VERSION)
+        try:
+            topup_dict = cls._client.post(
+                '/bill/pay', data, api_version=TOPUP_API_VERSION)
+        except UnprocessableEntity as ex:
+            if ex.code == 'R5':
+                raise InvalidAccountNumber(account_number, biller_id)
+            else:
+                raise
         return Topup(**topup_dict)
 
     @classmethod

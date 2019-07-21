@@ -22,9 +22,12 @@ def test_invalid_biller_id(client):
 
 @pytest.mark.vcr
 def test_invalid_account_number(client):
+    biller_id = 40
     invalid_account_number = '501000000004'
-    with pytest.raises(exc.InvalidAccountNumber):
-        client.bills.create(40, invalid_account_number)
+    with pytest.raises(exc.InvalidAccountNumber) as excinfo:
+        client.bills.create(biller_id, invalid_account_number)
+    assert excinfo.value.account_number == invalid_account_number
+    assert excinfo.value.biller_id == biller_id
 
 
 @pytest.mark.vcr

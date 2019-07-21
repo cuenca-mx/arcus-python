@@ -1,6 +1,6 @@
 import pytest
 
-from arcus.exc import UnprocessableEntity
+from arcus.exc import InvalidAccountNumber
 
 
 @pytest.mark.vcr
@@ -30,11 +30,11 @@ def test_topup_invalid_phone_number(client):
     biller_id = 13599
     account_number = '559999'
     amount = 100.0
-    with pytest.raises(UnprocessableEntity) as excinfo:
+    with pytest.raises(InvalidAccountNumber) as excinfo:
         client.topups.create(biller_id, account_number, amount)
     exc = excinfo.value
-    assert exc.code == 'R5'
-    assert exc.message == 'Invalid Phone Number'
+    assert exc.account_number == account_number
+    assert exc.biller_id == biller_id
 
 
 def test_topup_list(client):

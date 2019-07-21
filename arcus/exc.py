@@ -12,8 +12,13 @@ class InvalidAuth(ArcusException):
 
 
 class InvalidAccountNumber(ArcusException):
-    def __init__(self, account_number: str):
-        self.message = f'{account_number} is an invalid account_number'
+    def __init__(self, account_number: str, biller_id: int):
+        self.message = (
+            f'{account_number} is an invalid account_number for biller '
+            f'{biller_id}'
+        )
+        self.account_number = account_number
+        self.biller_id = biller_id
 
 
 class InvalidBiller(ArcusException):
@@ -51,5 +56,5 @@ class UnprocessableEntity(ArcusException):
 
 class InvalidOperation(UnprocessableEntity):
     def __init__(self, code: str, transaction_id: Union[int, str]):
-        self.message = f'Unable to cancel the transaction {transaction_id}'
-        super().__init__(code, self.message, transaction_id=transaction_id)
+        message = f'Unable to cancel the transaction {transaction_id}'
+        super().__init__(code, message, transaction_id=transaction_id)
