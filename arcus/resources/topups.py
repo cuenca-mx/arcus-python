@@ -16,6 +16,7 @@ TOPUP_API_VERSION = '1.6'
 
 @dataclass
 class Topup(Resource):
+    _endpoint = '/bill/pay'
 
     id: int
     biller_id: int
@@ -58,13 +59,20 @@ class Topup(Resource):
                     name_on_account=name_on_account)
         try:
             topup_dict = cls._client.post(
-                '/bill/pay', data, api_version=TOPUP_API_VERSION)
+                cls._endpoint, data, api_version=TOPUP_API_VERSION)
         except UnprocessableEntity as ex:
             if ex.code == 'R5':
                 raise InvalidAccountNumber(account_number, biller_id)
             else:
                 raise
         return Topup(**topup_dict)
+
+    @classmethod
+    def get(cls, _):
+        raise NotImplementedError(
+            f"{cls.__name__}.get(id) is unsupported by the API. Use "
+            f"Transaction.get(id) instead."
+        )
 
     @classmethod
     def list(cls):

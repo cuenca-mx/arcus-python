@@ -66,6 +66,7 @@ def test_cancel_bill_success(client):
     updated_transaction = client.transactions.get(transaction.id)
     assert updated_transaction.id == transaction.id
     assert updated_transaction.status == 'refunded'
+    assert transaction.status == updated_transaction.status
 
 
 @pytest.mark.vcr

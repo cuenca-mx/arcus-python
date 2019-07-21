@@ -1,6 +1,7 @@
 import pytest
 
 from arcus.exc import InvalidAccountNumber
+from arcus.resources import Topup
 
 
 @pytest.mark.vcr
@@ -54,3 +55,10 @@ def test_pay_invoice_with_name_on_account(client):
     assert topup.account_number == account_number
     assert topup.bill_amount == amount
     assert topup.ending_balance < topup.starting_balance
+
+
+def test_unimplemented():
+    with pytest.raises(NotImplementedError):
+        Topup.list()
+    with pytest.raises(NotImplementedError):
+        Topup.get(1)
