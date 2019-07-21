@@ -53,6 +53,7 @@ def test_unexpected_error(client):
         client.bills.create(6900, '1111362009')
     e = excinfo.value
     assert e.code == 'R9'
+    str(e)
 
 
 @pytest.mark.vcr
