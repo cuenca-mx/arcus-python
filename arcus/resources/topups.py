@@ -70,12 +70,12 @@ class Topup(Resource):
     @classmethod
     def get(cls, _):
         raise NotImplementedError(
-            f"{cls.__name__}.get(id) is unsupported by the API. Use "
-            f"Transaction.get(id) instead."
+            f'{cls.__name__}.get(id) is unsupported by the API. Use '
+            f'Transaction.get(id) instead.'
         )
 
     @classmethod
     def list(cls):
         raise NotImplementedError(
             f"{cls.__name__}.list() hasn't been implemented or isn't "
-            f"supported by the API.")
+            f'supported by the API.')
