@@ -37,6 +37,14 @@ def test_successful_payment(client):
 
 
 @pytest.mark.vcr
+def test_pay_with_int_amount(client):
+    bill = client.bills.create(40, '501000000007')
+    assert bill == client.bills.get(bill.id)
+    with pytest.raises(TypeError):
+        bill.pay(100)
+
+
+@pytest.mark.vcr
 def test_unexpected_error(client):
     with pytest.raises(exc.UnprocessableEntity) as excinfo:
         client.bills.create(6900, '1111362009')
