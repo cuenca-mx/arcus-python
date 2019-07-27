@@ -41,7 +41,7 @@ class Bill(Resource):
         except NotFound:
             raise InvalidBiller(biller_id)
         except UnprocessableEntity as ex:
-            if ex.code in 'R2':
+            if ex.code in ['R2', 'R29']:
                 raise InvalidAccountNumber(ex.code, account_number, biller_id)
             else:
                 raise
