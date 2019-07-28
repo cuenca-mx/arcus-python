@@ -2,8 +2,9 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Optional, Union
 
-from arcus.exc import (InvalidAccountNumber, InvalidBiller, NotFound,
-                       UnprocessableEntity)
+from arcus.exc import (
+    InvalidAccountNumber, InvalidAmount, InvalidBiller, NotFound,
+    UnprocessableEntity)
 
 from .base import Resource
 from .transactions import Transaction
@@ -54,6 +55,12 @@ class Bill(Resource):
         if not isinstance(amount, float):
             raise TypeError('amount must be a float')
         data = dict(amount=amount, currency=self.balance_currency)
-        transaction_dict = self._client.post(
-            f'{self._endpoint}/{self.id}/pay', data)
+        try:
+            transaction_dict = self._client.post(
+                f'{self._endpoint}/{self.id}/pay', data)
+        except UnprocessableEntity as ex:
+            if ex.code == 'R102':
+                raise InvalidAmount(ex.code, ex.message, amount=amount)
+            else:
+                raise
         return Transaction(**transaction_dict)

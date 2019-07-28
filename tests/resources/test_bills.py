@@ -40,6 +40,14 @@ def test_successful_payment(client):
 
 
 @pytest.mark.vcr
+def test_amount_too_low(client):
+    bill = client.bills.create(40, '501000000007')
+    assert bill == client.bills.get(bill.id)
+    with pytest.raises(exc.InvalidAmount):
+        bill.pay(.01)
+
+
+@pytest.mark.vcr
 def test_pay_with_int_amount(client):
     bill = client.bills.create(40, '501000000007')
     assert bill == client.bills.get(bill.id)

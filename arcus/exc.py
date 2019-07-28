@@ -59,3 +59,7 @@ class InvalidOperation(UnprocessableEntity):
     def __init__(self, code: str, transaction_id: Union[int, str]):
         message = f'Unable to cancel the transaction {transaction_id}'
         super().__init__(code, message, transaction_id=transaction_id)
+
+
+class InvalidAmount(UnprocessableEntity):
+    pass
