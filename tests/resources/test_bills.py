@@ -22,9 +22,12 @@ def test_invalid_biller_id(client):
 
 @pytest.mark.vcr
 def test_invalid_account_number(client):
+    biller_id = 40
     invalid_account_number = '501000000004'
-    with pytest.raises(exc.InvalidAccountNumber):
-        client.bills.create(40, invalid_account_number)
+    with pytest.raises(exc.InvalidAccountNumber) as excinfo:
+        client.bills.create(biller_id, invalid_account_number)
+    assert excinfo.value.account_number == invalid_account_number
+    assert excinfo.value.biller_id == biller_id
 
 
 @pytest.mark.vcr
@@ -34,6 +37,14 @@ def test_successful_payment(client):
     transaction = bill.pay()
     assert transaction.id
     assert transaction.status == 'fulfilled'
+
+
+@pytest.mark.vcr
+def test_amount_too_low(client):
+    bill = client.bills.create(40, '501000000007')
+    assert bill == client.bills.get(bill.id)
+    with pytest.raises(exc.InvalidAmount):
+        bill.pay(.01)
 
 
 @pytest.mark.vcr
@@ -50,6 +61,7 @@ def test_unexpected_error(client):
         client.bills.create(6900, '1111362009')
     e = excinfo.value
     assert e.code == 'R9'
+    str(e)
 
 
 @pytest.mark.vcr
@@ -63,6 +75,7 @@ def test_cancel_bill_success(client):
     updated_transaction = client.transactions.get(transaction.id)
     assert updated_transaction.id == transaction.id
     assert updated_transaction.status == 'refunded'
+    assert transaction.status == updated_transaction.status
 
 
 @pytest.mark.vcr

@@ -29,11 +29,18 @@ class Transaction(Resource):
             cls._client.get(f'{cls._endpoint}?q[id_eq]={transaction_id}'))
         return Transaction(**transaction_dict['transactions'][0])
 
+    def refresh(self):
+        updated = self.get(self.id)
+        for attr, value in updated.__dict__.items():
+            setattr(self, attr, value)
+
     def cancel(self) -> dict:
         try:
-            return self._client.post('/transaction/cancel', dict(id=self.id))
+            resp = self._client.post('/transaction/cancel', dict(id=self.id))
         except UnprocessableEntity as ex:
             if ex.code in ['R26', 'R103']:
                 raise InvalidOperation(ex.code, self.id)
             else:
                 raise
+        self.refresh()
+        return resp

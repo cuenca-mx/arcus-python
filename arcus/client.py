@@ -82,7 +82,7 @@ class Client:
             raise InvalidAuth
         elif response.status_code == 404:
             raise NotFound(data['message'])
-        elif response.status_code == 422:
+        elif response.status_code in [400, 422]:
             raise UnprocessableEntity(**data)
         else:
             response.raise_for_status()

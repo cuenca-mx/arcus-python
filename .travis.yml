@@ -27,7 +27,7 @@ jobs:
         - make install-test
         - pip install coveralls
       script:
-        - python setup.py test
+        - pytest --vcr-record=none
         - coveralls
     - stage: PyPI Upload
       python: 3.7

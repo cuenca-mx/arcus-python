@@ -2,6 +2,8 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Optional
 
+from arcus.exc import InvalidAccountNumber, UnprocessableEntity
+
 from .base import Resource
 
 """
@@ -14,6 +16,7 @@ TOPUP_API_VERSION = '1.6'
 
 @dataclass
 class Topup(Resource):
+    _endpoint = '/bill/pay'
 
     id: int
     biller_id: int
@@ -54,12 +57,25 @@ class Topup(Resource):
                     amount=amount,
                     currency=currency,
                     name_on_account=name_on_account)
-        topup_dict = cls._client.post(
-            '/bill/pay', data, api_version=TOPUP_API_VERSION)
+        try:
+            topup_dict = cls._client.post(
+                cls._endpoint, data, api_version=TOPUP_API_VERSION)
+        except UnprocessableEntity as ex:
+            if ex.code == 'R5':
+                raise InvalidAccountNumber(ex.code, account_number, biller_id)
+            else:
+                raise
         return Topup(**topup_dict)
+
+    @classmethod
+    def get(cls, _):
+        raise NotImplementedError(
+            f'{cls.__name__}.get(id) is unsupported by the API. Use '
+            f'Transaction.get(id) instead.'
+        )
 
     @classmethod
     def list(cls):
         raise NotImplementedError(
             f"{cls.__name__}.list() hasn't been implemented or isn't "
-            f"supported by the API.")
+            f'supported by the API.')

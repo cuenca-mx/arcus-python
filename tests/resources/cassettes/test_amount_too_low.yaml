@@ -1,0 +1,83 @@
+interactions:
+- request:
+    body: '{"biller_id": 40, "account_number": "501000000007"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:0gGhOKBCqJnQijkr+61x8bxzQ+c=']
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      Content-MD5: [PtZUYQ9bmh3ULNV0W7ZNdw==]
+      Content-Type: [application/json]
+      Date: ['Sun, 28 Jul 2019 15:09:20 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills
+  response:
+    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2019-07-28T15:09:21Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 28 Jul 2019 15:09:22 GMT']
+      ETag: [W/"29fa251c1dbaca8c77f31dafb0580798"]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains]
+      Transfer-Encoding: [chunked]
+      X-Request-Id: [a189887d-dac5-4381-bbaf-0b15f73a9612]
+      X-Runtime: ['1.811842']
+    status: {code: 200, message: OK}
+- request:
+    body: '{}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:uX2OBRr3DMmR6+RiYTqSZxh5lWk=']
+      Connection: [keep-alive]
+      Content-Length: ['2']
+      Content-MD5: [mZFLkyvTelC5g8XnyQrpOw==]
+      Content-Type: [application/json]
+      Date: ['Sun, 28 Jul 2019 15:09:22 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://api.casiregalii.com/bills/8390
+  response:
+    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2019-07-28T15:09:21Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 28 Jul 2019 15:09:22 GMT']
+      ETag: [W/"29fa251c1dbaca8c77f31dafb0580798"]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains]
+      Transfer-Encoding: [chunked]
+      X-Request-Id: [93d06206-d23f-49dd-9cf5-f916835a20c0]
+      X-Runtime: ['0.088213']
+    status: {code: 200, message: OK}
+- request:
+    body: '{"amount": 0.01, "currency": "MXN"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:8Rx0fQQrLRdfLD8Jevq3jrPzfKE=']
+      Connection: [keep-alive]
+      Content-Length: ['35']
+      Content-MD5: [y/YL8kAiyFrfQ6mQknvv7g==]
+      Content-Type: [application/json]
+      Date: ['Sun, 28 Jul 2019 15:09:23 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills/8390/pay
+  response:
+    body: {string: '{"code":"R102","message":"Parameter amount cannot be less than
+        0.1: amount"}'}
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 28 Jul 2019 15:09:23 GMT']
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains]
+      Transfer-Encoding: [chunked]
+      X-Request-Id: [d93a3f16-5325-4db6-9ceb-136e4f98186c]
+      X-Runtime: ['0.018683']
+    status: {code: 400, message: Bad Request}
+version: 1
