@@ -150,4 +150,23 @@ def test_recurrent_payments(client):
     bill = client.bills.create(40, '501000000007')
     with pytest.raises(exc.RecurrentPayments) as excinfo:
         bill.pay()
-    assert 'recurrent payments enabled' in str(excinfo.value)
+    ex = excinfo.value
+    assert ex.message == 'Recurrent payments enabled'
+
+
+@pytest.mark.vcr
+def test_already_paid(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.AlreadyPaid) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert ex.message == 'Payment already made'
+
+
+@pytest.mark.vcr
+def test_duplicate_payment(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.DuplicatedPayment) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert ex.message == 'Duplicated payment for 549.0'

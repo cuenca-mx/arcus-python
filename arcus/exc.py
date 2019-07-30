@@ -73,16 +73,24 @@ class Forbidden(ArcusException):
     """Method Not Allowed"""
 
 class AlreadyPaid(UnprocessableEntity):
-    pass
+    def __init__(self, code: str):
+        message = f'Payment already made'
+        super().__init__(
+            code, message
+        )
 
 
 class RecurrentPayments(UnprocessableEntity):
     def __init__(self, code: str):
-        message = f'recurrent payments enabled'
+        message = f'Recurrent payments enabled'
         super().__init__(
             code, message
         )
 
 
 class DuplicatedPayment(UnprocessableEntity):
-    pass
+    def __init__(self, code: str, amount: float):
+        message = f'Duplicated payment for {amount}'
+        super().__init__(
+            code, message
+        )
