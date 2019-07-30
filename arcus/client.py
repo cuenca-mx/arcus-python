@@ -31,12 +31,13 @@ class Client:
         self.api_key = api_key or os.environ['ARCUS_API_KEY']
         self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
         self.sandbox = sandbox
+        self.proxy = proxy
         if proxy:
             self.base_url = proxy
             if sandbox:
-                self.headers['X-ARCUS-DESTINATION-HOST'] = SANDBOX_API_URL
+                self.headers['X-ARCUS-SANDBOX'] = 'true'
             else:
-                self.headers['X-ARCUS-DESTINATION-HOST'] = PRODUCTION_API_URL
+                self.headers['X-ARCUS-SANDBOX'] = 'false'
         else:
             if sandbox:
                 self.base_url = SANDBOX_API_URL
@@ -59,7 +60,10 @@ class Client:
         **kwargs,
     ) -> dict:
         url = self.base_url + endpoint
-        headers = self._build_headers(endpoint, api_version, data)
+        if self.proxy:
+            headers = {}
+        else:
+            headers = self._build_headers(endpoint, api_version, data)
         headers = {**headers, **self.headers}
         response = self.session.request(
             method, url, headers=headers, json=data, **kwargs
