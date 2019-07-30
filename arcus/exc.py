@@ -74,10 +74,10 @@ class AlreadyPaid(UnprocessableEntity):
 
 
 class RecurrentPayments(UnprocessableEntity):
-    def __init__(self, code: str, account_number: str):
-        message = f'{account_number} has recurrent payments enabled'
+    def __init__(self, code: str):
+        message = f'recurrent payments enabled'
         super().__init__(
-            code, message, account_number=account_number
+            code, message
         )
 
 
