@@ -24,14 +24,19 @@ class Client:
         api_key: Optional[str] = None,
         secret_key: Optional[str] = None,
         sandbox: bool = False,
+        host: Optional[str] = None,  # Used in the case of a proxy
     ):
         self.session = requests.Session()
         self.api_key = api_key or os.environ['ARCUS_API_KEY']
         self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
-        if sandbox:
-            self.base_url = SANDBOX_API_URL
+        self.sandbox = sandbox
+        if host:
+            self.base_url = host
         else:
-            self.base_url = PRODUCTION_API_URL
+            if sandbox:
+                self.base_url = SANDBOX_API_URL
+            else:
+                self.base_url = PRODUCTION_API_URL
         Resource._client = self
 
     def get(self, endpoint: str, **kwargs) -> dict:
