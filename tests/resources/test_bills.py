@@ -170,3 +170,13 @@ def test_duplicate_payment(client):
         bill.pay()
     ex = excinfo.value
     assert ex.message == 'Duplicated payment for 549.0'
+
+
+@pytest.mark.vcr
+def test_incomplete_amount(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.IncompleteAmount) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.message ==
+            'Incomplete payment amount of 549.0, must pay full balance')
