@@ -24,14 +24,19 @@ class Client:
         api_key: Optional[str] = None,
         secret_key: Optional[str] = None,
         sandbox: bool = False,
-        host: Optional[str] = None,  # Used in the case of a proxy
+        proxy: Optional[str] = None,  # Used in the case of a proxy
     ):
+        self.headers = {}
         self.session = requests.Session()
         self.api_key = api_key or os.environ['ARCUS_API_KEY']
         self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
         self.sandbox = sandbox
-        if host:
-            self.base_url = host
+        if proxy:
+            self.base_url = proxy
+            if sandbox:
+                self.headers['X-ARCUS-DESTINATION-HOST'] = SANDBOX_API_URL
+            else:
+                self.headers['X-ARCUS-DESTINATION-HOST'] = PRODUCTION_API_URL
         else:
             if sandbox:
                 self.base_url = SANDBOX_API_URL
@@ -55,6 +60,7 @@ class Client:
     ) -> dict:
         url = self.base_url + endpoint
         headers = self._build_headers(endpoint, api_version, data)
+        headers = {**headers, **self.headers}
         response = self.session.request(
             method, url, headers=headers, json=data, **kwargs
         )
