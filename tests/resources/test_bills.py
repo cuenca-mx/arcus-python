@@ -168,14 +168,23 @@ def test_recurrent_payments(client):
     bill = client.bills.create(40, '501000000007')
     with pytest.raises(exc.UnprocessableEntity) as excinfo:
         bill.pay()
-    e = excinfo.value
-    assert e.code == 'R7'
+    ex = excinfo.value
+    assert ex.message == 'Recurrent payments enabled'
 
 
 @pytest.mark.vcr
-def test_incomplete_amount(client):
+def test_already_paid(client):
     bill = client.bills.create(40, '501000000007')
-    with pytest.raises(exc.UnprocessableEntity) as excinfo:
+    with pytest.raises(exc.AlreadyPaid) as excinfo:
         bill.pay()
-    e = excinfo.value
-    assert e.code == 'R41'
+    ex = excinfo.value
+    assert ex.message == 'Payment already made'
+
+
+@pytest.mark.vcr
+def test_duplicate_payment(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.DuplicatedPayment) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert ex.message == 'Duplicated payment for 549.0'

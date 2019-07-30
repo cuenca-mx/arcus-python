@@ -67,9 +67,9 @@ class Bill(Resource):
             elif ex.code == 'R7':
                 raise RecurrentPayments(ex.code, ex.message)
             elif ex.code == 'R36':
-                raise DuplicatedPayment(ex.code, ex.message, amount=amount)
+                raise DuplicatedPayment(ex.code, amount=amount)
             elif ex.code in {'R12', 'R8'}:
-                raise AlreadyPaid(ex.code, ex.message)
+                raise AlreadyPaid(ex.code)
             else:
                 raise
         return Transaction(**transaction_dict)
