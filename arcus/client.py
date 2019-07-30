@@ -24,25 +24,28 @@ class Client:
         api_key: Optional[str] = None,
         secret_key: Optional[str] = None,
         sandbox: bool = False,
-        proxy: Optional[str] = None,  # Used in the case of a proxy
+        proxy: Optional[str] = None,  # Used in the case of a read-only proxy
     ):
         self.headers = {}
         self.session = requests.Session()
-        self.api_key = api_key or os.environ['ARCUS_API_KEY']
-        self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
         self.sandbox = sandbox
         self.proxy = proxy
-        if proxy:
+        if not proxy:
+            self.api_key = api_key or os.environ['ARCUS_API_KEY']
+            self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
+            if sandbox:
+                self.base_url = SANDBOX_API_URL
+            else:
+                self.base_url = PRODUCTION_API_URL
+        else:
+            self.api_key = None
+            self.secret_key = None
             self.base_url = proxy
             if sandbox:
                 self.headers['X-ARCUS-SANDBOX'] = 'true'
             else:
                 self.headers['X-ARCUS-SANDBOX'] = 'false'
-        else:
-            if sandbox:
-                self.base_url = SANDBOX_API_URL
-            else:
-                self.base_url = PRODUCTION_API_URL
+
         Resource._client = self
 
     def get(self, endpoint: str, **kwargs) -> dict:
@@ -60,10 +63,10 @@ class Client:
         **kwargs,
     ) -> dict:
         url = self.base_url + endpoint
-        if self.proxy:
-            headers = {}
-        else:
+        if not self.proxy:
             headers = self._build_headers(endpoint, api_version, data)
+        else:
+            headers = {}
         headers = {**headers, **self.headers}
         response = self.session.request(
             method, url, headers=headers, json=data, **kwargs
