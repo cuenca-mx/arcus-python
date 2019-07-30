@@ -4,7 +4,8 @@ from typing import Optional, Union
 
 from arcus.exc import (
     InvalidAccountNumber, InvalidAmount, InvalidBiller, NotFound,
-    UnprocessableEntity)
+    UnprocessableEntity, IncompleteAmount, RecurrentPayments,
+    DuplicatedPayment, AlreadyPaid)
 
 from .base import Resource
 from .transactions import Transaction
@@ -42,7 +43,7 @@ class Bill(Resource):
         except NotFound:
             raise InvalidBiller(biller_id)
         except UnprocessableEntity as ex:
-            if ex.code in ['R2', 'R29']:
+            if ex.code in ['R2', 'R29', 'R1']:
                 raise InvalidAccountNumber(ex.code, account_number, biller_id)
             else:
                 raise
@@ -61,6 +62,14 @@ class Bill(Resource):
         except UnprocessableEntity as ex:
             if ex.code == 'R102':
                 raise InvalidAmount(ex.code, ex.message, amount=amount)
+            elif ex.code in {'R3', 'R11', 'R41'}:
+                raise IncompleteAmount(ex.code, ex.message, amount=amount)
+            elif ex.code == 'R7':
+                raise RecurrentPayments(ex.code, ex.message)
+            elif ex.code == 'R36':
+                raise DuplicatedPayment(ex.code, ex.message, amount=amount)
+            elif ex.code in {'R12', 'R8'}:
+                raise AlreadyPaid(ex.code, ex.message)
             else:
                 raise
         return Transaction(**transaction_dict)
