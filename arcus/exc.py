@@ -61,6 +61,10 @@ class InvalidOperation(UnprocessableEntity):
         super().__init__(code, message, transaction_id=transaction_id)
 
 
+class IncompleteAmount(UnprocessableEntity):
+    pass
+
+
 class InvalidAmount(UnprocessableEntity):
     pass
 
@@ -92,3 +96,18 @@ class IncompleteAmount(UnprocessableEntity):
 
 class Forbidden(ArcusException):
     """Method Not Allowed"""
+
+class AlreadyPaid(UnprocessableEntity):
+    pass
+
+
+class RecurrentPayments(UnprocessableEntity):
+    def __init__(self, code: str, account_number: str):
+        message = f'{account_number} has recurrent payments enabled'
+        super().__init__(
+            code, message, account_number=account_number
+        )
+
+
+class DuplicatedPayment(UnprocessableEntity):
+    pass
