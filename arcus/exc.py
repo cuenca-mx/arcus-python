@@ -61,10 +61,6 @@ class InvalidOperation(UnprocessableEntity):
         super().__init__(code, message, transaction_id=transaction_id)
 
 
-class IncompleteAmount(UnprocessableEntity):
-    pass
-
-
 class InvalidAmount(UnprocessableEntity):
     pass
 
@@ -89,8 +85,17 @@ class RecurrentPayments(UnprocessableEntity):
 
 
 class DuplicatedPayment(UnprocessableEntity):
-    def __init__(self, code: str, amount: float):
+    def __init__(self, code: str, amount: int):
         message = f'Duplicated payment for {amount}'
+        super().__init__(
+            code, message
+        )
+
+
+class IncompleteAmount(UnprocessableEntity):
+    def __init__(self, code: str, amount: int):
+        message = (
+            f'Incomplete payment amount of {amount}, must pay full balance')
         super().__init__(
             code, message
         )

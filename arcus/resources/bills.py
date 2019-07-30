@@ -63,7 +63,7 @@ class Bill(Resource):
             if ex.code == 'R102':
                 raise InvalidAmount(ex.code, ex.message, amount=amount)
             elif ex.code in {'R3', 'R11', 'R41'}:
-                raise IncompleteAmount(ex.code, ex.message, amount=amount)
+                raise IncompleteAmount(ex.code, amount=amount)
             elif ex.code == 'R7':
                 raise RecurrentPayments(ex.code)
             elif ex.code == 'R36':
