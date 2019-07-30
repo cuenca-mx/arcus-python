@@ -65,9 +65,6 @@ class InvalidAmount(UnprocessableEntity):
     pass
 
 
-class Forbidden(ArcusException):
-    """Method Not Allowed"""
-
 class AlreadyPaid(UnprocessableEntity):
     def __init__(self, code: str):
         message = f'Payment already made'
