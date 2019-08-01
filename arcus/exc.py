@@ -91,3 +91,7 @@ class IncompleteAmount(UnprocessableEntity):
         message = (
             f'Incomplete payment amount of {amount}, must pay full balance')
         super().__init__(code, message, amount=amount)
+
+
+class Forbidden(ArcusException):
+    """Method Not Allowed"""
