@@ -143,3 +143,40 @@ def test_bills_list(client):
     assert bills
     assert type(bills) is list
     assert all(isinstance(bill, Bill) for bill in bills)
+
+
+@pytest.mark.vcr
+def test_recurrent_payments(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.RecurrentPayments) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert ex.message == 'Recurrent payments enabled'
+
+
+@pytest.mark.vcr
+def test_already_paid(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.AlreadyPaid) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert ex.message == 'Payment already made'
+
+
+@pytest.mark.vcr
+def test_duplicate_payment(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.DuplicatedPayment) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert ex.message == 'Duplicated payment for 549.0'
+
+
+@pytest.mark.vcr
+def test_incomplete_amount(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.IncompleteAmount) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.message ==
+            'Incomplete payment amount of 549.0, must pay full balance')

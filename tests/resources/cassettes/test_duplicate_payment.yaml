@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: '{"biller_id": 40, "account_number": "501000000007"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:xvLj1+LpjeJZWFIOt6MIGSEHvoU=']
+      Connection: [keep-alive]
+      Content-Length: ['49']
+      Content-MD5: [ZzalFfx6gqbsDisb9hrS9Q==]
+      Content-Type: [application/json]
+      Date: ['Fri, 15 Feb 2019 00:13:57 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills
+  response:
+    body: {string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":null,"balance":549.0,"balance_currency":"MXN","balance_updated_at":"2019-07-30T05:04:15Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Fri, 15 Feb 2019 00:13:59 GMT']
+      ETag: [W/"584f250f3ed1b34c832ad4868e803245"]
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [5d679597-2c22-4ff0-b38a-cd370b3faac0]
+      X-Runtime: ['1.082991']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: '{"amount": 549.0, "currency": "MXN"}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:CUbnfjh1pOrvbqcGgEF/GvaDh0A=']
+      Connection: [keep-alive]
+      Content-Length: ['49']
+      Content-MD5: [mLEUSO9hrGRBei+168rTOw==]
+      Content-Type: [application/json]
+      Date: ['Fri, 15 Feb 2019 00:13:59 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bills/8390/pay
+  response:
+    body: {string: '{"code":"R36","message":"Blocked attempt to make a possible duplicate payment. Requests for this account number with this payment amount are blocked for 1 hour"}'}
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Fri, 15 Feb 2019 00:14:19 GMT']
+      Strict-Transport-Security: [max-age=31536000]
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [f31525f1-6f1c-4af6-842e-19d749a287e7]
+      X-Runtime: ['20.039162']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 422, message: Unprocessable Entity}
+version: 1
