@@ -3,9 +3,9 @@ from dataclasses import dataclass, field
 from typing import Optional, Union
 
 from arcus.exc import (
-    InvalidAccountNumber, InvalidAmount, InvalidBiller, NotFound,
-    UnprocessableEntity, IncompleteAmount, RecurrentPayments,
-    DuplicatedPayment, AlreadyPaid)
+    AlreadyPaid, DuplicatedPayment, IncompleteAmount,
+    InvalidAccountNumber, InvalidAmount, InvalidBiller,
+    NotFound, RecurrentPayments, UnprocessableEntity)
 
 from .base import Resource
 from .transactions import Transaction
