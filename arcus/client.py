@@ -4,7 +4,7 @@ from typing import Optional
 import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
-from .exc import InvalidAuth, NotFound, UnprocessableEntity
+from .exc import Forbidden, InvalidAuth, NotFound, UnprocessableEntity
 from .resources import Account, Bill, Biller, Resource, Topup, Transaction
 
 API_VERSION = '3.1'
@@ -102,5 +102,7 @@ class Client:
             raise NotFound(data['message'])
         elif response.status_code in [400, 422]:
             raise UnprocessableEntity(**data)
+        elif response.status_code == 403:
+            raise Forbidden
         else:
             response.raise_for_status()

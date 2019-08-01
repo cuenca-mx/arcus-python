@@ -63,3 +63,7 @@ class InvalidOperation(UnprocessableEntity):
 
 class InvalidAmount(UnprocessableEntity):
     pass
+
+
+class Forbidden(ArcusException):
+    """Method Not Allowed"""
