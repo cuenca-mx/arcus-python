@@ -71,17 +71,13 @@ class Forbidden(ArcusException):
 class AlreadyPaid(UnprocessableEntity):
     def __init__(self, code: str):
         message = f'Payment already made'
-        super().__init__(
-            code, message
-        )
+        super().__init__(code, message)
 
 
 class RecurrentPayments(UnprocessableEntity):
     def __init__(self, code: str):
         message = f'Recurrent payments enabled'
-        super().__init__(
-            code, message
-        )
+        super().__init__(code, message)
 
 
 class DuplicatedPayment(UnprocessableEntity):
