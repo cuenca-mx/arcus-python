@@ -68,13 +68,9 @@ class Client:
         else:
             headers = {}  # The proxy is going to sign the request
         headers = {**headers, **self.headers}
-        print(f'method = {method}')
-        print(f'url = {url}')
-        print(f'headers = {headers}')
         response = self.session.request(
             method, url, headers=headers, json=data, **kwargs
         )
-        print(f'response = {response}')
         self._check_response(response)
         return response.json()
 
