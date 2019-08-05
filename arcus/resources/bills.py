@@ -3,9 +3,9 @@ from dataclasses import dataclass, field
 from typing import Optional, Union
 
 from arcus.exc import (
-    InvalidAccountNumber, InvalidAmount, InvalidBiller, NotFound,
-    UnprocessableEntity, IncompleteAmount, RecurrentPayments,
-    DuplicatedPayment, AlreadyPaid)
+    AlreadyPaid, DuplicatedPayment, IncompleteAmount,
+    InvalidAccountNumber, InvalidAmount, InvalidBiller,
+    NotFound, RecurrentPayments, UnprocessableEntity)
 
 from .base import Resource
 from .transactions import Transaction
@@ -63,9 +63,9 @@ class Bill(Resource):
             if ex.code == 'R102':
                 raise InvalidAmount(ex.code, ex.message, amount=amount)
             elif ex.code in {'R3', 'R11', 'R41'}:
-                raise IncompleteAmount(ex.code, ex.message, amount=amount)
+                raise IncompleteAmount(ex.code, amount=amount)
             elif ex.code == 'R7':
-                raise RecurrentPayments(ex.code, ex.message)
+                raise RecurrentPayments(ex.code)
             elif ex.code == 'R36':
                 raise DuplicatedPayment(ex.code, amount=amount)
             elif ex.code in {'R12', 'R8'}:
