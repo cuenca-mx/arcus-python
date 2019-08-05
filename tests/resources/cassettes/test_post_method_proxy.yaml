@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - python-requests/2.21.0
+      X-ARCUS-SANDBOX:
+      - 'true'
+    method: POST
+    uri: http://127.0.0.1:3001/account
+  response:
+    body:
+      string: '{"message":"Missing Authentication Token"}
+
+        '
+    headers:
+      Content-Length:
+      - '43'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 05 Aug 2019 17:59:02 GMT
+      Server:
+      - Werkzeug/0.15.5 Python/3.7.4
+    status:
+      code: 403
+      message: FORBIDDEN
+version: 1
