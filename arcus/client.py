@@ -4,7 +4,7 @@ from typing import Optional
 import requests
 
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
-from .exc import InvalidAuth, NotFound, UnprocessableEntity
+from .exc import Forbidden, InvalidAuth, NotFound, UnprocessableEntity
 from .resources import Account, Bill, Biller, Resource, Topup, Transaction
 
 API_VERSION = '3.1'
@@ -24,14 +24,28 @@ class Client:
         api_key: Optional[str] = None,
         secret_key: Optional[str] = None,
         sandbox: bool = False,
+        proxy: Optional[str] = None,  # Used in the case of a read-only proxy
     ):
+        self.headers = {}
         self.session = requests.Session()
-        self.api_key = api_key or os.environ['ARCUS_API_KEY']
-        self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
-        if sandbox:
-            self.base_url = SANDBOX_API_URL
+        self.sandbox = sandbox
+        self.proxy = proxy
+        if not proxy:
+            self.api_key = api_key or os.environ['ARCUS_API_KEY']
+            self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
+            if sandbox:
+                self.base_url = SANDBOX_API_URL
+            else:
+                self.base_url = PRODUCTION_API_URL
         else:
-            self.base_url = PRODUCTION_API_URL
+            self.api_key = None
+            self.secret_key = None
+            self.base_url = proxy
+            if sandbox:
+                self.headers['X-ARCUS-SANDBOX'] = 'true'
+            else:
+                self.headers['X-ARCUS-SANDBOX'] = 'false'
+
         Resource._client = self
 
     def get(self, endpoint: str, **kwargs) -> dict:
@@ -49,10 +63,18 @@ class Client:
         **kwargs,
     ) -> dict:
         url = self.base_url + endpoint
-        headers = self._build_headers(endpoint, api_version, data)
-        response = self.session.request(
-            method, url, headers=headers, json=data, **kwargs
-        )
+        if not self.proxy:
+            headers = self._build_headers(endpoint, api_version, data)
+            headers = {**headers, **self.headers}
+            response = self.session.request(
+                method, url, headers=headers, json=data, **kwargs
+            )
+        else:
+            headers = {}  # The proxy is going to sign the request
+            headers = {**headers, **self.headers}
+            response = self.session.request(
+                method, url, headers=headers, **kwargs
+            )
         self._check_response(response)
         return response.json()
 
@@ -84,5 +106,7 @@ class Client:
             raise NotFound(data['message'])
         elif response.status_code in [400, 422]:
             raise UnprocessableEntity(**data)
+        elif response.status_code == 403:
+            raise Forbidden
         else:
             response.raise_for_status()
