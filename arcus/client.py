@@ -65,12 +65,16 @@ class Client:
         url = self.base_url + endpoint
         if not self.proxy:
             headers = self._build_headers(endpoint, api_version, data)
+            headers = {**headers, **self.headers}
+            response = self.session.request(
+                method, url, headers=headers, json=data, **kwargs
+            )
         else:
             headers = {}  # The proxy is going to sign the request
-        headers = {**headers, **self.headers}
-        response = self.session.request(
-            method, url, headers=headers, json=data, **kwargs
-        )
+            headers = {**headers, **self.headers}
+            response = self.session.request(
+                method, url, headers=headers, **kwargs
+            )
         self._check_response(response)
         return response.json()
 
