@@ -3,6 +3,7 @@ from typing import Optional
 
 import requests
 
+from .api_keys import ApiKey
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
 from .exc import Forbidden, InvalidAuth, NotFound, UnprocessableEntity
 from .resources import Account, Bill, Biller, Resource, Topup, Transaction
@@ -21,8 +22,10 @@ class Client:
 
     def __init__(
         self,
-        api_key: Optional[str] = None,
-        secret_key: Optional[str] = None,
+        primary_user: Optional[str] = None,
+        primary_secret: Optional[str] = None,
+        topup_user: Optional[str] = None,
+        topup_secret: Optional[str] = None,
         sandbox: bool = False,
         proxy: Optional[str] = None,  # Used in the case of a read-only proxy
     ):
@@ -31,15 +34,24 @@ class Client:
         self.sandbox = sandbox
         self.proxy = proxy
         if not proxy:
-            self.api_key = api_key or os.environ['ARCUS_API_KEY']
-            self.secret_key = secret_key or os.environ['ARCUS_SECRET_KEY']
+            self.api_key = ApiKey(
+                primary_user or os.environ['ARCUS_API_KEY'],
+                primary_secret or os.environ['ARCUS_SECRET_KEY'],
+            )
+            try:
+                self.topup_key = ApiKey(
+                    topup_user or os.environ.get('TOPUP_API_KEY'),
+                    topup_secret or os.environ.get('TOPUP_SECRET_KEY'),
+                )
+            except ValueError:
+                self.topup_key = None
             if sandbox:
                 self.base_url = SANDBOX_API_URL
             else:
                 self.base_url = PRODUCTION_API_URL
         else:
             self.api_key = None
-            self.secret_key = None
+            self.topup_key = None
             self.base_url = proxy
             if sandbox:
                 self.headers['X-ARCUS-SANDBOX'] = 'true'
@@ -60,12 +72,16 @@ class Client:
         endpoint: str,
         data: dict,
         api_version: str = API_VERSION,
+        topup: bool = False,
         **kwargs,
     ) -> dict:
         url = self.base_url + endpoint
         if not self.proxy:
-            headers = self._build_headers(endpoint, api_version, data)
-            headers = {**headers, **self.headers}
+            if topup and self.topup_key:
+                api_key = self.topup_key
+            else:
+                api_key = self.api_key
+            headers = self._build_headers(api_key, endpoint, api_version, data)
             response = self.session.request(
                 method, url, headers=headers, json=data, **kwargs
             )
@@ -82,15 +98,16 @@ class Client:
     def account(self):
         return Account(**self.get('/account'))
 
+    @staticmethod
     def _build_headers(
-        self, endpoint: str, api_version: str, data: dict
+        api_key: ApiKey, endpoint: str, api_version: str, data: dict
     ) -> dict:
         headers = [('Accept', f'application/vnd.regalii.v{api_version}+json')]
         headers.append(compute_md5_header(data))
         headers.append(compute_date_header())
         headers.append(
             compute_auth_header(
-                headers, endpoint, self.api_key, self.secret_key
+                headers, endpoint, api_key.user, api_key.secret
             )
         )
         return dict(headers)

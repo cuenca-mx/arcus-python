@@ -2,7 +2,7 @@ from importlib.machinery import SourceFileLoader
 
 from setuptools import setup
 
-version = SourceFileLoader('version', 'stpmex/version.py').load_module()
+version = SourceFileLoader('version', 'arcus/version.py').load_module()
 
 test_requires = ['pytest', 'pytest-vcr', 'pycodestyle', 'pytest-cov',
                  'black', 'isort[pipfile]']
