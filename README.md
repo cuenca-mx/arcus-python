@@ -54,8 +54,8 @@ bill = client.bills.create(40, '501000000007')
 # pay bill
 transaction = bill.pay()
 
-# show transaction
-transaction = client.transactions.get(transaction.id)
+# refresh transaction
+transaction.refresh()
 
 # cancel transaction
 cancellation = transaction.cancel()
