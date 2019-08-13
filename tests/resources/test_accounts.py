@@ -7,9 +7,9 @@ from arcus.resources import Account
 @pytest.mark.vcr
 def test_get_account_info(client):
     accounts = client.accounts
-    assert type(accounts) is list
-    assert len(accounts) == 2
-    for account in accounts:
+    assert type(accounts) is dict
+    assert set(accounts.keys()) == {'primary', 'topup'}
+    for account in accounts.values():
         assert type(account) is Account
         assert account.currency == 'MXN'
         assert type(account.balance) is float

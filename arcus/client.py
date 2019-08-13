@@ -1,5 +1,5 @@
 import os
-from typing import List, Optional
+from typing import Dict, Optional
 
 import requests
 
@@ -95,10 +95,10 @@ class Client:
         return response.json()
 
     @property
-    def accounts(self) -> List[Account]:
-        accounts_ = [Account(**self.get('/account'))]
+    def accounts(self) -> Dict[str, Account]:
+        accounts_ = dict(primary=Account(**self.get('/account')))
         if self.topup_key:
-            accounts_.append(Account(**self.get('/account', topup=True)))
+            accounts_['topup'] = Account(**self.get('/account', topup=True))
         return accounts_
 
     @staticmethod
