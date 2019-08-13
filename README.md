@@ -61,11 +61,7 @@ transaction = client.transactions.get(transaction.id)
 cancellation = transaction.cancel()
 assert cancellation['code'] == 'R0'
 assert cancellation['message'] == 'Transaction successful'
-
-# verify cancellation
-updated_transaction = client.transactions.get(transaction.id)
-assert updated_transaction.id == transaction.id
-assert updated_transaction.status == 'refunded'
+assert transaction.status == 'refunded'
 ```
 
 ## Top-up
@@ -100,16 +96,3 @@ mx_biller_list = client.biller.list(country='MX', currency='MXN')
 
 # Get all billers with an specific biller_type
 electricity_biller_list = client.biller.list(biller_type='Electricity')
-
-
-```
-
-## Release to PyPi
-
-1. Update version in `setup.py`
-1. Commit changes to `setup.py` and push to `origin/master`
-1. `git tag -a <version> -m <release message>`
-1. `git push origin --tags`
-
-TravisCI will release the updated version to PyPi after verifying the tests
-pass.
