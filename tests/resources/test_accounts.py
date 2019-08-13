@@ -16,7 +16,7 @@ def test_get_account_info(client):
         assert account.balance > account.minimum_balance
 
 
-@pytest.mark.vcr
+@pytest.mark.skip
 def test_get_account_info_proxy(client_proxy):
     account = client_proxy.account
     assert type(account) is Account
@@ -25,7 +25,7 @@ def test_get_account_info_proxy(client_proxy):
     assert account.balance > account.minimum_balance
 
 
-@pytest.mark.vcr
+@pytest.mark.skip
 def test_post_method_proxy(client_proxy):
     with pytest.raises(Forbidden):
         client_proxy.post('/account', {})
