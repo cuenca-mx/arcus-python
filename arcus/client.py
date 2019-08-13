@@ -1,5 +1,5 @@
 import os
-from typing import Optional
+from typing import List, Optional
 
 import requests
 
@@ -95,8 +95,11 @@ class Client:
         return response.json()
 
     @property
-    def account(self):
-        return Account(**self.get('/account'))
+    def accounts(self) -> List[Account]:
+        accounts_ = [Account(**self.get('/account'))]
+        if self.topup_key:
+            accounts_.append(Account(**self.get('/account', topup=True)))
+        return accounts_
 
     @staticmethod
     def _build_headers(
