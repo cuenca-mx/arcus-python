@@ -105,7 +105,10 @@ class Client:
     def _build_headers(
         api_key: ApiKey, endpoint: str, api_version: str, data: dict
     ) -> dict:
-        headers = [('Accept', f'application/vnd.regalii.v{api_version}+json')]
+        headers = list()
+        headers.append(
+            ('Accept', f'application/vnd.regalii.v{api_version}+json')
+        )
         headers.append(compute_md5_header(data))
         headers.append(compute_date_header())
         headers.append(
