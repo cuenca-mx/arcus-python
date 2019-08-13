@@ -27,7 +27,8 @@ class Client:
         topup_user: Optional[str] = None,
         topup_secret: Optional[str] = None,
         sandbox: bool = False,
-        proxy: Optional[str] = None,  # Used in the case of a read-only proxy
+        # refers to: https://github.com/cuenca-mx/arcus-read-only
+        proxy: Optional[str] = None,
     ):
         self.headers = {}
         self.session = requests.Session()
