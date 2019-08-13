@@ -54,10 +54,7 @@ class Client:
             self.api_key = None
             self.topup_key = None
             self.base_url = proxy
-            if sandbox:
-                self.headers['X-ARCUS-SANDBOX'] = 'true'
-            else:
-                self.headers['X-ARCUS-SANDBOX'] = 'false'
+            self.headers['X-ARCUS-SANDBOX'] = str(sandbox).lower()
 
         Resource._client = self
 
