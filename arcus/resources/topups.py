@@ -61,7 +61,7 @@ class Topup(Resource):
             topup_dict = cls._client.post(
                 cls._endpoint, data, api_version=TOPUP_API_VERSION)
         except UnprocessableEntity as ex:
-            if ex.code == 'R5':
+            if ex.code in {'R2', 'R5'}:
                 raise InvalidAccountNumber(ex.code, account_number, biller_id)
             else:
                 raise

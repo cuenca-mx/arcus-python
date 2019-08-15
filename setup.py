@@ -24,7 +24,7 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
     name='arcus',
-    version='1.0.4',
+    version='1.0.5',
     author='Cuenca',
     author_email='dev@cuenca.com',
     description='Arcus API Client',
