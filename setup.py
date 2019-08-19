@@ -5,7 +5,7 @@ from setuptools import setup
 version = SourceFileLoader('version', 'arcus/version.py').load_module()
 
 test_requires = ['pytest', 'pytest-vcr', 'pycodestyle', 'pytest-cov',
-                 'black', 'isort[pipfile]']
+                 'black', 'isort[pipfile]', 'requests-mock']
 
 with open('README.md', 'r') as f:
     long_description = f.read()
