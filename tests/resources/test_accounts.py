@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 
 from arcus import Client
-from arcus.exc import Forbidden
+from arcus.exc import Forbidden, NotFound
 from arcus.resources import Account
 
 
@@ -45,3 +45,10 @@ def test_get_account_info_without_proxy():
         assert account.currency == 'MXN'
         assert type(account.balance) is float
         assert account.balance > account.minimum_balance
+
+
+@patch.dict('os.environ', {'TOPUP_API_KEY': '', 'TOPUP_SECRET_KEY': ''})
+def test_get_account_info_value_error_topup():
+    client = Client(sandbox=True)
+    with pytest.raises(NotFound):
+        client.accounts
