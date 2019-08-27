@@ -33,7 +33,7 @@ class Client:
         self.headers = {}
         self.session = requests.Session()
         self.sandbox = sandbox
-        self.proxy = proxy or os.environ['ARCUS_PROXY']
+        self.proxy = proxy or os.environ.get('ARCUS_PROXY')
         if not proxy:
             self.api_key = ApiKey(
                 primary_user or os.environ['ARCUS_API_KEY'],
