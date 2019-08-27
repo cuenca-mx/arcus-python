@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 
 from arcus import Client
-from arcus.exc import Forbidden, NotFound
+from arcus.exc import Forbidden
 from arcus.resources import Account
 
 
@@ -34,21 +34,14 @@ def test_post_method_proxy(client_proxy):
         client_proxy.post('/account', {})
 
 
-@patch.dict('os.environ', {'ARCUS_PROXY': ''})
-def test_get_account_info_without_proxy():
-    client_without_proxy = Client(sandbox=True)
-    accounts = client_without_proxy.accounts
+@patch.dict('os.environ', {'TOPUP_API_KEY': '', 'TOPUP_SECRET_KEY': ''})
+def test_get_account_info_value_error_topup():
+    client = Client(sandbox=True)
+    accounts = client.accounts
     assert type(accounts) is dict
-    assert set(accounts.keys()) == {'primary', 'topup'}
+    assert set(accounts.keys()) == {'primary'}
     for account in accounts.values():
         assert type(account) is Account
         assert account.currency == 'MXN'
         assert type(account.balance) is float
         assert account.balance > account.minimum_balance
-
-
-@patch.dict('os.environ', {'TOPUP_API_KEY': '', 'TOPUP_SECRET_KEY': ''})
-def test_get_account_info_value_error_topup():
-    client = Client(sandbox=True)
-    with pytest.raises(NotFound):
-        client.accounts

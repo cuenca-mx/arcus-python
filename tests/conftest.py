@@ -5,8 +5,6 @@ import requests_mock
 
 from arcus import Client
 
-PROXY = os.environ['ARCUS_PROXY']
-
 
 @pytest.fixture
 def client():
@@ -15,8 +13,9 @@ def client():
 
 @pytest.fixture
 def client_proxy():
+    proxy = os.environ['ARCUS_PROXY']
     with requests_mock.mock() as m:
-        m.get(f'{PROXY}/account', json=dict(
+        m.get(f'{proxy}/account', json=dict(
             name='Cuenca',
             balance=60454.43,
             minimum_balance=0.0,
@@ -24,10 +23,10 @@ def client_proxy():
         )
         )
         m.post(
-            f'{PROXY}/account',
+            f'{proxy}/account',
             json=dict(
                 message='Missing Authentication Token'
             ),
             status_code=403
         )
-        yield Client(sandbox=True, proxy=PROXY)
+        yield Client(sandbox=True, proxy=proxy)
