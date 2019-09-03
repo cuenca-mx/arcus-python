@@ -57,7 +57,7 @@ def test_pay_with_int_amount(client):
 
 @pytest.mark.vcr
 def test_unexpected_error(client):
-    with pytest.raises(exc.UnprocessableEntity) as excinfo:
+    with pytest.raises(exc.UnexpectedError) as excinfo:
         client.bills.create(6900, '1111362009')
     e = excinfo.value
     assert e.code == 'R9'
@@ -112,7 +112,7 @@ def test_consult_error(client):
 
 @pytest.mark.vcr
 def test_biller_maintenance(client):
-    with pytest.raises(exc.UnprocessableEntity) as excinfo:
+    with pytest.raises(exc.BillerMaintenance) as excinfo:
         client.bills.create(1821, '1111992022')
     e = excinfo.value
     assert e.code == 'R22'
@@ -185,3 +185,24 @@ def test_incomplete_amount(client):
         ex.message
         == 'Incomplete payment amount of 549.0, must pay full balance'
     )
+
+
+@pytest.mark.vcr
+def test_missing_parameters(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.InvalidOrMissingParameters) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.code == 'R13')
+    assert (ex.message == 'Invalid or missing parameters')
+
+
+@pytest.mark.vcr
+def test_limit_payments(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.DailyPaymentsLimit) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.code == 'R45')
+    assert (ex.message ==
+            'The maximum number of payments on this day was reached')
