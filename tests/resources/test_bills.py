@@ -124,7 +124,7 @@ def test_biller_maintenance(client):
 @pytest.mark.vcr
 def test_timeout_on_payment(client):
     bill = client.bills.create(37, '2424240024')
-    with pytest.raises(exc.UnprocessableEntity) as excinfo:
+    with pytest.raises(exc.BillerConnection) as excinfo:
         bill.pay()
     e = excinfo.value
     assert e.code == 'R24'
@@ -206,3 +206,64 @@ def test_limit_payments(client):
     assert (ex.code == 'R45')
     assert (ex.message ==
             'The maximum number of payments on this day was reached')
+
+
+@pytest.mark.vcr
+def test_failed_consult(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.FailedConsult) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.code == 'R16')
+    assert (ex.message == 'Failed to make the consult, please try again later')
+
+
+@pytest.mark.vcr
+def test_invalid_balance(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.InvalidBalance) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.code == 'R15')
+    assert (ex.message == 'Account Balance is 0 or not enough')
+
+
+@pytest.mark.vcr
+def test_invalid_currency(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.InvalidCurrency) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.code == 'R34')
+    assert (ex.message == 'Invalid Currency')
+
+
+@pytest.mark.vcr
+def test_daily_limit(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.UnprocessableEntity) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.code == 'R45')
+    assert (ex.message ==
+            'The maximum number of payments on this day was reached')
+
+
+@pytest.mark.vcr
+def test_overdue_bill(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.OverdueBill) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.code == 'R27')
+    assert (ex.message == 'Overdue Bill')
+
+
+@pytest.mark.vcr
+def test_fraud_suspected(client):
+    bill = client.bills.create(40, '501000000007')
+    with pytest.raises(exc.UnprocessableEntity) as excinfo:
+        bill.pay()
+    ex = excinfo.value
+    assert (ex.code == 'R33')
+    assert (ex.message == 'Fraud suspected')

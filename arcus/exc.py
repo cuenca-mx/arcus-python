@@ -112,7 +112,7 @@ class InvalidOrMissingParameters(UnprocessableEntity):
 
 class InvalidBalance(UnprocessableEntity):
     def __init__(self, code: str):
-        message = f'Account Balance is 0 or not '
+        message = f'Account Balance is 0 or not enough'
         super().__init__(code, message)
 
 

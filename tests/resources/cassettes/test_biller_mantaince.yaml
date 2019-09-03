@@ -1,0 +1,96 @@
+interactions:
+- request:
+    body: '{"biller_id": 40, "account_number": "501000000007"}'
+    headers:
+      Accept:
+      - application/vnd.regalii.v3.1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - APIAuth 88879c1b066dc9aea6201f27be2bbba9:n+xr25eXooBAXAqLf1Zj2mXQs0M=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '51'
+      Content-MD5:
+      - PtZUYQ9bmh3ULNV0W7ZNdw==
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 03 Sep 2019 04:17:56 GMT
+      User-Agent:
+      - python-requests/2.21.0
+    method: POST
+    uri: https://api.casiregalii.com/bills
+  response:
+    body:
+      string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":"2019-09-03T00:00:00Z","balance":-10.0,"balance_currency":"MXN","balance_updated_at":"2019-09-03T04:17:56Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 03 Sep 2019 04:17:57 GMT
+      ETag:
+      - W/"1cf4ce7673830ce601ee8e1b56ca0bae"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Request-Id:
+      - 16e7ea07-a167-4219-8738-5721b061a38b
+      X-Runtime:
+      - '1.122868'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"amount": -10.0, "currency": "MXN"}'
+    headers:
+      Accept:
+      - application/vnd.regalii.v3.1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - APIAuth 88879c1b066dc9aea6201f27be2bbba9:FkDW1PC0trGzGaF+12z33mA7DGw=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '36'
+      Content-MD5:
+      - mg1MPY2yXLf8n26ugdpxLw==
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 03 Sep 2019 04:17:57 GMT
+      User-Agent:
+      - python-requests/2.21.0
+    method: POST
+    uri: https://api.casiregalii.com/bills/8390/pay
+  response:
+    body:
+      string: '{"code":"R22","message":"Biller maintenance in progress, please try again later"}'
+    headers:
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 03 Sep 2019 04:17:57 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Request-Id:
+      - f3f28a58-9030-46e1-86e9-a530b895500f
+      X-Runtime:
+      - '0.017811'
+    status:
+      code: 400
+      message: Bad Request
+version: 1
