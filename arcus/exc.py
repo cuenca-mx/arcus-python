@@ -31,6 +31,7 @@ class UnprocessableEntity(ArcusException):
     def __repr__(self):
         return (
             self.__class__.__name__
+            + '('
             + ', '.join(
                 [
                     f'{attr}={repr(value)}'
@@ -86,7 +87,8 @@ class DuplicatedPayment(UnprocessableEntity):
 class IncompleteAmount(UnprocessableEntity):
     def __init__(self, code: str, amount: float):
         message = (
-            f'Incomplete payment amount of {amount}, must pay full balance')
+            f'Incomplete payment amount of {amount}, must pay full balance'
+        )
         super().__init__(code, message, amount=amount)
 
 

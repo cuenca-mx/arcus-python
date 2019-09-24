@@ -1,39 +1,34 @@
-import setuptools
+from importlib.machinery import SourceFileLoader
 
-install_requirements = [
-    'requests>=2.21.0,<2.22.0',
-    'pytz==2018.9',
-    'iso8601>=0.1.12,<0.2.0',
-    'pydash>=4.7.4,<4.8.0'
-]
+from setuptools import setup
 
-# dataclasses is currently only builtin for 3.7. There is a backport on PyPi.
-# There may be an official backport in the future, which is why we don't just
-# check the python version.
-try:
-    import dataclasses
-except ModuleNotFoundError:
-    install_requirements.append('dataclasses')
+version = SourceFileLoader('version', 'arcus/version.py').load_module()
 
 test_requires = ['pytest', 'pytest-vcr', 'pycodestyle', 'pytest-cov',
-                 'black', 'isort[pipfile]']
+                 'black', 'isort[pipfile]', 'requests-mock']
 
 with open('README.md', 'r') as f:
     long_description = f.read()
 
 
-setuptools.setup(
+setup(
     name='arcus',
-    version='1.0.5',
+    version=version.__version__,
     author='Cuenca',
     author_email='dev@cuenca.com',
     description='Arcus API Client',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/cuenca-mx/arcus-python',
-    packages=setuptools.find_packages(),
+    packages=['arcus'],
     python_requires='>=3.6',
-    install_requires=install_requirements,
+    install_requires=[
+        'requests>=2.21.0,<2.22.0',
+        'pytz==2018.9',
+        'iso8601>=0.1.12,<0.2.0',
+        'pydash>=4.7.4,<4.8.0',
+        'dataclasses>=0.6;python_version<"3.7"'
+    ],
     setup_requires=['pytest-runner'],
     tests_require=test_requires,
     extras_require=dict(test=test_requires),

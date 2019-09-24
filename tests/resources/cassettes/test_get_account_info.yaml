@@ -22,11 +22,37 @@ interactions:
       Date: ['Fri, 15 Feb 2019 00:13:15 GMT']
       ETag: [W/"aa98852d8983d709f4ba4b8e3224fa08"]
       Strict-Transport-Security: [max-age=31536000]
-      Transfer-Encoding: [chunked]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
       X-Request-Id: [c81dfce9-d001-42c5-ba41-89bf062b2129]
       X-Runtime: ['0.013312']
       X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: '{}'
+    headers:
+      Accept: [application/vnd.regalii.v3.1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:cotI2ltlCE5PSLcZyp1Y/zFTJIM=']
+      Connection: [keep-alive]
+      Content-Length: ['2']
+      Content-MD5: [mZFLkyvTelC5g8XnyQrpOw==]
+      Content-Type: [application/json]
+      Date: ['Tue, 13 Aug 2019 01:41:50 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://api.casiregalii.com/account
+  response:
+    body: {string: '{"name":"Cuenca","balance":9946425.54,"minimum_balance":0.0,"currency":"MXN"}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 13 Aug 2019 01:41:50 GMT']
+      ETag: [W/"1b47de49cfb48c1c620bf72bbc5ce014"]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains]
+      Transfer-Encoding: [chunked]
+      X-Request-Id: [4c9cc4db-d035-4e87-9ffd-2327afb24aa3]
+      X-Runtime: ['0.012276']
     status: {code: 200, message: OK}
 version: 1
