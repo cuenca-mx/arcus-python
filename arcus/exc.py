@@ -224,7 +224,7 @@ class AccessDenied(UnprocessableEntity):
         super().__init__(code, message)
 
 
-def RaiseCustomArcusException(
+def raiseCustomArcusException(
         ex: UnprocessableEntity,
         account_number: str,
         biller_id: int,

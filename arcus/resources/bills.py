@@ -2,19 +2,8 @@ import datetime
 from dataclasses import dataclass, field
 from typing import ClassVar, Optional, Union
 
-from arcus.exc import (
-    AlreadyPaid,
-    DuplicatedPayment,
-    IncompleteAmount,
-    InvalidAccountNumber,
-    InvalidAmount,
-    InvalidBiller,
-    NotFound,
-    RecurrentPayments,
-    UnprocessableEntity,
-    UnexpectedError,
-    RaiseCustomArcusException
-)
+from arcus.exc import (InvalidBiller, NotFound, raiseCustomArcusException,
+                       UnprocessableEntity)
 
 from .base import Resource
 from .transactions import Transaction
@@ -52,7 +41,7 @@ class Bill(Resource):
         except NotFound:
             raise InvalidBiller(biller_id)
         except UnprocessableEntity as ex:
-            RaiseCustomArcusException(ex, account_number, biller_id)
+            raiseCustomArcusException(ex, account_number, biller_id)
         return cls(**bill_dict)
 
     def pay(self, amount: Optional[float] = None) -> Transaction:
@@ -67,6 +56,6 @@ class Bill(Resource):
                 f'{self._endpoint}/{self.id}/pay', data
             )
         except UnprocessableEntity as ex:
-            RaiseCustomArcusException(
+            raiseCustomArcusException(
                 ex, self.account_number, self.biller_id, amount)
         return Transaction(**transaction_dict)
