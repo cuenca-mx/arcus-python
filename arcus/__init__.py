@@ -1,2 +1,2 @@
-from . import client, exc
+from . import client, exc, resources
 from .client import Client
