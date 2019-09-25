@@ -6,7 +6,8 @@ import requests
 from .api_keys import ApiKey
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
 from .exc import Forbidden, InvalidAuth, NotFound, UnprocessableEntity
-from .resources import Account, Bill, Biller, Resource, Topup, Transaction
+from .resources import (Account, Bill, Biller, BillPayment, Resource,
+                        Transaction)
 
 API_VERSION = '3.1'
 PRODUCTION_API_URL = 'https://api.regalii.com'
@@ -17,7 +18,7 @@ class Client:
 
     bills = Bill
     billers = Biller
-    topups = Topup
+    bill_payments = BillPayment
     transactions = Transaction
 
     def __init__(

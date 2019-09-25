@@ -21,7 +21,7 @@ def test_get_account_info(client):
 def test_get_account_info_proxy(client_proxy):
     accounts = client_proxy.accounts
     assert type(accounts) is dict
-    assert set(accounts.keys()) == {'primary'}
+    assert set(accounts.keys()) == {'primary', 'topup'}
     for account in accounts.values():
         assert type(account) is Account
         assert account.currency == 'MXN'
