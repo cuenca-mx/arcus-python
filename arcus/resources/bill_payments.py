@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from typing import ClassVar, Optional
 
-from arcus.exc import raiseCustomArcusException, UnprocessableEntity
+from arcus.exc import raise_arcus_exception, UnprocessableEntity
 
 from .base import Resource
 
@@ -64,7 +64,7 @@ class BillPayment(Resource):
                 cls._endpoint, data, api_version=OLD_API_VERSION, topup=topup
             )
         except UnprocessableEntity as ex:
-            raiseCustomArcusException(ex, account_number, biller_id, amount)
+            raise_arcus_exception(ex, account_number, biller_id, amount)
         return BillPayment(**bill_payment_dict)
 
     @classmethod
