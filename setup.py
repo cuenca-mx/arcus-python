@@ -1,6 +1,6 @@
 from importlib.machinery import SourceFileLoader
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 version = SourceFileLoader('version', 'arcus/version.py').load_module()
 
@@ -20,7 +20,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/cuenca-mx/arcus-python',
-    packages=['arcus'],
+    packages=find_packages(),
     python_requires='>=3.6',
     install_requires=[
         'requests>=2.21.0,<2.22.0',
