@@ -48,7 +48,7 @@ class BillPayment(Resource):
             amount: float,
             currency: str = 'MXN',
             name_on_account: Optional[str] = None,
-            topup: bool = False
+            topup: bool = False  # if True, the topup creds will be used
     ):
         if not isinstance(amount, float):
             raise TypeError('amount must be a float')
