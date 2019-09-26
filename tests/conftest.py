@@ -24,15 +24,6 @@ def client_proxy():
                 currency='MXN',
             ),
         )
-        m.get(
-            f'{proxy}/account',
-            json=dict(
-                name='Cuenca Topup',
-                balance=60454.43,
-                minimum_balance=0.0,
-                currency='MXN',
-            ),
-        )
         m.post(
             f'{proxy}/account',
             json=dict(message='Missing Authentication Token'),

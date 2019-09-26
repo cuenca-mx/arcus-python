@@ -62,7 +62,6 @@ class Client:
             self.topup_key = None
             self.base_url = proxy
             self.headers['X-ARCUS-SANDBOX'] = str(sandbox).lower()
-
         Resource._client = self
 
     def get(self, endpoint: str, **kwargs) -> dict:
