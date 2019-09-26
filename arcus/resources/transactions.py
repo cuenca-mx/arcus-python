@@ -1,6 +1,6 @@
 import datetime
 from dataclasses import dataclass, field
-from typing import Union
+from typing import ClassVar, Union
 
 from arcus.exc import InvalidOperation, UnprocessableEntity
 
@@ -9,7 +9,7 @@ from .base import Resource
 
 @dataclass
 class Transaction(Resource):
-    _endpoint = '/transactions'
+    _endpoint: ClassVar[str] = '/transactions'
 
     id: int
     amount: float

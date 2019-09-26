@@ -38,4 +38,4 @@ release: clean
 		twine upload dist/*
 
 
-.PHONY: all install-test release test clean-pyc
+.PHONY: all install-test test format lint clean release

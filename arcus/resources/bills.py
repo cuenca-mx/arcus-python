@@ -1,6 +1,6 @@
 import datetime
 from dataclasses import dataclass, field
-from typing import Optional, Union
+from typing import ClassVar, Optional, Union
 
 from arcus.exc import (
     AlreadyPaid,
@@ -20,7 +20,7 @@ from .transactions import Transaction
 
 @dataclass
 class Bill(Resource):
-    _endpoint = '/bills'
+    _endpoint: ClassVar[str] = '/bills'
 
     id: int
     biller_id: int
