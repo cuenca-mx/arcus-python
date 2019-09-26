@@ -136,4 +136,4 @@ class Client:
         elif response.status_code == 403:
             raise Forbidden
         else:
-            response.raise_for_status()
+            response.raise_for_status()  # pragma: no cover

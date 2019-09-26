@@ -42,6 +42,6 @@ class Transaction(Resource):
             if ex.code in ['R26', 'R103']:
                 raise InvalidOperation(ex.code, self.id)
             else:
-                raise
+                raise  # pragma: no cover
         self.refresh()
         return resp

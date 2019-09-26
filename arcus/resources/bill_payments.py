@@ -67,7 +67,7 @@ class BillPayment(Resource):
             if ex.code in {'R2', 'R5'}:
                 raise InvalidAccountNumber(ex.code, account_number, biller_id)
             else:
-                raise
+                raise  # pragma: no cover
         return BillPayment(**bill_payment_dict)
 
     @classmethod
