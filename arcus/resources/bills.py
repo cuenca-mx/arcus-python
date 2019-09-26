@@ -2,9 +2,17 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Optional, Union
 
-from arcus.exc import (AlreadyPaid, DuplicatedPayment, IncompleteAmount,
-                       InvalidAccountNumber, InvalidAmount, InvalidBiller,
-                       NotFound, RecurrentPayments, UnprocessableEntity)
+from arcus.exc import (
+    AlreadyPaid,
+    DuplicatedPayment,
+    IncompleteAmount,
+    InvalidAccountNumber,
+    InvalidAmount,
+    InvalidBiller,
+    NotFound,
+    RecurrentPayments,
+    UnprocessableEntity,
+)
 
 from .base import Resource
 from .transactions import Transaction

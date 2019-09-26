@@ -3,7 +3,7 @@ PATH := ./venv/bin:${PATH}
 PYTHON=python3.7
 PROJECT=arcus
 isort = isort -rc -ac $(PROJECT) tests setup.py
-black = black -S -l 79 --target-version py36 $(PROJECT) tests setup.py
+black = black -S -l 79 --target-version py37 $(PROJECT) tests setup.py
 
 
 all: test
@@ -23,9 +23,9 @@ format:
 		$(black)
 
 lint:
+		flake8 $(PROJECT) tests setup.py
 		$(isort) --check-only
 		$(black) --check
-		flake8 $(PROJECT) tests setup.py
 
 clean:
 		find . -name '*.pyc' -exec rm -f {} +
