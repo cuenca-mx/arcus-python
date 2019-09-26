@@ -35,6 +35,7 @@ def test_post_method_proxy(client_proxy):
         client_proxy.post('/account', {})
 
 
+@pytest.mark.vcr
 @patch.dict('os.environ', {'TOPUP_API_KEY': '', 'TOPUP_SECRET_KEY': ''})
 def test_get_account_info_value_error_topup():
     client = Client(sandbox=True)
