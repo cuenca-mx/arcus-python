@@ -2,10 +2,9 @@ import datetime
 from dataclasses import dataclass, field
 from typing import Optional, Union
 
-from arcus.exc import (
-    AlreadyPaid, DuplicatedPayment, IncompleteAmount,
-    InvalidAccountNumber, InvalidAmount, InvalidBiller,
-    NotFound, RecurrentPayments, UnprocessableEntity)
+from arcus.exc import (AlreadyPaid, DuplicatedPayment, IncompleteAmount,
+                       InvalidAccountNumber, InvalidAmount, InvalidBiller,
+                       NotFound, RecurrentPayments, UnprocessableEntity)
 
 from .base import Resource
 from .transactions import Transaction
@@ -58,7 +57,8 @@ class Bill(Resource):
         data = dict(amount=amount, currency=self.balance_currency)
         try:
             transaction_dict = self._client.post(
-                f'{self._endpoint}/{self.id}/pay', data)
+                f'{self._endpoint}/{self.id}/pay', data
+            )
         except UnprocessableEntity as ex:
             if ex.code == 'R102':
                 raise InvalidAmount(ex.code, ex.message, amount=amount)

@@ -42,25 +42,26 @@ class BillPayment(Resource):
 
     @classmethod
     def create(
-            cls,
-            biller_id: int,
-            account_number: str,
-            amount: float,
-            currency: str = 'MXN',
-            name_on_account: Optional[str] = None,
-            topup: bool = False  # if True, the topup creds will be used
+        cls,
+        biller_id: int,
+        account_number: str,
+        amount: float,
+        currency: str = 'MXN',
+        name_on_account: Optional[str] = None,
+        topup: bool = False,  # if True, the topup creds will be used
     ):
         if not isinstance(amount, float):
             raise TypeError('amount must be a float')
-        data = dict(biller_id=biller_id,
-                    account_number=account_number,
-                    amount=amount,
-                    currency=currency,
-                    name_on_account=name_on_account)
+        data = dict(
+            biller_id=biller_id,
+            account_number=account_number,
+            amount=amount,
+            currency=currency,
+            name_on_account=name_on_account,
+        )
         try:
             bill_payment_dict = cls._client.post(
-                cls._endpoint, data, api_version=OLD_API_VERSION,
-                topup=topup
+                cls._endpoint, data, api_version=OLD_API_VERSION, topup=topup
             )
         except UnprocessableEntity as ex:
             if ex.code in {'R2', 'R5'}:
@@ -80,4 +81,5 @@ class BillPayment(Resource):
     def list(cls):
         raise NotImplementedError(
             f"{cls.__name__}.list() hasn't been implemented or isn't "
-            f'supported by the API.')
+            f'supported by the API.'
+        )

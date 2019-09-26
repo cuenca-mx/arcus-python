@@ -6,8 +6,10 @@ from arcus.exc import NotFound
 @pytest.mark.vcr
 def test_mexican_biller_list(client):
     biller_list = client.billers.list(country='MX', currency='MXN')
-    assert all(biller.country == 'MX' and
-               biller.currency == 'MXN' for biller in biller_list)
+    assert all(
+        biller.country == 'MX' and biller.currency == 'MXN'
+        for biller in biller_list
+    )
 
 
 @pytest.mark.vcr

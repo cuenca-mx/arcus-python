@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import patch
+
+import pytest
 
 from arcus import Client
 from arcus.exc import Forbidden

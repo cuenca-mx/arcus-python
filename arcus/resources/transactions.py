@@ -25,8 +25,9 @@ class Transaction(Resource):
 
     @classmethod
     def get(cls, transaction_id: Union[int, str]):
-        transaction_dict = (
-            cls._client.get(f'{cls._endpoint}?q[id_eq]={transaction_id}'))
+        transaction_dict = cls._client.get(
+            f'{cls._endpoint}?q[id_eq]={transaction_id}'
+        )
         return Transaction(**transaction_dict['transactions'][0])
 
     def refresh(self):

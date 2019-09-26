@@ -9,7 +9,9 @@ def test_bill_payment(client):
     biller_id = 13599
     account_number = '5599999999'
     amount = 100.0
-    bill_payment = client.bill_payments.create(biller_id, account_number, amount)
+    bill_payment = client.bill_payments.create(
+        biller_id, account_number, amount
+    )
     assert bill_payment.biller_id == biller_id
     assert bill_payment.account_number == account_number
     assert bill_payment.bill_amount == amount
@@ -49,8 +51,9 @@ def test_pay_invoice_with_name_on_account(client):
     account_number = '5599999999'
     amount = 578.0
     invoice_owner = 'Edward S. Burton'
-    bill_payment = client.bill_payments.create(biller_id, account_number, amount,
-                                 name_on_account=invoice_owner)
+    bill_payment = client.bill_payments.create(
+        biller_id, account_number, amount, name_on_account=invoice_owner
+    )
     assert bill_payment.biller_id == biller_id
     assert bill_payment.account_number == account_number
     assert bill_payment.bill_amount == amount

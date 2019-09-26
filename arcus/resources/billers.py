@@ -46,8 +46,9 @@ class Biller(Resource):
         billers = []
         for endpoint in ENDPOINTS:
             billers.extend(cls._list_for_endpoint(endpoint))
-        filtered_billers = [Biller(**biller_dict)
-                            for biller_dict in filter_(billers, filters)]
+        filtered_billers = [
+            Biller(**biller_dict) for biller_dict in filter_(billers, filters)
+        ]
         return filtered_billers
 
     @classmethod
