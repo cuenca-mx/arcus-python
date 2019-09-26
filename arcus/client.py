@@ -41,25 +41,25 @@ class Client:
         self.session = requests.Session()
         self.sandbox = sandbox
         self.proxy = proxy
-        if not proxy:
-            self.api_key = ApiKey(
-                primary_user or os.environ['ARCUS_API_KEY'],
-                primary_secret or os.environ['ARCUS_SECRET_KEY'],
+        self.api_key = ApiKey(
+            primary_user or os.environ['ARCUS_API_KEY'],
+            primary_secret or os.environ['ARCUS_SECRET_KEY'],
+        )
+
+        try:
+            self.topup_key = ApiKey(
+                topup_user or os.environ.get('TOPUP_API_KEY'),
+                topup_secret or os.environ.get('TOPUP_SECRET_KEY', ''),
             )
-            try:
-                self.topup_key = ApiKey(
-                    topup_user or os.environ.get('TOPUP_API_KEY'),
-                    topup_secret or os.environ.get('TOPUP_SECRET_KEY'),
-                )
-            except ValueError:
-                self.topup_key = None
+        except ValueError:
+            self.topup_key = None
+
+        if not proxy:
             if sandbox:
                 self.base_url = SANDBOX_API_URL
             else:
                 self.base_url = PRODUCTION_API_URL
         else:
-            self.api_key = None
-            self.topup_key = None
             self.base_url = proxy
             self.headers['X-ARCUS-SANDBOX'] = str(sandbox).lower()
         Resource._client = self
@@ -87,7 +87,11 @@ class Client:
                 api_key = self.api_key
             headers = self._build_headers(api_key, endpoint, api_version, data)
         else:
-            headers = {}  # Proxy is going to sign the request
+            if topup:
+                api_key = self.topup_key.user
+            else:
+                api_key = self.api_key.user
+            headers = {'X-ARCUS-API-KEY': api_key}
         response = self.session.request(
             method,
             url,
