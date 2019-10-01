@@ -1,7 +1,11 @@
 import json
 
-from arcus.auth import (base64_md5, calculate_checksum, compute_auth_header,
-                        compute_md5_header)
+from arcus.auth import (
+    base64_md5,
+    calculate_checksum,
+    compute_auth_header,
+    compute_md5_header,
+)
 
 ACCOUNT_INFO = dict(account_id=40, account_number='501000000007')
 ACCOUNT_INFO_MD5 = 'lxllA6QjrbEADpYJYMxl2w=='

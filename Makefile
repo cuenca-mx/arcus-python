@@ -2,6 +2,8 @@ SHELL := bash
 PATH := ./venv/bin:${PATH}
 PYTHON=python3.7
 PROJECT=arcus
+isort = isort -rc -ac $(PROJECT) tests setup.py
+black = black -S -l 79 --target-version py37 $(PROJECT) tests setup.py
 
 
 all: test
@@ -16,12 +18,14 @@ install-test:
 test: clean install-test lint
 		python setup.py test
 
-polish:
-		black -S -l 79 **/*.py
-		isort -rc --atomic **/*.py
+format:
+		$(isort)
+		$(black)
 
 lint:
-		pycodestyle setup.py $(PROJECT)/ tests/
+		flake8 $(PROJECT) tests setup.py
+		$(isort) --check-only
+		$(black) --check
 
 clean:
 		find . -name '*.pyc' -exec rm -f {} +
@@ -34,4 +38,4 @@ release: clean
 		twine upload dist/*
 
 
-.PHONY: all install-test release test clean-pyc
+.PHONY: all install-test test format lint clean release

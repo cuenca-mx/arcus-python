@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import patch
+
+import pytest
 
 from arcus import Client
 from arcus.exc import Forbidden
@@ -21,7 +22,7 @@ def test_get_account_info(client):
 def test_get_account_info_proxy(client_proxy):
     accounts = client_proxy.accounts
     assert type(accounts) is dict
-    assert set(accounts.keys()) == {'primary'}
+    assert set(accounts.keys()) == {'primary', 'topup'}
     for account in accounts.values():
         assert type(account) is Account
         assert account.currency == 'MXN'
@@ -34,6 +35,7 @@ def test_post_method_proxy(client_proxy):
         client_proxy.post('/account', {})
 
 
+@pytest.mark.vcr
 @patch.dict('os.environ', {'TOPUP_API_KEY': '', 'TOPUP_SECRET_KEY': ''})
 def test_get_account_info_value_error_topup():
     client = Client(sandbox=True)

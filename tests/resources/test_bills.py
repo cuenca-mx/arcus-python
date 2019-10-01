@@ -44,7 +44,7 @@ def test_amount_too_low(client):
     bill = client.bills.create(40, '501000000007')
     assert bill == client.bills.get(bill.id)
     with pytest.raises(exc.InvalidAmount):
-        bill.pay(.01)
+        bill.pay(0.01)
 
 
 @pytest.mark.vcr
@@ -87,7 +87,8 @@ def test_cancel_bill_fail(client):
         first_transaction.cancel()
     assert excinfo.value.code == 'R103'
     assert excinfo.value.message == (
-        f'Unable to cancel the transaction {first_transaction.id}')
+        f'Unable to cancel the transaction {first_transaction.id}'
+    )
 
     second_bill = client.bills.create(37, '7259047384')
     second_transaction = second_bill.pay(second_bill.balance)
@@ -95,7 +96,8 @@ def test_cancel_bill_fail(client):
         second_transaction.cancel()
     assert excinfo.value.code == 'R26'
     assert excinfo.value.message == (
-        f'Unable to cancel the transaction {second_transaction.id}')
+        f'Unable to cancel the transaction {second_transaction.id}'
+    )
 
 
 @pytest.mark.vcr
@@ -115,7 +117,8 @@ def test_biller_maintenance(client):
     e = excinfo.value
     assert e.code == 'R22'
     assert e.message == (
-        'Biller maintenance in progress, please try again later')
+        'Biller maintenance in progress, please try again later'
+    )
 
 
 @pytest.mark.vcr
@@ -178,5 +181,7 @@ def test_incomplete_amount(client):
     with pytest.raises(exc.IncompleteAmount) as excinfo:
         bill.pay()
     ex = excinfo.value
-    assert (ex.message ==
-            'Incomplete payment amount of 549.0, must pay full balance')
+    assert (
+        ex.message
+        == 'Incomplete payment amount of 549.0, must pay full balance'
+    )

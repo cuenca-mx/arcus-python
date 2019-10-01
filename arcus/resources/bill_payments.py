@@ -1,22 +1,21 @@
 import datetime
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import ClassVar, Optional
 
 from arcus.exc import InvalidAccountNumber, UnprocessableEntity
 
 from .base import Resource
 
 """
-Arcus API version 1.6 should be used in order to make top-up operations.
-It's because newer API versions don't support this kind of operations.
-https://www.arcusfi.com/api/v1_6/#pay
+Some of Arcus's billers don't support the new API version 3.1, which is why we
+have to use 1.6, the older version instead.
 """
-TOPUP_API_VERSION = '1.6'
+OLD_API_VERSION = '1.6'
 
 
 @dataclass
-class Topup(Resource):
-    _endpoint = '/bill/pay'
+class BillPayment(Resource):
+    _endpoint: ClassVar[str] = '/bill/pay'
 
     id: int
     biller_id: int
@@ -43,31 +42,33 @@ class Topup(Resource):
 
     @classmethod
     def create(
-            cls,
-            biller_id: int,
-            account_number: str,
-            amount: float,
-            currency: str = 'MXN',
-            name_on_account: Optional[str] = None
+        cls,
+        biller_id: int,
+        account_number: str,
+        amount: float,
+        currency: str = 'MXN',
+        name_on_account: Optional[str] = None,
+        topup: bool = False,  # if True, the topup creds will be used
     ):
         if not isinstance(amount, float):
             raise TypeError('amount must be a float')
-        data = dict(biller_id=biller_id,
-                    account_number=account_number,
-                    amount=amount,
-                    currency=currency,
-                    name_on_account=name_on_account)
+        data = dict(
+            biller_id=biller_id,
+            account_number=account_number,
+            amount=amount,
+            currency=currency,
+            name_on_account=name_on_account,
+        )
         try:
-            topup_dict = cls._client.post(
-                cls._endpoint, data, api_version=TOPUP_API_VERSION,
-                topup=True
+            bill_payment_dict = cls._client.post(
+                cls._endpoint, data, api_version=OLD_API_VERSION, topup=topup
             )
         except UnprocessableEntity as ex:
             if ex.code in {'R2', 'R5'}:
                 raise InvalidAccountNumber(ex.code, account_number, biller_id)
             else:
-                raise
-        return Topup(**topup_dict)
+                raise  # pragma: no cover
+        return BillPayment(**bill_payment_dict)
 
     @classmethod
     def get(cls, _):
@@ -80,4 +81,5 @@ class Topup(Resource):
     def list(cls):
         raise NotImplementedError(
             f"{cls.__name__}.list() hasn't been implemented or isn't "
-            f'supported by the API.')
+            f'supported by the API.'
+        )

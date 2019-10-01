@@ -1,6 +1,6 @@
 import datetime
 from dataclasses import dataclass, field
-from typing import Union
+from typing import ClassVar, Union
 
 from arcus.exc import InvalidOperation, UnprocessableEntity
 
@@ -9,7 +9,7 @@ from .base import Resource
 
 @dataclass
 class Transaction(Resource):
-    _endpoint = '/transactions'
+    _endpoint: ClassVar[str] = '/transactions'
 
     id: int
     amount: float
@@ -25,8 +25,9 @@ class Transaction(Resource):
 
     @classmethod
     def get(cls, transaction_id: Union[int, str]):
-        transaction_dict = (
-            cls._client.get(f'{cls._endpoint}?q[id_eq]={transaction_id}'))
+        transaction_dict = cls._client.get(
+            f'{cls._endpoint}?q[id_eq]={transaction_id}'
+        )
         return Transaction(**transaction_dict['transactions'][0])
 
     def refresh(self):
@@ -41,6 +42,6 @@ class Transaction(Resource):
             if ex.code in ['R26', 'R103']:
                 raise InvalidOperation(ex.code, self.id)
             else:
-                raise
+                raise  # pragma: no cover
         self.refresh()
         return resp

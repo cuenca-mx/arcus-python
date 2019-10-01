@@ -1,9 +1,11 @@
+from typing import ClassVar
+
 import iso8601
 
 
 class Resource:
-    _client = None
-    _endpoint: str
+    _client: ClassVar['arcus.Client']
+    _endpoint: ClassVar[str]
 
     def __post_init__(self):
         for attr, value in self.__dict__.items():

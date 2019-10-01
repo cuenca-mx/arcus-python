@@ -4,8 +4,15 @@ from setuptools import find_packages, setup
 
 version = SourceFileLoader('version', 'arcus/version.py').load_module()
 
-test_requires = ['pytest', 'pytest-vcr', 'pycodestyle', 'pytest-cov',
-                 'black', 'isort[pipfile]', 'requests-mock']
+test_requires = [
+    'pytest',
+    'pytest-vcr',
+    'pytest-cov',
+    'black',
+    'isort[pipfile]',
+    'flake8',
+    'requests-mock',
+]
 
 with open('README.md', 'r') as f:
     long_description = f.read()
@@ -27,7 +34,7 @@ setup(
         'pytz==2018.9',
         'iso8601>=0.1.12,<0.2.0',
         'pydash>=4.7.4,<4.8.0',
-        'dataclasses>=0.6;python_version<"3.7"'
+        'dataclasses>=0.6;python_version<"3.7"',
     ],
     setup_requires=['pytest-runner'],
     tests_require=test_requires,
@@ -38,5 +45,5 @@ setup(
         'Programming Language :: Python :: 3.7',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
-    ]
+    ],
 )

@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: '{"biller_id": 13599, "account_number": "5599999999", "amount": 100.0, "currency":
+      "MXN", "name_on_account": null}'
+    headers:
+      Accept: [application/vnd.regalii.v1.6+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:6mZ6BEic70aJF2XcSObDnE/8x6E=']
+      Connection: [keep-alive]
+      Content-Length: ['113']
+      Content-MD5: [gezFHl/YiK0K7SyixrATUQ==]
+      Content-Type: [application/json]
+      Date: ['Wed, 25 Sep 2019 23:47:50 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bill/pay
+  response:
+    body: {string: '{"id":81346,"external_id":null,"biller_id":13599,"account_number":"5599999999","bill_amount":100.0,"bill_amount_currency":"MXN","fx_rate":1.0,"bill_amount_usd":5.12,"bill_amount_chain_currency":100.0,"payment_transaction_fee":0.0,"payment_total_usd":5.12,"payment_total_chain_currency":100.0,"chain_earned":7.5,"chain_paid":92.5,"starting_balance":9938597.72,"ending_balance":9938505.22,"hours_to_fulfill":0,"sms_text":null,"created_at":"2019-09-25T23:47:51Z","bill_amount_local_currency":100.0,"local_currency":"MXN","ticket_text":"Pago
+        realizado exitosamente Auth: 1569455271"}'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 25 Sep 2019 23:47:51 GMT']
+      ETag: [W/"2446a1f328b3cfc7c984b8697b20835c"]
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains]
+      Transfer-Encoding: [chunked]
+      X-Request-Id: [be2a77aa-18c6-4fab-b2c6-d5c2570b69e6]
+      X-Runtime: ['0.072688']
+    status: {code: 201, message: Created}
+version: 1
