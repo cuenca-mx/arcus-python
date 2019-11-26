@@ -24,10 +24,10 @@ def test_get_account_info_proxy(client_proxy):
     assert type(accounts) is dict
     assert set(accounts.keys()) == {'primary', 'topup'}
     for account in accounts.values():
-        assert type(account) is Account
-        assert account.currency == 'MXN'
-        assert type(account.balance) is float
-        assert account.balance > account.minimum_balance
+        assert type(account) is dict
+        assert account['currency'] == 'MXN'
+        assert type(account['balance']) is float
+        assert account['balance'] > account['minimun_balance']
 
 
 def test_post_method_proxy(client_proxy):
