@@ -92,6 +92,7 @@ class Client:
             else:
                 api_key = self.api_key.user
             headers = {'X-ARCUS-API-KEY': api_key}
+            data = None
         response = self.session.request(
             method,
             url,
