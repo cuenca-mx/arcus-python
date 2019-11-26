@@ -21,13 +21,13 @@ def client_proxy():
                 primary=dict(
                     name='cuenca',
                     balance=63869.33,
-                    minimun_balance=0.0,
+                    minimum_balance=0.0,
                     currency='MXN',
                 ),
                 topup=dict(
                     name='cuenca-tae',
                     balance=69720.0,
-                    minimun_balance=0.0,
+                    minimum_balance=0.0,
                     currency='MXN',
                 ),
             ),
