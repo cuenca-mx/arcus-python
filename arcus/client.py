@@ -92,6 +92,8 @@ class Client:
             else:
                 api_key = self.api_key.user
             headers = {'X-ARCUS-API-KEY': api_key}
+            # GET request with Body is not allowed on CloudFront
+            data = None
         response = self.session.request(
             method,
             url,
