@@ -108,6 +108,8 @@ class Client:
     def accounts(self) -> Dict[str, Account]:
         if self.proxy:
             accounts_ = self.get('/account')
+            accounts_['primary'] = Account(**accounts_['primary'])
+            accounts_['topup'] = Account(**accounts_['topup'])
         else:
             accounts_ = dict(primary=Account(**self.get('/account')))
             if self.topup_key:
