@@ -106,9 +106,17 @@ class Client:
 
     @property
     def accounts(self) -> Dict[str, Account]:
-        accounts_ = dict(primary=Account(**self.get('/account')))
-        if self.topup_key:
-            accounts_['topup'] = Account(**self.get('/account', topup=True))
+        if self.proxy:
+            accounts_dict = self.get('/account')
+            accounts_ = {
+                key: Account(**val) for key, val in accounts_dict.items()
+            }
+        else:
+            accounts_ = dict(primary=Account(**self.get('/account')))
+            if self.topup_key:
+                accounts_['topup'] = Account(
+                    **self.get('/account', topup=True)
+                )
         return accounts_
 
     @staticmethod

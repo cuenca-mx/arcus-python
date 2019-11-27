@@ -19,6 +19,16 @@ def test_get_account_info(client):
         assert account.balance > account.minimum_balance
 
 
+@pytest.mark.vcr
+def test_get_topup_account_info(client_proxy):
+    accounts = client_proxy.get('/account', topup=True)
+    for account in accounts.values():
+        assert type(account) is dict
+        assert account['currency'] == 'MXN'
+        assert type(account['balance']) is float
+        assert account['balance'] > account['minimum_balance']
+
+
 def test_get_account_info_proxy(client_proxy):
     accounts = client_proxy.accounts
     assert type(accounts) is dict

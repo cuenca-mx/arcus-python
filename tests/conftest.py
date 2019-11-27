@@ -18,10 +18,18 @@ def client_proxy():
         m.get(
             f'{proxy}/account',
             json=dict(
-                name='Cuenca',
-                balance=60454.43,
-                minimum_balance=0.0,
-                currency='MXN',
+                primary=dict(
+                    name='cuenca',
+                    balance=63869.33,
+                    minimum_balance=0.0,
+                    currency='MXN',
+                ),
+                topup=dict(
+                    name='cuenca-tae',
+                    balance=69720.0,
+                    minimum_balance=0.0,
+                    currency='MXN',
+                ),
             ),
         )
         m.post(
