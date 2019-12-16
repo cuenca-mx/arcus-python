@@ -193,8 +193,8 @@ def test_missing_parameters(client):
     with pytest.raises(exc.InvalidOrMissingParameters) as excinfo:
         bill.pay()
     ex = excinfo.value
-    assert (ex.code == 'R13')
-    assert (ex.message == 'Invalid or missing parameters')
+    assert ex.code == 'R13'
+    assert ex.message == 'Invalid or missing parameters'
 
 
 @pytest.mark.vcr
@@ -203,9 +203,10 @@ def test_limit_payments(client):
     with pytest.raises(exc.DailyPaymentsLimit) as excinfo:
         bill.pay()
     ex = excinfo.value
-    assert (ex.code == 'R45')
-    assert (ex.message ==
-            'The maximum number of payments on this day was reached')
+    assert ex.code == 'R45'
+    assert (
+        ex.message == 'The maximum number of payments on this day was reached'
+    )
 
 
 @pytest.mark.vcr
@@ -214,8 +215,8 @@ def test_failed_consult(client):
     with pytest.raises(exc.FailedConsult) as excinfo:
         bill.pay()
     ex = excinfo.value
-    assert (ex.code == 'R16')
-    assert (ex.message == 'Failed to make the consult, please try again later')
+    assert ex.code == 'R16'
+    assert ex.message == 'Failed to make the consult, please try again later'
 
 
 @pytest.mark.vcr
@@ -224,8 +225,8 @@ def test_invalid_balance(client):
     with pytest.raises(exc.InvalidBalance) as excinfo:
         bill.pay()
     ex = excinfo.value
-    assert (ex.code == 'R15')
-    assert (ex.message == 'Account Balance is 0 or not enough')
+    assert ex.code == 'R15'
+    assert ex.message == 'Account Balance is 0 or not enough'
 
 
 @pytest.mark.vcr
@@ -234,8 +235,8 @@ def test_invalid_currency(client):
     with pytest.raises(exc.InvalidCurrency) as excinfo:
         bill.pay()
     ex = excinfo.value
-    assert (ex.code == 'R34')
-    assert (ex.message == 'Invalid Currency')
+    assert ex.code == 'R34'
+    assert ex.message == 'Invalid Currency'
 
 
 @pytest.mark.vcr
@@ -244,9 +245,10 @@ def test_daily_limit(client):
     with pytest.raises(exc.UnprocessableEntity) as excinfo:
         bill.pay()
     ex = excinfo.value
-    assert (ex.code == 'R45')
-    assert (ex.message ==
-            'The maximum number of payments on this day was reached')
+    assert ex.code == 'R45'
+    assert (
+        ex.message == 'The maximum number of payments on this day was reached'
+    )
 
 
 @pytest.mark.vcr
@@ -255,8 +257,8 @@ def test_overdue_bill(client):
     with pytest.raises(exc.OverdueBill) as excinfo:
         bill.pay()
     ex = excinfo.value
-    assert (ex.code == 'R27')
-    assert (ex.message == 'Overdue Bill')
+    assert ex.code == 'R27'
+    assert ex.message == 'Overdue Bill'
 
 
 @pytest.mark.vcr
@@ -265,5 +267,5 @@ def test_fraud_suspected(client):
     with pytest.raises(exc.UnprocessableEntity) as excinfo:
         bill.pay()
     ex = excinfo.value
-    assert (ex.code == 'R33')
-    assert (ex.message == 'Fraud suspected')
+    assert ex.code == 'R33'
+    assert ex.message == 'Fraud suspected'

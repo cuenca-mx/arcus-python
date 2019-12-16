@@ -1,6 +1,6 @@
 import pytest
 
-from arcus.exc import NotFound, BillerConnection
+from arcus.exc import BillerConnection, NotFound
 
 
 @pytest.mark.vcr

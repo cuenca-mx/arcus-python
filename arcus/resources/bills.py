@@ -2,8 +2,12 @@ import datetime
 from dataclasses import dataclass, field
 from typing import ClassVar, Optional, Union
 
-from arcus.exc import (InvalidBiller, NotFound, raise_arcus_exception,
-                       UnprocessableEntity)
+from arcus.exc import (
+    InvalidBiller,
+    NotFound,
+    UnprocessableEntity,
+    raise_arcus_exception,
+)
 
 from .base import Resource
 from .transactions import Transaction
@@ -57,5 +61,6 @@ class Bill(Resource):
             )
         except UnprocessableEntity as ex:
             raise_arcus_exception(
-                ex, self.account_number, self.biller_id, amount)
+                ex, self.account_number, self.biller_id, amount
+            )
         return Transaction(**transaction_dict)

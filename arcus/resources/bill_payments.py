@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from typing import ClassVar, Optional
 
-from arcus.exc import raise_arcus_exception, UnprocessableEntity
+from arcus.exc import UnprocessableEntity, raise_arcus_exception
 
 from .base import Resource
 

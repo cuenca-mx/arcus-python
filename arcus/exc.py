@@ -46,23 +46,25 @@ class UnprocessableEntity(ArcusException):
 
 
 class InvalidAccountNumber(UnprocessableEntity):
-    def __init__(self, account_number: str, biller_id: int,
-                 **kwargs):
+    def __init__(self, account_number: str, biller_id: int, **kwargs):
         message = (
             f'{account_number} is an invalid account_number for biller '
             f'{biller_id}'
         )
         super().__init__(
-            message=message, biller_id=biller_id,
-            account_number=account_number, **kwargs
+            message=message,
+            biller_id=biller_id,
+            account_number=account_number,
+            **kwargs,
         )
 
 
 class InvalidOperation(UnprocessableEntity):
     def __init__(self, transaction_id: Union[int, str], **kwargs):
         message = f'Unable to cancel the transaction {transaction_id}'
-        super().__init__(message=message, transaction_id=transaction_id,
-                         **kwargs)
+        super().__init__(
+            message=message, transaction_id=transaction_id, **kwargs
+        )
 
 
 class InvalidAmount(UnprocessableEntity):
@@ -78,7 +80,7 @@ class AlreadyPaid(UnprocessableEntity):
 
 
 class RecurrentPayments(UnprocessableEntity):
-    def __init__(self,  **kwargs):
+    def __init__(self, **kwargs):
         message = f'Recurrent payments enabled'
         super().__init__(message=message, **kwargs)
 
@@ -292,15 +294,17 @@ ARCUS_EXCEPTIONS = dict(
 
 
 def raise_arcus_exception(
-        ex: UnprocessableEntity,
-        account_number: Optional[str] = "",
-        biller_id: Optional[int] = 0,
-        amount: Optional[float] = 0,
-        transaction_id: Optional[Union[int, str]] = 0):
+    ex: UnprocessableEntity,
+    account_number: Optional[str] = "",
+    biller_id: Optional[int] = 0,
+    amount: Optional[float] = 0,
+    transaction_id: Optional[Union[int, str]] = 0,
+):
     exc = ARCUS_EXCEPTIONS[ex.code]
     raise exc(
         code=ex.code,
         account_number=account_number,
         biller_id=biller_id,
         amount=amount,
-        transaction_id=transaction_id)
+        transaction_id=transaction_id,
+    )
