@@ -52,9 +52,9 @@ class Biller(Resource):
         return filtered_billers
 
     @classmethod
-    def _list_for_endpoint(cls, endpoint: str) -> list:
+    def _list_for_endpoint(cls, endpoint: str) -> List:
         page = 1
-        billers = []
+        billers: List[Biller] = []
         while True:
             resp = cls._client.get(f'{cls._endpoint}/{endpoint}?page={page}')
             billers.extend(resp['billers'])

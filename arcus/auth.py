@@ -3,24 +3,25 @@ import json
 from base64 import b64encode
 from datetime import datetime
 from hashlib import md5, sha1
+from typing import Tuple
 
 import pytz
 
 CONTENT_TYPE = 'application/json'
 
 
-def compute_md5_header(data: dict) -> tuple:
-    data = json.dumps(data)
-    return 'Content-MD5', base64_md5(data)
+def compute_md5_header(data: dict) -> Tuple[str, str]:
+    data_str = json.dumps(data)
+    return 'Content-MD5', base64_md5(data_str)
 
 
-def compute_date_header() -> tuple:
+def compute_date_header() -> Tuple[str, str]:
     return 'Date', compute_timestamp()
 
 
 def compute_auth_header(
     headers: list, endpoint: str, api_key: str, secret_key: str
-) -> tuple:
+) -> Tuple[str, str]:
     verify_secret = calculate_checksum(endpoint, headers, secret_key)
     return 'Authorization', f'APIAuth {api_key}:{verify_secret}'
 
@@ -29,9 +30,9 @@ def calculate_checksum(endpoint: str, headers: list, secret_key: str) -> str:
     """
     Calculate checksum based on https://www.arcusfi.com/api/v3/#authentication
     """
-    headers = dict(headers)
-    content_md5 = headers['Content-MD5']
-    date = headers['Date']
+    headers_dict = dict(headers)
+    content_md5 = headers_dict['Content-MD5']
+    date = headers_dict['Date']
     verify_this = f'{CONTENT_TYPE},{content_md5},{endpoint},{date}'
     verify_secret = hmac.new(
         secret_key.encode('utf-8'), verify_this.encode('utf-8'), sha1

@@ -296,7 +296,7 @@ ARCUS_EXCEPTIONS = dict(
 def raise_arcus_exception(
     ex: UnprocessableEntity,
     account_number: Optional[str] = "",
-    biller_id: Optional[int] = 0,
+    biller_id: Union[int, str] = 0,
     amount: Optional[float] = 0,
     transaction_id: Optional[Union[int, str]] = 0,
 ):

@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 
 import requests
 
@@ -37,7 +37,7 @@ class Client:
         # refers to: https://github.com/cuenca-mx/arcus-read-only
         proxy: Optional[str] = None,
     ):
-        self.headers = {}
+        self.headers: Dict[str, str] = dict()
         self.session = requests.Session()
         self.sandbox = sandbox
         self.proxy = proxy
@@ -46,10 +46,11 @@ class Client:
             primary_secret or os.environ['ARCUS_SECRET_KEY'],
         )
 
+        self.topup_key: Optional[ApiKey]
         try:
             self.topup_key = ApiKey(
-                topup_user or os.environ.get('TOPUP_API_KEY'),
-                topup_secret or os.environ.get('TOPUP_SECRET_KEY', ''),
+                topup_user or os.environ.get('TOPUP_API_KEY') or '',
+                topup_secret or os.environ.get('TOPUP_SECRET_KEY') or '',
             )
         except ValueError:
             self.topup_key = None
@@ -80,6 +81,7 @@ class Client:
         **kwargs,
     ) -> dict:
         url = self.base_url + endpoint
+        api_key: Union[str, ApiKey]
         if not self.proxy:
             if topup and self.topup_key:
                 api_key = self.topup_key
@@ -87,18 +89,18 @@ class Client:
                 api_key = self.api_key
             headers = self._build_headers(api_key, endpoint, api_version, data)
         else:
-            if topup:
+            if topup and self.topup_key:
                 api_key = self.topup_key.user
             else:
                 api_key = self.api_key.user
             headers = {'X-ARCUS-API-KEY': api_key}
             # GET request with Body is not allowed on CloudFront
-            data = None
+            data = dict()
         response = self.session.request(
             method,
             url,
             headers={**self.headers, **headers},
-            json=data,
+            json=data if data else None,
             **kwargs,
         )
         self._check_response(response)

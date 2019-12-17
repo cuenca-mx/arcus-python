@@ -1,11 +1,15 @@
-from typing import ClassVar
+from typing import ClassVar, List
 
 import iso8601
 
 
 class Resource:
-    _client: ClassVar['arcus.Client']
+    _client: ClassVar['arcus.Client']  # type: ignore
     _endpoint: ClassVar[str]
+
+    # Just for mypy
+    def __init__(self, *_, **__):  # pragma: no cover
+        ...  # pragma: no cover
 
     def __post_init__(self):
         for attr, value in self.__dict__.items():
@@ -20,7 +24,7 @@ class Resource:
         return cls(**obj_dict)
 
     @classmethod
-    def list(cls) -> list:
+    def list(cls) -> List:
         type_ = cls._endpoint[1:]
         obj_dicts = cls._client.get(cls._endpoint)[type_]
         objs = [cls(**obj_dict) for obj_dict in obj_dicts]

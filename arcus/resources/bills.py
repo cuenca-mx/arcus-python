@@ -45,7 +45,7 @@ class Bill(Resource):
         except NotFound:
             raise InvalidBiller(biller_id)
         except UnprocessableEntity as ex:
-            raise_arcus_exception(ex, account_number, biller_id)
+            raise_arcus_exception(ex, account_number, int(biller_id))
         return cls(**bill_dict)
 
     def pay(self, amount: Optional[float] = None) -> Transaction:
