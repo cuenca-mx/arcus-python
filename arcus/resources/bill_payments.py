@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from typing import ClassVar, Optional
 
-from arcus.exc import InvalidAccountNumber, UnprocessableEntity
+from arcus.exc import UnprocessableEntity, raise_arcus_exception
 
 from .base import Resource
 
@@ -64,10 +64,7 @@ class BillPayment(Resource):
                 cls._endpoint, data, api_version=OLD_API_VERSION, topup=topup
             )
         except UnprocessableEntity as ex:
-            if ex.code in {'R2', 'R5'}:
-                raise InvalidAccountNumber(ex.code, account_number, biller_id)
-            else:
-                raise  # pragma: no cover
+            raise_arcus_exception(ex, account_number, biller_id, amount)
         return BillPayment(**bill_payment_dict)
 
     @classmethod

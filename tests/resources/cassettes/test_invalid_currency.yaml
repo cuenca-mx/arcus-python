@@ -1,0 +1,96 @@
+interactions:
+- request:
+    body: '{"biller_id": 40, "account_number": "501000000007"}'
+    headers:
+      Accept:
+      - application/vnd.regalii.v3.1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - APIAuth 88879c1b066dc9aea6201f27be2bbba9:HEoAwTUYSL6G72N/G/lpBO3wbhA=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '51'
+      Content-MD5:
+      - PtZUYQ9bmh3ULNV0W7ZNdw==
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 03 Sep 2019 05:10:44 GMT
+      User-Agent:
+      - python-requests/2.21.0
+    method: POST
+    uri: https://api.casiregalii.com/bills
+  response:
+    body:
+      string: '{"type":"bill","id":8390,"biller_id":40,"account_number":"501000000007","name_on_account":null,"due_date":"2019-09-03T00:00:00Z","balance":-10.0,"balance_currency":"MXN","balance_updated_at":"2019-09-03T05:10:44Z","error_code":null,"error_message":null,"status":"linked","migrated_at":null,"mfa_challenges":[]}'
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 03 Sep 2019 05:10:45 GMT
+      ETag:
+      - W/"1939ba9cf82b258e40731ca98b76e937"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Request-Id:
+      - 6ced5399-e131-4363-8c97-c312d69241b8
+      X-Runtime:
+      - '1.065444'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"amount": -10.0, "currency": "MXN"}'
+    headers:
+      Accept:
+      - application/vnd.regalii.v3.1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - APIAuth 88879c1b066dc9aea6201f27be2bbba9:wD9DwI4Hl+agTXAoueoZAKBk+KE=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '36'
+      Content-MD5:
+      - mg1MPY2yXLf8n26ugdpxLw==
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 03 Sep 2019 05:10:46 GMT
+      User-Agent:
+      - python-requests/2.21.0
+    method: POST
+    uri: https://api.casiregalii.com/bills/8390/pay
+  response:
+    body:
+      string: '{"code":"R34","message":"Invalid Currency"}'
+    headers:
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 03 Sep 2019 05:10:46 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      X-Request-Id:
+      - 76d78f8d-6a70-42dd-8dc4-65f9d71536e4
+      X-Runtime:
+      - '0.019092'
+    status:
+      code: 400
+      message: Bad Request
+version: 1

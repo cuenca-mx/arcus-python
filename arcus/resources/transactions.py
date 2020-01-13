@@ -2,7 +2,7 @@ import datetime
 from dataclasses import dataclass, field
 from typing import ClassVar, Union
 
-from arcus.exc import InvalidOperation, UnprocessableEntity
+from arcus.exc import UnprocessableEntity, raise_arcus_exception
 
 from .base import Resource
 
@@ -39,9 +39,6 @@ class Transaction(Resource):
         try:
             resp = self._client.post('/transaction/cancel', dict(id=self.id))
         except UnprocessableEntity as ex:
-            if ex.code in ['R26', 'R103']:
-                raise InvalidOperation(ex.code, self.id)
-            else:
-                raise  # pragma: no cover
+            raise_arcus_exception(ex, transaction_id=self.id)
         self.refresh()
         return resp

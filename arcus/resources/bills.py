@@ -3,15 +3,10 @@ from dataclasses import dataclass, field
 from typing import ClassVar, Optional, Union
 
 from arcus.exc import (
-    AlreadyPaid,
-    DuplicatedPayment,
-    IncompleteAmount,
-    InvalidAccountNumber,
-    InvalidAmount,
     InvalidBiller,
     NotFound,
-    RecurrentPayments,
     UnprocessableEntity,
+    raise_arcus_exception,
 )
 
 from .base import Resource
@@ -50,10 +45,7 @@ class Bill(Resource):
         except NotFound:
             raise InvalidBiller(biller_id)
         except UnprocessableEntity as ex:
-            if ex.code in {'R1', 'R2', 'R29'}:
-                raise InvalidAccountNumber(ex.code, account_number, biller_id)
-            else:
-                raise
+            raise_arcus_exception(ex, account_number, int(biller_id))
         return cls(**bill_dict)
 
     def pay(self, amount: Optional[float] = None) -> Transaction:
@@ -68,16 +60,7 @@ class Bill(Resource):
                 f'{self._endpoint}/{self.id}/pay', data
             )
         except UnprocessableEntity as ex:
-            if ex.code == 'R102':
-                raise InvalidAmount(ex.code, ex.message, amount=amount)
-            elif ex.code in {'R3', 'R11', 'R41'}:
-                raise IncompleteAmount(ex.code, amount=amount)
-            elif ex.code == 'R7':
-                raise RecurrentPayments(ex.code)
-            elif ex.code == 'R36':
-                raise DuplicatedPayment(ex.code, amount=amount)
-            elif ex.code in {'R12', 'R8'}:
-                raise AlreadyPaid(ex.code)
-            else:
-                raise
+            raise_arcus_exception(
+                ex, self.account_number, self.biller_id, amount
+            )
         return Transaction(**transaction_dict)

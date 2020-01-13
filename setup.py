@@ -12,6 +12,7 @@ test_requires = [
     'isort[pipfile]',
     'flake8',
     'requests-mock',
+    'mypy',
 ]
 
 with open('README.md', 'r') as f:
