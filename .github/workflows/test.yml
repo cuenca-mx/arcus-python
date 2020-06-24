@@ -10,7 +10,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: '3.8'
+          python-version: '3.7'
       - name: Install dependencies
         run: make install-test
       - name: Lint
@@ -23,7 +23,7 @@ jobs:
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
-        python-version: 3.8
+        python-version: 3.7
     - name: Install dependencies
       run: |
         cp env.template .env
@@ -39,7 +39,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@master
         with:
-          python-version: 3.8
+          python-version: 3.7
       - name: Install dependencies
         run: |
           make install-test
