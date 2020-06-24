@@ -29,5 +29,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: make install-test
+    - name: Copy env variables
+      run: cp env.template .env
     - name: Run tests
       run: pytest
