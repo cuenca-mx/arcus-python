@@ -10,7 +10,7 @@ test_requires = [
     'pytest-cov==2.10.0',
     'black==19.10b0',
     'isort[pipfile]==4.3.21',
-    'flake8==3.8.3',
+    'flake8==3.8.1',
     'mypy==0.782',
     'requests-mock==1.8.0',
 ]

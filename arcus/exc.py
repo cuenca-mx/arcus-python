@@ -75,13 +75,13 @@ class InvalidAmount(UnprocessableEntity):
 
 class AlreadyPaid(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Payment already made'
+        message = 'Payment already made'
         super().__init__(message=message, **kwargs)
 
 
 class RecurrentPayments(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Recurrent payments enabled'
+        message = 'Recurrent payments enabled'
         super().__init__(message=message, **kwargs)
 
 
@@ -105,127 +105,127 @@ class Forbidden(ArcusException):
 
 class UnexpectedError(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Unexpected error. Failed to make the consult'
+        message = 'Unexpected error. Failed to make the consult'
         super().__init__(message=message, **kwargs)
 
 
 class InvalidOrMissingParameters(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Invalid or missing parameters'
+        message = 'Invalid or missing parameters'
         super().__init__(message=message, **kwargs)
 
 
 class InvalidBalance(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Account Balance is 0 or not enough'
+        message = 'Account Balance is 0 or not enough'
         super().__init__(message=message, **kwargs)
 
 
 class FailedConsult(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Failed to make the consult, please try again later'
+        message = 'Failed to make the consult, please try again later'
         super().__init__(message=message, **kwargs)
 
 
 class LimitExceeded(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Limit of transactions exceeded'
+        message = 'Limit of transactions exceeded'
         super().__init__(message=message, **kwargs)
 
 
 class BillerMaintenance(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Biller maintenance in progress, please try again later'
+        message = 'Biller maintenance in progress, please try again later'
         super().__init__(message=message, **kwargs)
 
 
 class ReversalNotSupported(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Reversal not supported'
+        message = 'Reversal not supported'
         super().__init__(message=message, **kwargs)
 
 
 class BillerConnection(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Timeout from biller'
+        message = 'Timeout from biller'
         super().__init__(message=message, **kwargs)
 
 
 class CancellationError(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Error with performing the cancellation'
+        message = 'Error with performing the cancellation'
         super().__init__(message=message, **kwargs)
 
 
 class OverdueBill(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Overdue Bill'
+        message = 'Overdue Bill'
         super().__init__(message=message, **kwargs)
 
 
 class InvalidPhone(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Invalid Phone Number'
+        message = 'Invalid Phone Number'
         super().__init__(message=message, **kwargs)
 
 
 class FraudSuspected(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Fraud suspected'
+        message = 'Fraud suspected'
         super().__init__(message=message, **kwargs)
 
 
 class InvalidCurrency(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Invalid Currency'
+        message = 'Invalid Currency'
         super().__init__(message=message, **kwargs)
 
 
 class InvalidCompany(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Invalid company'
+        message = 'Invalid company'
         super().__init__(message=message, **kwargs)
 
 
 class InvalidBarCode(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Invalid Barcode Format.'
+        message = 'Invalid Barcode Format.'
         super().__init__(message=message, **kwargs)
 
 
 class InvalidCustomerStatus(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Invalid Customer Status.'
+        message = 'Invalid Customer Status.'
         super().__init__(message=message, **kwargs)
 
 
 class DailyPaymentsLimit(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'The maximum number of payments on this day was reached'
+        message = 'The maximum number of payments on this day was reached'
         super().__init__(message=message, **kwargs)
 
 
 class BalanceNotFound(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Can\'t get balance.'
+        message = 'Can\'t get balance.'
         super().__init__(message=message, **kwargs)
 
 
 class InvalidSubscription(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Invalid Subscription ID. Verify the ID or create a new'
+        message = 'Invalid Subscription ID. Verify the ID or create a new'
         super().__init__(message=message, **kwargs)
 
 
 class InvalidPOS(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'POS number is invalid'
+        message = 'POS number is invalid'
         super().__init__(message=message, **kwargs)
 
 
 class AccessDenied(UnprocessableEntity):
     def __init__(self, **kwargs):
-        message = f'Processor Access Denied'
+        message = 'Processor Access Denied'
         super().__init__(message=message, **kwargs)
 
 
