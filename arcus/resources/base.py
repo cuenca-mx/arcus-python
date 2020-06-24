@@ -2,6 +2,8 @@ from typing import ClassVar, List
 
 import iso8601
 
+import arcus
+
 
 class Resource:
     _client: ClassVar['arcus.Client']  # type: ignore
