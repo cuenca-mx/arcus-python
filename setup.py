@@ -5,19 +5,18 @@ from setuptools import find_packages, setup
 version = SourceFileLoader('version', 'arcus/version.py').load_module()
 
 test_requires = [
-    'pytest',
+    'pytest==5.4.3',
     'pytest-vcr',
-    'pytest-cov',
-    'black',
-    'isort[pipfile]',
-    'flake8',
-    'requests-mock',
-    'mypy',
+    'pytest-cov==2.10.0',
+    'black==19.10b0',
+    'isort[pipfile]==4.3.21',
+    'flake8==3.8.3',
+    'mypy==0.782',
+    'requests-mock==1.8.0',
 ]
 
 with open('README.md', 'r') as f:
     long_description = f.read()
-
 
 setup(
     name='arcus',
