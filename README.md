@@ -1,6 +1,6 @@
 # arcus-python
-[![Build Status](https://travis-ci.com/cuenca-mx/arcus-python.svg?branch=master)](https://travis-ci.com/cuenca-mx/arcus-python)
-[![Coverage Status](https://coveralls.io/repos/github/cuenca-mx/arcus-python/badge.svg?branch=master)](https://coveralls.io/github/cuenca-mx/arcus-python?branch=master)
+[![test](https://github.com/cuenca-mx/arcus-python/workflows/test/badge.svg)](https://github.com/cuenca-mx/arcus-python/actions?query=workflow%3Atest)
+[![codecov](https://codecov.io/gh/cuenca-mx/arcus-python/branch/master/graph/badge.svg)](https://codecov.io/gh/cuenca-mx/arcus-python)
 [![PyPI](https://img.shields.io/pypi/v/arcus.svg)](https://pypi.org/project/arcus/)
 
 
