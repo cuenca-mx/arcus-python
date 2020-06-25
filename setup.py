@@ -31,7 +31,7 @@ setup(
     python_requires='>=3.6',
     install_requires=[
         'requests==2.21.0',
-        'pytz==2018.9',
+        'pytz==2020.1',
         'iso8601==0.1.12',
         'pydash==4.7.4',
         'dataclasses>=0.6;python_version<"3.7"',
