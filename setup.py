@@ -33,7 +33,7 @@ setup(
         'requests==2.21.0',
         'pytz==2018.9',
         'iso8601==0.1.12',
-        'pydash==4.7.4',
+        'pydash==4.8.0',
         'dataclasses>=0.6;python_version<"3.7"',
     ],
     setup_requires=['pytest-runner'],
