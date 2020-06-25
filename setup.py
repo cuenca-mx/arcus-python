@@ -6,7 +6,7 @@ version = SourceFileLoader('version', 'arcus/version.py').load_module()
 
 test_requires = [
     'pytest==5.4.3',
-    'pytest-vcr',
+    'pytest-vcr==1.0.2',
     'pytest-cov==2.10.0',
     'black==19.10b0',
     'isort[pipfile]==4.3.21',
@@ -30,10 +30,10 @@ setup(
     packages=find_packages(),
     python_requires='>=3.6',
     install_requires=[
-        'requests>=2.21.0,<2.22.0',
+        'requests==2.21.0',
         'pytz==2018.9',
-        'iso8601>=0.1.12,<0.2.0',
-        'pydash>=4.7.4,<4.8.0',
+        'iso8601==0.1.12',
+        'pydash==4.7.4',
         'dataclasses>=0.6;python_version<"3.7"',
     ],
     setup_requires=['pytest-runner'],
