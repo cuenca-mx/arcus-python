@@ -2,13 +2,12 @@ import datetime
 from dataclasses import dataclass, field
 from typing import ClassVar, Optional, Union
 
-from arcus.exc import (
+from ..exc import (
     InvalidBiller,
     NotFound,
     UnprocessableEntity,
     raise_arcus_exception,
 )
-
 from .base import Resource
 from .transactions import Transaction
 

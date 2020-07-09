@@ -3,8 +3,7 @@ from typing import List, Optional, Union
 
 from pydash import filter_
 
-from arcus.exc import NotFound
-
+from ..exc import NotFound
 from .base import Resource
 
 ENDPOINTS = ['topups', 'utilities']
