@@ -2,9 +2,10 @@
 [![test](https://github.com/cuenca-mx/arcus-python/workflows/test/badge.svg)](https://github.com/cuenca-mx/arcus-python/actions?query=workflow%3Atest)
 [![codecov](https://codecov.io/gh/cuenca-mx/arcus-python/branch/master/graph/badge.svg)](https://codecov.io/gh/cuenca-mx/arcus-python)
 [![PyPI](https://img.shields.io/pypi/v/arcus.svg)](https://pypi.org/project/arcus/)
+[![Downloads](https://pepy.tech/badge/arcus)](https://pepy.tech/project/arcus)
 
 
-Arcus python3.6 + 3.7 client library for API version 3.1 of [Arcus](https://www.arcusfi.com/).
+Arcus python3.6+ client library for API version 3.1 of [Arcus](https://www.arcusfi.com/).
 
 
 
