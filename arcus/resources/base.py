@@ -4,7 +4,7 @@ import iso8601
 
 
 class Resource:
-    _client: ClassVar['arcus.Client']  # type: ignore
+    _client: ClassVar['arcus.Client']  # type:ignore  # noqa:F821
     _endpoint: ClassVar[str]
 
     # Just for mypy
