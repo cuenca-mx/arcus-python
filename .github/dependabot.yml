@@ -3,7 +3,7 @@ updates:
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
     time: "08:00"
     timezone: "America/Mexico_City"
   open-pull-requests-limit: 5
@@ -13,7 +13,7 @@ updates:
 - package-ecosystem: pip
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
     time: "08:00"
     timezone: "America/Mexico_City"
   open-pull-requests-limit: 5
