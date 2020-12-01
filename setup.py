@@ -20,7 +20,7 @@ setup(
     packages=find_packages(),
     python_requires='>=3.6',
     install_requires=[
-        'requests>=2.21,<=2.22',
+        'requests>=2.21,<2.26',
         'pytz>=2020.1,<2020.5',
         'iso8601>=0.1,<=0.2',
         'pydash>=4.7,<=4.8',
