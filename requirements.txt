@@ -1,5 +1,5 @@
 requests==2.21.0
-pytz==2020.1
+pytz==2020.4
 iso8601==0.1.13
 pydash==4.7.4
 dataclasses==0.6
