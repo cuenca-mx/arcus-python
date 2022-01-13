@@ -23,7 +23,7 @@ setup(
         'requests>=2.21,<2.28',
         'pytz>=2020.1,<2021.4',
         'iso8601>=0.1,<1.1',
-        'pydash>=4.7,<4.10',
+        'pydash>=4.7,<5.2',
         'dataclasses>=0.6;python_version<"3.7"',
     ],
     classifiers=[
