@@ -4,7 +4,8 @@ updates:
   directory: "/"
   schedule:
     interval: weekly
-    time: "08:00"
+    day: "wednesday"
+    time: "10:00"
     timezone: "America/Mexico_City"
   open-pull-requests-limit: 5
   reviewers:
@@ -14,7 +15,8 @@ updates:
   directory: "/"
   schedule:
     interval: weekly
-    time: "08:00"
+    day: "wednesday"
+    time: "10:00"
     timezone: "America/Mexico_City"
   open-pull-requests-limit: 5
   reviewers:
