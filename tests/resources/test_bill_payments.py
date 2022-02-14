@@ -1,6 +1,6 @@
 import pytest
 
-from arcus.exc import InvalidAccountNumber
+from arcus.exc import InvalidAccountNumber, UnprocessableEntity
 from arcus.resources import BillPayment
 
 
@@ -34,6 +34,18 @@ def test_bill_payment_invalid_phone_number(client):
     account_number = '559999'
     amount = 100.0
     with pytest.raises(InvalidAccountNumber) as excinfo:
+        client.bill_payments.create(biller_id, account_number, amount)
+    exc = excinfo.value
+    assert exc.account_number == account_number
+    assert exc.biller_id == biller_id
+
+
+@pytest.mark.vcr
+def test_bill_payment_type_error(client):
+    biller_id = 13599
+    account_number = '559999'
+    amount = 100.0
+    with pytest.raises(UnprocessableEntity) as excinfo:
         client.bill_payments.create(biller_id, account_number, amount)
     exc = excinfo.value
     assert exc.account_number == account_number
