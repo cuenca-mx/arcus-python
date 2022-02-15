@@ -1,0 +1,29 @@
+interactions:
+- request:
+    body: '{"biller_id": 13599, "account_number": "559999", "amount": 100.0, "currency":
+      "MXN", "name_on_account": null}'
+    headers:
+      Accept: [application/vnd.regalii.v1.6+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: ['APIAuth 88879c1b066dc9aea6201f27be2bbba9:5ZV1v+AlHt7SGRwJ+RFD0tYRQr8=']
+      Connection: [keep-alive]
+      Content-Length: ['109']
+      Content-MD5: [U86ULvlq1wG/DVe1HygOkw==]
+      Content-Type: [application/json]
+      Date: ['Wed, 25 Sep 2019 23:47:50 GMT']
+      User-Agent: [python-requests/2.21.0]
+    method: POST
+    uri: https://api.casiregalii.com/bill/pay
+  response:
+    body: {string: '{"code":"R19","message":"Payments with this biller are currently unavailable","mode":"STAGING"}'}
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 25 Sep 2019 23:47:51 GMT']
+      Strict-Transport-Security: [max-age=31536000; includeSubDomains]
+      Transfer-Encoding: [chunked]
+      X-Request-Id: [7291a4fe-e4da-4133-9098-81dfb73df0e0]
+      X-Runtime: ['0.043308']
+    status: {code: 422, message: Unprocessable Entity}
+version: 1
