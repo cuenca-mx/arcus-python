@@ -12,7 +12,7 @@ class InvalidAuth(ArcusException):
 
 
 class InvalidBiller(ArcusException):
-    def __init__(self, biller_id: Union[int, str]):
+    def __init__(self, biller_id: Union[int, str], **kwargs):
         self.message = f'{biller_id} is an invalid biller_id'
 
 
@@ -248,7 +248,7 @@ ARCUS_EXCEPTIONS = dict(
     R16=FailedConsult,
     R17=InvalidAmount,
     R18=LimitExceeded,
-    R19=UnprocessableEntity,
+    R19=InvalidBiller,
     R20=InvalidBiller,
     R21=InvalidBiller,
     R22=BillerMaintenance,
