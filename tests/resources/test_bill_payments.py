@@ -1,6 +1,6 @@
 import pytest
 
-from arcus.exc import InvalidAccountNumber, InvalidBiller, UnprocessableEntity
+from arcus.exc import InvalidAccountNumber, InvalidBiller
 from arcus.resources import BillPayment
 
 
@@ -45,7 +45,7 @@ def test_bill_payment_type_error(client):
     biller_id = 13599
     account_number = '559999'
     amount = 100.0
-    with pytest.raises(InvalidBiller) as excinfo:
+    with pytest.raises(InvalidBiller):
         client.bill_payments.create(biller_id, account_number, amount)
 
 
