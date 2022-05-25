@@ -4,5 +4,5 @@ pytest-cov==3.0.*
 black==22.1.0
 isort==5.10.*
 flake8==4.0.*
-mypy==0.790
+mypy==0.960
 requests-mock==1.9.*
