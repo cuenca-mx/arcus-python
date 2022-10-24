@@ -7,7 +7,7 @@ from .api_keys import ApiKey
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
 from .exc import (
     Forbidden,
-    GatewayTimeout,
+    GatewayTimeOut,
     InvalidAuth,
     NotFound,
     UnprocessableEntity,
@@ -149,7 +149,7 @@ class Client:
         if response.ok:
             return
         if response.status_code == 504:
-            raise GatewayTimeout
+            raise GatewayTimeOut
         data = response.json()
         if response.status_code == 401:
             raise InvalidAuth
