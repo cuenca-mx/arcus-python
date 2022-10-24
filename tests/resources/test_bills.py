@@ -1,4 +1,7 @@
+from unittest.mock import Mock, patch
+
 import pytest
+from requests.models import Response
 
 from arcus import exc
 from arcus.resources import Bill
@@ -18,6 +21,15 @@ def test_invalid_biller_id(client):
     invalid_biller_id = 99999999
     with pytest.raises(exc.InvalidBiller):
         client.bills.create(invalid_biller_id, '1234')
+
+
+def test_gateway_time_out(client):
+    with patch('requests.Session.request') as mock_request:
+        res = Response()
+        res.status_code = 504
+        mock_request.side_effect = Mock(return_value=res)
+        with pytest.raises(exc.GatewayTimeOut):
+            client.bills.create(40, '501000000007')
 
 
 @pytest.mark.vcr

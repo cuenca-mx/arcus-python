@@ -11,6 +11,10 @@ class InvalidAuth(ArcusException):
     """Invalid API authentication credentials"""
 
 
+class GatewayTimeOut(ArcusException):
+    """The server didn't respond in time"""
+
+
 class InvalidBiller(ArcusException):
     def __init__(self, biller_id: Union[int, str], **kwargs):
         self.message = f'{biller_id} is an invalid biller_id'

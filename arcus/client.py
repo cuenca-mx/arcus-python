@@ -5,7 +5,13 @@ import requests
 
 from .api_keys import ApiKey
 from .auth import compute_auth_header, compute_date_header, compute_md5_header
-from .exc import Forbidden, InvalidAuth, NotFound, UnprocessableEntity
+from .exc import (
+    Forbidden,
+    GatewayTimeOut,
+    InvalidAuth,
+    NotFound,
+    UnprocessableEntity,
+)
 from .resources import (
     Account,
     Bill,
@@ -142,6 +148,8 @@ class Client:
     def _check_response(response):
         if response.ok:
             return
+        if response.status_code == 504:
+            raise GatewayTimeOut
         data = response.json()
         if response.status_code == 401:
             raise InvalidAuth
