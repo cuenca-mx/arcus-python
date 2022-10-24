@@ -11,7 +11,7 @@ class InvalidAuth(ArcusException):
     """Invalid API authentication credentials"""
 
 
-class TimeExceeded(ArcusException):
+class GatewayTimeout(ArcusException):
     """The server didn't respond in time"""
 
 

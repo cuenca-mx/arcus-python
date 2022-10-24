@@ -23,12 +23,12 @@ def test_invalid_biller_id(client):
         client.bills.create(invalid_biller_id, '1234')
 
 
-def test_time_exceeded(client):
+def test_gateway_timeout(client):
     with patch('requests.Session.request') as mock_request:
         res = Response()
         res.status_code = 504
         mock_request.side_effect = Mock(return_value=res)
-        with pytest.raises(exc.TimeExceeded):
+        with pytest.raises(exc.GatewayTimeout):
             client.bills.create(40, '501000000007')
 
 
