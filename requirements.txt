@@ -1,4 +1,4 @@
-requests==2.27.1
+requests==2.28.2
 pytz==2021.3
 iso8601==1.0.2
 pydash==5.1.0
